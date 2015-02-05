@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="LibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="LibraryModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TableServiceEntities" EntityType="LibraryModel.TableServiceEntity" />
+        </EntityContainer>
+        <EntityType Name="Books" BaseType="LibraryModel.TableServiceEntity">
+          <Property Type="Int32" Name="ISBN" Nullable="false"  />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="String" Name="Publisher" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" />
+        </EntityType>
+        <EntityType Name="TableServiceEntity" Abstract="true">
+          <Key>
+            <PropertyRef Name="RowKey" />
+            <PropertyRef Name="PartitionKey" />
+          </Key>
+          <Property Type="String" Name="RowKey" Nullable="false" />
+          <Property Type="String" Name="PartitionKey" Nullable="false" />
+          <Property Type="DateTime" Name="Timestamp" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="LibraryModel" />
+        <Alias Key="Target" Value="LibraryModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="LibraryEntities" StorageEntityContainer="LibraryModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="LibraryModel" >
+        <EntityTypeShape EntityType="LibraryModel.Books" Width="2.25" PointX="1.5" PointY="3.125" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="LibraryModel.TableServiceEntity" Width="2.25" PointX="1.5" PointY="0.625" Height="1.5956835937499996" />
+        <InheritanceConnector EntityType="LibraryModel.Books" ManuallyRouted="false" >
+          <ConnectorPoint PointX="2.625" PointY="2.2206835937499996" />
+          <ConnectorPoint PointX="2.625" PointY="3.125" />
+        </InheritanceConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

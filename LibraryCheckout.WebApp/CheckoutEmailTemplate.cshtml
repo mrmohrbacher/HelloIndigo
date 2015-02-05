@@ -1,0 +1,49 @@
+﻿@using System.Collections.Specialized
+@using System.Diagnostics
+@using LibraryModel
+@using LibraryCheckout.WebApp
+@using Blackriverinc.Framework.DataStore;
+@using Blackriverinc.EmailClient;
+@{  
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "Black River Systems, Inc - Lending Library Checkout";
+
+   DateTime checkoutDate = DateTime.Now;
+   IKeyedDataStore data = null;
+   try
+      {
+      // Access Form variables to override the WebConfig appSettings   
+      IDataStoreProvider provider = new HttpRequestDataStoreProvider(Request, new WebConfigProvider());
+      if (provider == null)
+         {
+         throw new Exception("Could not access Configuration Settings.");
+         }
+      data = new KeyedDataStore(provider);
+      }
+   catch (Exception exp)
+      {
+      BookSelection.WebApp.Helper.PostError(exp, Context, true);
+      }
+}
+}
+<div id="oe-email">
+   <h2>
+      Checkout Confirmation
+   </h2>
+   <fieldset style="margin-left: 27px; margin-right: 27px;">
+      <label class="oe-label" style="margin-top: 2pt;">
+         Name</label>
+      <input type="text" name="Name" id="name" class="oe-text" value="@data["ShipToName"]" />
+      <label class="oe-label" style="margin-top: 2pt;">
+         ISBN</label>
+      <input type="text" name="BookISBN" id="book-isbn" class="oe-text" value="@data["BookISBN"]" />
+      <label class="oe-label" style="margin-top: 2pt;">
+         Title</label>
+      <input type="text" name="BookTitle" id="book-title" class="oe-text" value="@data["BookTitle"]" />
+      <label class="oe-label" style="margin-top: 2pt;">
+         Date</label>
+      <input   type="text"   
+               name="CheckoutDate" id="checkout-date" class="oe-text" 
+               value="@checkoutDate.ToShortDateString()" />
+   </fieldset>
+</div>

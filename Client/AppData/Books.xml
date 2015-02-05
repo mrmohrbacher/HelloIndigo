@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Books>
+  <Book>
+    <Author>Freeman,Eric;Freeman,Elisabeth</Author>
+    <ISBN>0-596-00712-4</ISBN>
+    <Publisher>O'Reilly</Publisher>
+    <Title>Head First Design Patterns</Title>
+  </Book>
+  <Book>
+    <Author>Musciano,Chuck;Kennedy, Bill</Author>
+    <ISBN>1-56592-492-4</ISBN>
+    <Publisher>O'Reilly</Publisher>
+    <Title>HTML: The Definitive Guide</Title>
+  </Book>
+  <Book>
+    <Author>Meyer, Eric A.</Author>
+    <ISBN>0-596-00525-3</ISBN>
+    <Publisher>O'Reilly</Publisher>
+    <Title>Cascading Style Sheets: The Definitive Guide, Second Edition</Title>
+  </Book>
+  <Book>
+    <Author>Jones, Allen</Author>
+    <ISBN>0-7356-1930-1</ISBN>
+    <Publisher>Microsoft Press</Publisher>
+    <Title>C# Programmer's Cookbook</Title>
+  </Book>
+  <Book>
+    <Author>McFarland, David Sawyer</Author>
+    <ISBN>978-0-596-52687-0</ISBN>
+    <Publisher>O'Reilly Media Inc.</Publisher>
+    <Title>CSS: The Missing Manual</Title>
+  </Book>
+  <Book>
+    <Author>Troelsen,Andrew</Author>
+    <ISBN>978-1-4302-2549-2</ISBN>
+    <Publisher>Apress</Publisher>
+    <Title>Pro C# 2010 and the .NET 4 Platform, Fifth Edition</Title>
+  </Book>
+  <Book>
+    <Author>Clarke,Andy</Author>
+    <ISBN>0-321-41097-1</ISBN>
+    <Publisher>New Riders</Publisher>
+    <Title>Transcending CSS, The Fine Art of Web Design</Title>
+  </Book>
+  <Book>
+    <Author>McCullough,David</Author>
+    <ISBN>978-1-4165-7176-6</ISBN>
+    <Publisher>Simon &amp; Schuster</Publisher>
+    <Title>The Greater Journey, Americans in Paris</Title>
+  </Book>
+</Books>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="HelloAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
+  <Role name="HelloIndigoService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="LogPath" value="HelloIndigoService" />
+      <Setting name="LibraryEntities.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=blackriverinc;AccountKey=VfCW3o2DtXyyBjlsxQlms70zGAY2QkFVN3+mks1J3wm0QtO8ZANz1Ykm46mkPsLiGUdK7dEeuHF9nQHJW5Eoqg==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="mike" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEAMLqL67LAOvTZgyMZw73AYwDQYJKoZIhvcNAQEBBQAEggEADja47PlHSOVVcIW9cCV5RoJv426jJ929mVFn6QekgdLUUIkrrU5pHjlhlHaTZzRyvaJzM5df4vULTqJHJ/fxgJHN7GKRf2u1Aq7+BsD9MmJzu3v9psb7+K7nYT7h81TQhMQgDt24QSNRm+WclbNrsM5rjsm7buF6NARlWH46t+vvhNqTV/GYCB9L+vLdA3OX4Md5B22yvPElMb0EyFQF4l/iBEGYZWbbgnGYYXyqWdUbyCFWXXn+/JlrPmCRixudYCtuWyY5BF9BB9+XIlDxNm325V93BSYBRPwU9SFGOOCmA3c2l58F0EmOm1pLGUd6eXy+dAuGloBbSKZZbXHD4jAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECEavu0zgZ4kngBC5BDIinMXFu9YILER7lxG/" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2015-12-31T23:59:59.0000000-06:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=blackriverinc;AccountKey=VfCW3o2DtXyyBjlsxQlms70zGAY2QkFVN3+mks1J3wm0QtO8ZANz1Ykm46mkPsLiGUdK7dEeuHF9nQHJW5Eoqg==" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="E9325BEA9142484625176F206C605A621DFD4905" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

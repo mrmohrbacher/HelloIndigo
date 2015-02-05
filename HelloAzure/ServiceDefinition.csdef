@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="HelloAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-01.2.3">
+  <WebRole name="HelloIndigoService" vmsize="Small">
+    <ConfigurationSettings>
+      <Setting name="LogPath" />
+      <Setting name="LibraryEntities.ConnectionString" />
+    </ConfigurationSettings>
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Endpoint1" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Endpoint1" protocol="http" port="8080" />
+    </Endpoints>
+    <LocalResources>
+      <LocalStorage name="LogFiles" sizeInMB="10" cleanOnRoleRecycle="true" />
+    </LocalResources>
+    <Imports>
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+      <Import moduleName="Diagnostics" />
+    </Imports>
+  </WebRole>
+</ServiceDefinition>

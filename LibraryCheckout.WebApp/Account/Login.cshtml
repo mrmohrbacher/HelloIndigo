@@ -1,0 +1,78 @@
+﻿@using System.Collections.Specialized
+@using System.Diagnostics;
+@using System.Reflection;
+@using System.Text;
+@using System.Threading;
+@using Blackriverinc.Framework.Utility
+@using LibraryModel
+@{
+    // Set the layout page and page title
+    Layout = "~/_BasePage.cshtml";
+    Page.Title = "Log In";
+    string message = null;
+
+    try
+        {
+        // If this is a POST request, validate and process data
+        if (IsPost)
+            {      
+            /*     
+            Encryption encryptor = new Encryption();
+            string cryptPassword = encryptor.Encrypt(password);
+            Assembly assembly = Assembly.GetCallingAssembly();
+            string resourcePath = string.Format("{0}.{1}",
+                                          assembly.GetName().Name,
+                                          "PasswordToken");
+            Stream result = assembly.GetManifestResourceStream(resourcePath);
+            token = result.ContentsToString();
+            if (cryptPassword != token)
+                {
+                message = "Nope! Try again!";
+                cryptPassword = null;
+                token = null;
+                }
+             */
+            NameValueCollection inboundForm = Request.Form;
+
+            string password = inboundForm["Password"];
+            
+            if (password != "bellbookandcandle")
+                {
+                message = "Nope! Try again!";
+                }               
+            else
+                {
+                Session.Contents.Add("LoginToken", password);
+                string tempUser = DateTime.Now.ToShortTimeString().Replace(" ", "-");
+                Debug.WriteLine(string.Format("Generated User : '{0}'", tempUser));
+                FormsAuthentication.RedirectFromLoginPage(tempUser, true);                
+                }
+            }
+        }
+    catch(ThreadAbortException tae)
+        {
+        }
+    catch (Exception exp)
+        {
+        BookSelection.WebApp.Helper.PostError(exp, Context);
+        }
+}
+<p>
+    Please enter the Password.
+</p>
+<form method="post" action="">
+<fieldset>
+    <legend>Login</legend>
+    <ol>
+        <li class="password">
+            <label for="password">
+                Password:</label>
+            <input type="password" id="Password" name="Password" title="Password" />
+        </li>
+        <p>@message</p>
+    </ol>
+    <p class="form-actions">
+        <input type="submit" value="login" title="Login" />
+    </p>
+</fieldset>
+</form>

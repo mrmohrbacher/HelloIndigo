@@ -1,0 +1,61 @@
+﻿@using System.Collections.Specialized
+@using System.Diagnostics
+@using BookCorpModel
+@using OrderEntry.WebApp
+@using Blackriverinc.Framework.DataStore;
+@{  
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "BookCorp - solutions for breastfeeding mothers.";
+
+   // Extract the client identifier from the form/session variables
+   int clientID = Int32.Parse(Request.Form["ClientID"]);
+
+   // Access Form variables   
+   IKeyedDataStore data = new KeyedDataStore(new HttpRequestDataStoreAdapter(Request));
+   string name = null;
+   if (!data.get("MothersName", ref name))
+      {
+      data.get("Name", ref name);
+      }
+      
+   string email = null;
+   if (!data.get("HomeEmail", ref email))
+      {
+      data.get("WorkEmail", ref email);
+      }
+   
+   // ---------------------------------------------------------
+   // Build the data model for the Order Entry Page
+   // ---------------------------------------------------------
+   ProductEx service = null;
+   using (BookCorpEntities context = new BookCorpEntities())
+      {
+      service = (from cp in context.ClientProducts
+                 where cp.ClientId == clientID
+                 join s in context.Products
+                        on cp.ModelNo equals s.ModelNo
+                 where s.ProductType == "SERVICE"
+                 select
+                   new ProductEx()
+                   {
+                      CompanyName = cp.Client.CompanyName,
+                      AccountExec = cp.Client.AccountExec,
+                      ModelNo = s.ModelNo,
+                      ProductSpecs = s.ProductSpecs,
+                      ProductName = s.ProductName,
+                      ProductType = s.ProductType,
+                      EnrolleePrice = cp.EnrolleePrice,
+                      ShippingCosts = cp.ShippingCosts
+                   }).FirstOrDefault();
+
+      }
+}
+<div id="oe-email">
+   <h2>Lactation Program Enrollment</h2>
+   <p class="oe-para">Dear @name,</p>
+   <p class="oe-para">You have enrolled in the Lactation Program offered by 
+   @service.CompanyName. This program offers you the following:</p>
+   <p class="oe-para">@Html.Raw(@Helper.SelectXML(@service.ProductSpecs, "productspecs"))</p>
+   <p class="oe-para">An copy of this notification is also being sent to '@email'.</p>
+   <p class="oe-para">At BookCorp Solutions, we look forward to helping you.</p>
+</div>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/LibraryCheckout.WebApp_deploy" />
+  <setParameter name="BookCorpEntities-Web.config Connection String" value="metadata=res://*/BookCorpModel.csdl|res://*/BookCorpModel.ssdl|res://*/BookCorpModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=[SERVER];initial catalog=[DBNAME];UID=BookCorpclw;PWD=7uC1L7Fu;pooling=False;multipleactiveresultsets=True;App=EntityFramework&quot;" />
+</parameters>

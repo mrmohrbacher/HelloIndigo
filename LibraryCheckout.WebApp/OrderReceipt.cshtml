@@ -1,0 +1,17 @@
+﻿@{
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "BookCorp";
+
+}
+<h2>Order Receipt</h2>
+   <div>
+   <form class='oe-null' action="OrderReceipt.cshtml" id='oer-form' >
+      <fieldset>
+      @foreach(var item in Request.Form.AllKeys)
+         {
+         <label class="oe-label">@item</label><input class="oe-readonly" name="@item" type="text" readonly="readonly" value="@Request.Form[item]" />
+         }
+         <input type="submit" value="Submit Order" />
+      </fieldset>
+   </form>
+   </div>

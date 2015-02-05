@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="https://webdeploy.cloudsites.gearhost.com:8172/msdeploy.axd" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="BookCorp-s.com" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="True" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="True" profileName="GearHost" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="590924" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAcRGzQxIIPESvbRgKyuF80AAAAAACAAAAAAAQZgAAAAEAACAAAAAubWebLjjnlvrU+lAANSGe1TJ8+H4oSMMrKhbMqYuCSgAAAAAOgAAAAAIAACAAAACXvRIQQRRfG4DrnbvWYdqzZPn+M6vX1wP1C9ZIgygp8SAAAACa/pPfyiL6yHJrfha/UaNYMClmS6D15sGrV5i0zA2k8UAAAABQeaEmpNwYs8pLyS4BZuAQcxDVN0ZJMOtsnCguyfGJeqQwAA0D6//QbXMCP+bhoIPsl6OjKc1KcV+JjwdSSsD+" SelectedForPublish="True">
+    <file relUrl="bin/Utility.dll" publishTime="03/31/2012 12:43:33" />
+    <file relUrl="ErrorPage.cshtml" publishTime="03/31/2012 11:32:38" />
+    <file relUrl="Images/body-bg.gif" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="03/27/2012 08:16:27" />
+    <file relUrl="Styles/Site.css" publishTime="03/31/2012 11:04:35" />
+    <file relUrl="Web.Release.config" publishTime="03/27/2012 08:16:27" />
+    <file relUrl="Images/nav-rght-cur.jpg" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="Images/beveled tile.xcf" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="_BasePage.cshtml" publishTime="03/31/2012 11:40:24" />
+    <file relUrl="Helper.cs" publishTime="03/31/2012 11:45:07" />
+    <file relUrl="Scripts/jquery.validate.min.js" publishTime="03/27/2012 08:17:13" />
+    <file relUrl="bin/OrderEntry.WebApp.dll" publishTime="03/31/2012 13:33:35" />
+    <file relUrl="bin/BookCorpModel.dll" publishTime="03/31/2012 12:43:34" />
+    <file relUrl="OrderEntry.WebApp.Publish.xml" publishTime="03/31/2012 13:06:14" />
+    <file relUrl="_AppStart.cshtml" publishTime="03/27/2012 08:22:10" />
+    <file relUrl="FieldMap.xml" publishTime="03/27/2012 19:42:49" />
+    <file relUrl="Images/nav-left.gif" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="bin/EmailClient.dll" publishTime="03/31/2012 12:43:33" />
+    <file relUrl="OrderSubmission.ashx" publishTime="03/31/2012 11:47:09" />
+    <file relUrl="HttpPost.cs" publishTime="03/27/2012 09:33:18" />
+    <file relUrl="Images/nav-left.jpg" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="ConsultEmailTemplate.cshtml" publishTime="03/31/2012 11:04:22" />
+    <file relUrl="Account/Login.cshtml" publishTime="03/31/2012 10:47:27" />
+    <file relUrl="Images/nav-rght.jpg" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="OrderEntry.cshtml" publishTime="03/31/2012 11:54:00" />
+    <file relUrl="bin/ConfigurationSettingsProvider.dll" publishTime="03/31/2012 12:43:33" />
+    <file relUrl="OrderEntry.WebApp.csproj" publishTime="03/31/2012 13:18:32" />
+    <file relUrl="OrderEntry.WebApp.csproj.user" publishTime="03/31/2012 13:18:32" />
+    <file relUrl="Scripts/jquery.validate.js" publishTime="03/27/2012 08:17:13" />
+    <file relUrl="Scripts/jquery-ui-1.8.18.custom.min.js" publishTime="03/27/2012 11:25:47" />
+    <file relUrl="Default.cshtml" publishTime="03/27/2012 08:17:45" />
+    <file relUrl="Scripts/OrderEntry.js" publishTime="03/31/2012 12:40:35" />
+    <file relUrl="bin/DataStore.dll" publishTime="03/31/2012 12:43:33" />
+    <file relUrl="Images/nav-rght.gif" publishTime="03/27/2012 08:17:21" />
+    <file relUrl="OrderReceipt.cshtml" publishTime="03/29/2012 15:49:51" />
+    <file relUrl="EnrollmentEmailTemplate.cshtml" publishTime="03/30/2012 14:03:49" />
+    <file relUrl="Scripts/jquery-1.7.1.js" publishTime="03/27/2012 08:17:13" />
+    <file relUrl="Web.Debug.config" publishTime="03/27/2012 08:16:27" />
+    <file relUrl="Scripts/jquery.min.js" publishTime="03/27/2012 08:17:13" />
+    <file relUrl="Styles/jquery-ui-1.8.18.custom.css" publishTime="03/27/2012 11:26:29" />
+    <file relUrl="Web.config" publishTime="03/31/2012 13:34:19" />
+  </publishProfile>
+</publishData>

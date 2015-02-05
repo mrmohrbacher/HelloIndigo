@@ -1,0 +1,234 @@
+﻿<%@ WebHandler Language="C#" Class="OrderSubmission" %>
+
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Configuration;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.UI;
+
+using LibraryModel;
+using Blackriverinc.Framework.DataStore;
+using Blackriverinc.EmailClient;
+using Blackriverinc.Framework.Utility;
+
+using OrderEntry.WebApp;
+
+public class OrderSubmission : IHttpHandler
+   {
+   string _payAction = null;
+   private string PayUrl 
+      {
+      get
+         {
+         if (_payAction == null)
+            {
+            _payAction = ConfigurationManager.AppSettings["PAYURL"];
+            if (_payAction == null)
+               {
+               _payAction = "https://paypal.com/";
+               }
+            }
+         return _payAction;
+         }
+      }
+
+   string _emailServer = null;
+   private string EmailServer
+      {
+      get
+         {
+         if (_emailServer == null)
+            {
+            _emailServer = ConfigurationManager.AppSettings["EMAILSERVER"];
+            if (_emailServer == null)
+               {
+               _emailServer = "smtp:smtp.BookCorp.com";
+               }
+            }
+         return _emailServer;
+         }
+      }
+
+  
+   static private Regex _fieldParser = new Regex(@"\[(?<Lookup>\w+)\]", RegexOptions.IgnoreCase);
+
+   static Regex _formTagParser = new Regex(@"(?: (\<form .* action=) ('|"")? (/|\\) (.*[^\2]) ([~\>]*\>) )",
+         RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
+   static Regex _actionParser = new Regex(@"(?: (action=)(""|')(.\S*)(""|') )",
+         RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+   
+   static private Dictionary<string, string> _paySubmitMap;
+
+   static private Dictionary<string, string> _errorMap;
+   
+   static OrderSubmission()
+      {
+          // Maps OrderEntry form variables to Payment Processor requirements
+      _paySubmitMap = new Dictionary<string, string>()
+      {
+         {"NAME", "[Name]"},
+         {"ADDRESS","[Address]"},
+         {"CITY", "[City]"},
+         {"CARDNUM", ""},
+         {"EXPDATE", ""},
+         {"LOGIN", "LCSMerch"},
+         {"PARTNER", "PayPal"},
+         {"AMOUNT", "[TotalCost]"},
+         {"TYPE", "S"},
+         {"METHOD", "CC"},
+         {"ZIP", "[PostalCode]"},
+         {"ADDRESSTOSHIP", "[ShipToAddress]"},
+         {"CITYTOSHIP", "[ShipToCity]"},
+         {"DESCRIPTION", "Employee: [Name] [EmpId]\nExpectant Mother: [MothersName]\nExpected DueDate: [ExpectedDueDate]\nConsulting : [LactationProgram]\n[PumpDescription]"},
+         {"EMAIL", "[WorkEmail]"},
+         {"EMAILTOSHIP", "[HomeEmail]"},
+         {"NAMETOSHIP", "[ShipToName]"},
+         {"PHONE", "[WorkPhone]"},
+         {"PHONETOSHIP", "[HomePhone]"},
+
+         {"CLIENTID", "[ClientId]"},
+         {"STATE", "[State]"},
+         {"STATETOSHIP", "[ShipToState]"},
+         {"ZIPTOSHIP", "[ShipToPostalcode]"},
+         
+         {"USER1", "[EmpId]"},
+         {"USER2", "[HomeEmail]"},
+         {"USER3", "[HomePhone]"},
+         {"USER4", "[MothersName]"},
+         {"USER5", "[ExpectedDueDate]"},
+         
+         {"ECHODATA", "True"},
+         {"ORDERFORM", "True"},
+         {"SHOWCONFIRM", "True"}
+         
+      };
+
+
+      _errorMap = new Dictionary<string, string>()
+         {
+            {"ErrorMessage", ""},
+            {"ErrorStack", ""},
+            {"ErrorData", ""},
+            {"ShowStack", "false"}
+         };
+
+      // Register URI parsers
+      if (!UriParser.IsKnownScheme("http"))
+         UriParser.Register(new BasicURIParser(), "http", 80);
+
+      if (!UriParser.IsKnownScheme("https"))
+         UriParser.Register(new BasicURIParser(), "https", 443);
+
+      }
+   
+
+   public void ProcessRequest(HttpContext context)
+      {
+      Uri responseUri = context.Request.Url;
+      string responseString = null;
+
+
+      IKeyedDataStore config = new KeyedDataStore(new NameValueDataStoreAdapter(ConfigurationManager.AppSettings));
+      bool showException = false;
+      config.get("SHOWEXCEPTION", ref showException);
+      
+      try
+         {
+         NameValueCollection form = context.Request.Form;
+
+         //-------------------------------------------------------------
+         // Retrieve Merchant, Client from Model
+         int clientId = Int32.Parse(form["ClientId"]);
+         Merchant merchant = null;
+
+         using (BookCorpEntities entities = new BookCorpEntities())
+            {
+            merchant = (from c in entities.Clients
+                        where c.ClientId == clientId
+                        join m in entities.Merchants
+                          on c.MerchantId equals m.MerchantId
+                        select m
+                            ).FirstOrDefault();
+
+            }
+
+         //-------------------------------------------------------------
+         // Enrollee has chose to participate in the Lactation Program.
+         //-------------------------------------------------------------
+         if (form["LactationProgram"].ToLower() == "enrolled")
+            {
+            IEmailClient emailClient = EmailClientFactory.Create(EmailServer);
+            if (emailClient == null)
+               throw new ApplicationException(string.Format("Could not create an email connection to '{0}'", EmailServer));
+
+            // Send the Enrollment Notification to Merchant
+            responseString = Helper.PostRequest(out responseUri, 
+                                        context.Request, 
+                                        "EnrollmentEmailTemplate.cshtml");
+            emailClient.Send(merchant.NotificationUri, merchant.NotificationUri, "Lactation Program Enrollment",
+                  responseString);
+
+            // Send a copy of the Enrollment Notification to the
+            // a) The Expectant Mother, or
+            // b) if one is not specified, the enrollee.
+            string email = (form["HomeEmail"] == null || form["HomeEmail"].TrimEnd() == "") ? form["WorkEmail"] : form["HomeEmail"];
+            responseString = Helper.PostRequest(out responseUri, 
+                                         context.Request,
+                                         "ConsultEmailTemplate.cshtml");
+
+            emailClient.Send(merchant.NotificationUri, email, "Lactation Program Enrollment",
+                  responseString);
+            }
+
+         //-------------------------------------------------------------
+         // Enrollee has purchased a Pump.
+         //
+         // *NOTE*   In this case, an email witht he Order Receipt will be
+         //          sent out from the payment processor.
+         //-------------------------------------------------------------
+         if (form["PumpModelNo"] != "")
+            {
+            // Post to Payment Processor
+            responseString = Helper.PostRequest(out responseUri, context.Request, PayUrl, _paySubmitMap);
+            }
+
+         }
+      catch (Exception exp)
+         {
+         Trace.WriteLine(exp.ToString());
+         _errorMap["ErrorMessage"] = exp.Message;
+         _errorMap["ErrorStack"] = exp.StackTrace;
+         _errorMap["ErrorData"] = string.Format("Web Page: {0}", context.Request.Url);
+         _errorMap["ShowStack"] = (showException) ? "true" : "false";
+         responseString = Helper.PostRequest(out responseUri,
+                                      context.Request,
+                                      "ErrorPage.cshtml", 
+                                      _errorMap);
+         }
+      finally
+         {
+         if (responseString != null)
+            {
+            context.Response.RedirectLocation = responseUri.ToString();
+            context.Response.Output.WriteLine(responseString);
+            }
+         }
+      }
+
+   public bool IsReusable
+      {
+      get
+         {
+         return false;
+         }
+      }
+
+   }

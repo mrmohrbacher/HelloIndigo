@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TableStorageSet.TableObjectSet&lt;TEntity&gt;">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAABAAAAAAEABIAAAIAAAAABIAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>TableObjectSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TableStorageSet.TableServiceEntityBase">
+    <Position X="4.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAACAAAAAAQAAAABAAAAAQAAAAA=</HashCode>
+      <FileName>TableServiceEntityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

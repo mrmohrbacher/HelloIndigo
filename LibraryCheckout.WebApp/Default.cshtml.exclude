@@ -1,0 +1,58 @@
+﻿@using System.Collections.Specialized
+@using LibraryModel
+
+@{  
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "BookCorp Solutions Order Entry";
+
+   // Is this a login from Indigo Books?
+   NameValueCollection inboundForm = Request.Form;
+   
+   string password = inboundForm["Password"];
+
+   Merchant merchant = null;
+   Client client = null;
+   
+   // Site reached; check for existing login
+   if (Session.Contents["LoginToken"] == null
+   ||  Session.Contents["LoginToken"] != password)
+      {
+      using (BookCorpEntities model = new BookCorpEntities())
+         {
+         // Validates the GroupId
+         client = (from c in model.Clients
+                   where c.GroupId == groupId
+                   select c).FirstOrDefault();
+
+         // Validate the access password to the site.
+         merchant = (from m in model.Merchants
+                         where m.MerchantName == "BookCorp Solutions"
+                         && m.MerchantPassword == password
+                         select m).FirstOrDefault();
+         
+         }
+      
+      // Invalid GroupID
+      if (merchant == null || client == null)
+         {
+         if (Request.IsLocal)
+            {
+            // For development
+            Response.Redirect(string.Format(@"~/Account/Login.cshtml?ReturnUrl={0}", "~/OrderEntry.cshtml"));
+            }
+         throw new HttpException(403, "Nope!");
+         }
+      else
+         {
+         Session.Contents.Add("LoginToken", merchant.MerchantPassword);
+         Session.Contents.Add("ClientID", client.ClientId.ToString());
+         Response.Redirect(@"~/OrderEntry.cshtml");
+         }      
+      }
+   else
+      {
+      Session.Contents.Add("LoginToken", merchant.MerchantPassword);
+      Session.Contents.Add("ClientID", client.ClientId.ToString());
+      Response.Redirect(@"~/OrderEntry.cshtml");
+      }
+}

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="https://blackriverinc-svc.cloudapp.net:8173/MsDeploy.axd" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="LibraryCheckout.WebApp_IN_0_Web" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="True" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="blackriverinc-svc - Production" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="mike" savePWD="False" userPWD="" SelectedForPublish="True" />
+</publishData>

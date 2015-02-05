@@ -1,0 +1,462 @@
+﻿@using System.Diagnostics
+@using LactCorpModel
+
+@{  
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "LactCorp - solutions for breastfeeding mothers.";
+
+#if !_LOGIN
+   //    If attempt to reach this page directly without a proper login
+   //    redirects back to a login page.
+   if (Session.Contents["LoginToken"] == null)
+      {
+      Response.Redirect(string.Format(@"~/account/Login.cshtml?ReturnUrl={0}", Request.Url));
+      return;
+      }
+
+   // Extract the client identifier from the form/session variables
+   int clientID = Int32.Parse(Session.Contents["ClientID"].ToString());
+#else
+   int clientID = 33;
+#endif
+   
+   IList<ProductEx> pumps = null;
+   ProductEx service = null;
+
+   string companyName = null;
+   
+   // ---------------------------------------------------------
+   // Build the data model for the Order Entry Page
+   // ---------------------------------------------------------
+   using (LactCorpEntities context = new LactCorpEntities())
+      {
+      companyName = (from c in context.Clients
+                     where c.ClientId == clientID
+                     select
+                      new { c.CompanyName }).FirstOrDefault().CompanyName;
+      
+      
+      var products = from cp in context.ClientProducts
+                     where cp.ClientId == clientID
+                     join p in context.Products
+                            on cp.ModelNo equals p.ModelNo
+                     select
+                       new ProductEx()
+                       {
+                          CompanyName = cp.Client.CompanyName,
+                          AccountExec = cp.Client.AccountExec,
+                          ModelNo = p.ModelNo,
+                          ProductSpecs = p.ProductSpecs,
+                          ProductName = p.ProductName,
+                          ProductType = p.ProductType,
+                          EnrolleePrice = cp.EnrolleePrice,
+                          ShippingCosts = cp.ShippingCosts
+                       };
+
+      // Materialize copies of the model. 
+      //
+      // *NOTE*   This allows us to explicitly scavange the context's
+      //          connection, but preserve access to the data.
+      pumps = (from p in products
+               where p.ProductType != "SERVICE"
+               select p).ToList();
+
+      service = (from s in products
+                 where s.ProductType == "SERVICE"
+                 select s).FirstOrDefault();
+      }
+
+   if (IsPost)
+      {
+      // Validate the form fields
+      foreach(var fieldName in Request.Form.AllKeys)
+         {
+         Trace.WriteLine(string.Format("{0} = '{1}'", fieldName, Request.Form[fieldName]));
+         }
+      }
+}
+@*
+ *
+ *  Pump Selection Page is dynamically created on the server-side by inserting
+ *  pumps into the page based on a query against the ClientProducts table.
+ *
+ *  The form action is dynamically computed on the server-side by the presence
+ *  of SERVICE-type product items.
+ *
+ *@
+<form action="OrderSubmission.ashx" method="post" id="order-entry">
+<script type="text/javascript">
+
+   var validator;
+
+   function showPanel(panel) {
+      var selector = '#order-entry-menu > li > a[href=' + panel + ']';
+      $(selector).click();
+   }
+
+   $(document).ready(function () {
+
+      console.log('+ document.ready +');
+
+      // 1) Hide all panels
+      $('.oe-panel').hide();
+
+      $(document).unload(function () {
+         $('#current-tab').val('');
+      }
+      );
+
+      //--------------------------------------------------------
+      // Define functors to react to 'click' events
+      //--------------------------------------------------------
+      $('#order-entry-menu > li > a').click(function () {
+         // Stash computed selector to invoking element.
+         var $this = $(this);
+
+         //    Stash the current UI state into a hidden vbl.
+         var panel = $this.attr('href');
+         console.log("+ Panel '%s' +", panel)
+
+         // 0) Validate form entries (except on the first load)
+         //
+         // *NOTE*   By returning without doing the rest of the code,
+         //          we keep the user nailed to the current tab.
+         if ($('#current-tab').val() == "#personal"
+         && validator && !validator.form()) {
+            return;
+         }
+
+         $('#current-tab').val(panel);
+
+         // 1) Hide all panels
+         $('.oe-panel').hide();
+         $('#order-entry-menu > li > a.active').removeClass('active');
+
+         // 2) Activate the current selection
+         $this.addClass('active').blur();
+         $(panel).fadeIn(250);
+
+         console.log("- Panel '%s' -", panel)
+
+         // 3) Suppress following the <a> link
+         return false;
+      }
+      ); // End of '#order-entry-menu > li > a' click
+
+
+      // -------------------------------------------------------
+      // Entering 'Confirm Order' panel; build from data content 
+      // of previous panels.
+      // -------------------------------------------------------
+      $('#order-entry-menu > li > a[href=#confirmation]').click(function () {
+         // Stash computed selector to invoking element.
+         console.log('+ confirmation +');
+
+         var $this = $(this);
+
+         var consultReview = $('#consult-review');
+
+         // 'Pump Selection' Review
+         var reviewDiv = $('#pump-selection-review');
+         var modelNo = $('#pump-model-no').val();
+         var modelItem = $('#item-' + modelNo).find('p')[1];
+         reviewDiv.html("<label class='oe-label'>Pump selected:</label>&nbsp;" +
+                  "<label>" +
+                  modelNo +
+                  " - " + modelItem.innerHTML +
+                  "</label>");
+
+         var personalReview = $('#personal-review');
+
+         var shippingReview = $('#shipping-review');
+
+         console.log('- confirmation -');
+      });
+
+      // -------------------------------------------------------
+      // Stash the PumpModel choice into a hidden field.
+      // -------------------------------------------------------
+      $('#pump-selection :radio[name=ChoicePumpModel]').click(function () {
+         var $this = $(this);
+
+         var choice = $this.attr('id').slice('choice-pump-'.length);
+         console.log('Pump Model: %s', choice);
+         if (choice == 'none') {
+            choice = '';
+         }
+         $('#pump-model-no').val(choice);
+      });
+
+      // -------------------------------------------------------
+      // Copy the data from the 'personal' form's
+      // fields, into the corresponding 'ship-to- fields.
+      // -------------------------------------------------------
+      $('#copy-personal').click(function () {
+         // Stash computed selector to invoking element.
+         var $this = $(this);
+         if ($this.attr('checked')) {
+            // Copy fields from Personal Information panel
+            $('#ship-to-firstname').val($('#firstname').val());
+            $('#ship-to-lastname').val($('#lastname').val());
+            $('#ship-to-address1').val($('#address1').val());
+            $('#ship-to-address2').val($('#address2').val());
+            $('#ship-to-city').val($('#city').val());
+            $('#ship-to-state').val($('#state').val());
+            $('#ship-to-postalcode').val($('#postalcode').val());
+
+            // Uncheck 'copy-personal'
+            $this[0].checked = false;
+         }
+      }); // End of '#copy-personal' click
+
+      // Attach jquery.validator to order-entry form
+      validator = $('#order-entry').validate();
+
+      //--------------------------------------------------------
+      // Activate the 1st navigation tab.
+      if ($('#current-tab').val().length == 0)
+         showPanel('#welcome');
+      else
+         showPanel($('#current-tab').val());
+
+      console.log('- document.ready -');
+
+   });                                                   // End of document.ready
+   
+</script>
+
+<div class="oe-panels">
+
+   <ul class="oe-nav" id="order-entry-menu">
+      <li><a href="#welcome">Welcome!</a></li>
+      @if (service != null)
+         {
+         <li><a href="#consult">Lactation Program</a></li>
+         }
+      <li><a href="#pump-selection">Select Pump</a></li>
+      <li><a href="#personal">Personal Information</a></li>
+      <li><a href="#shipping">Shipping Information</a></li>
+      <li><a href="#confirmation">Confirm Order</a></li>
+   </ul>
+
+   <div class="oe-container">
+
+      <div class="oe-panel" id="welcome">
+         <fieldset>
+            <legend>Welcome!</legend>
+            @if (service != null)
+               {
+               <p>
+                  If you or your partner are an expectant mother, you can enroll in a company-sponsored
+                  program that provides answers to your breastfeeding questions by board-certified
+                  lactation consultants Monday through Saturday. This program is paid for by @companyName
+                  at no cost to you.
+               </p>
+
+               <p>
+                  On the next panel, you can enroll in this lactation program. You can also purchase
+                  at a significant discount a quality breast pump to help ease your transition back
+                  to work.
+               </p>
+            
+               }
+            else
+               {
+               <p>Welcome!  
+               </p>
+               <p>
+                  Welcome! If you or your partner are an expectant mother, LactCorp Solutions
+                  has been chosen by @companyName to offer a quality breast pump at a discount
+                  to help ease your transition back to work.
+               </p>
+               }
+
+         </fieldset>
+
+         @if (service != null)
+            { <label class='oe-next' onclick="goto('#consult');" >Next &gt;&gt;</label> }
+         @if (service == null)
+            { <label class='oe-next' onclick="goto('#pump-selection');" >Next &gt;&gt;</label> }
+      </div>
+
+      @if (service != null)
+         {
+         <div class="oe-panel" id="consult">
+            <fieldset>
+               <legend>Sign-up for the Lactation Program</legend>
+               @Helper.SelectXML(@service.ProductSpecs, "productspecs")
+               <p>
+                  <input type="checkbox" id="choice-service" name="ChoiceService" checked="checked" />
+                  &nbsp;Yes, I would like a board-certified Lactation Consultant to contact me!
+               </p>
+            </fieldset>
+
+         <label class='oe-prev' onclick="goto('#welcome');" >&lt;&lt;&nbsp;Back</label> 
+         <label class='oe-next' onclick="goto('#pump-selection');" >Next &gt;&gt;</label> 
+
+         </div>
+         }
+
+      <div class="oe-panel" id="pump-selection">
+         <fieldset>
+            <legend>Select a Pump</legend>
+            <p>
+               This equipment is being offered to you at a discount, supported by @companyName.</p>
+            <p>
+               Employees may purchase one(1) pump within any twelve month period though this offering.</p>
+            <ul id="pump-list" style="list-style: none;">
+               @foreach (var pump in pumps)
+                  {
+                  <li class="oe-modelitem" id="item-@pump.ModelNo">
+                     @Helper.SelectXML(@pump.ProductSpecs, "img")
+                     <p style="margin-top: 12pt; margin-bottom: 6pt;">
+                        <input type="radio" id="choice-pump-@pump.ModelNo" name="ChoicePumpModel" />
+                        Model: @pump.ModelNo</p>
+                     <p style="margin-top: 6pt; margin-bottom: 6pt;">@pump.ProductName</p>
+                     <p style="margin-top: 6pt; margin-bottom: 6pt;">
+                        Your cost: @((pump.EnrolleePrice + pump.ShippingCosts).ToString("$#,##0.00"))</p>
+                     <p style="margin-top: 6pt; margin-bottom: 6pt;" />
+                  </li>
+                  }
+            </ul>
+
+            <br style="clear:left;" />
+
+            <p>
+               <input type="radio" id="choice-pump-none" name="ChoicePumpModel" checked="checked" />
+               <em>&nbsp;No, thanks! I will not be needing to purchase a breast pump.</em>
+            </p>
+         </fieldset>
+
+         @if (service != null)
+            { <label class='oe-prev' onclick="goto('#consult');" >&lt;&lt;&nbsp;Back</label> }
+         @if (service == null)
+            { <label class='oe-prev' onclick="goto('#welcome');" >&lt;&lt;&nbsp;Back</label> }
+         <label class='oe-next' onclick="goto('#personal');" >Next &gt;&gt;</label> 
+
+      </div>
+      
+      <div class="oe-panel" id="personal">
+         <fieldset>
+            <legend>Personal Information</legend>
+            <label class="oe-label">
+               Employee's First Name</label>
+            <input type="text" name="FirstName" id="firstname" class="required" title="Please enter the first name." />
+            <label class="oe-label">
+               Employee's Last Name</label>
+            <input type="text" name="LastName" id="lastname" class="required" title="Please enter the last name." />
+            <label class="oe-label">
+               Address</label>
+            <input type="text" name="Address1" id="address1" class="required" title="Please enter the address." />
+            <label class="oe-label">
+               Address(cont.)</label>
+            <input type="text" name="Address2" id="address2" class="oe-text" />
+            <label class="oe-label">
+               City</label>
+            <input type="text" name="City" id="city" class="required"  title="City entry is required" />
+            <label class="oe-label">
+               State</label>
+            <input type="text" name="State" id="state" class="required" title="State entry is required" />
+            <label class="oe-label">
+               ZIP</label>
+            <input type="text" name="Postalcode" id="postalcode" class="required" title="ZIP Code is required" />
+            <label class="oe-label">
+               Work Email</label>
+            <input type="text" name="WorkEmail" id="work-email" class="required" title="Work email is required"/>
+            <label class="oe-label">
+               Work Phone</label>
+            <input type="text" name="WorkPhone" id="work-phone" class="required" title="Work phone number is required"/>
+
+            <hr style="margin-top:5px;margin-bottom:5px;" />
+
+            <p style="margin-bottom: 2pt;">
+               If different than the employee..</p>
+            <label class="oe-label" style="margin-top: 2pt;">
+               Expectant Mother's Name</label>
+            <input type="text" name="MothersName" id="mothers-name" class="oe-text" />
+            <p style="margin-bottom: 2pt;">
+               If you would prefer we use another email address or phone number to communicate
+               with you.</p>
+            <label class="oe-label" style="margin-top: 2pt;">
+               Personal Email</label>
+            <input type="text" name="HomeEmail" id="home-email" class="oe-text" />
+            <label class="oe-label">
+               Personal Phone</label>
+            <input type="text" name="HomePhone" id="home-phone" class="oe-text" />
+         </fieldset>
+
+         <label class='oe-prev' onclick="goto('#pump-selection');" >&lt;&lt;&nbsp;Back</label> 
+         <label class='oe-next' onclick="goto('#shipping');" >Next &gt;&gt;</label> 
+
+      </div>
+
+      <div class="oe-panel" id="shipping">
+         <fieldset>
+            <legend>Shipping and Billing Information</legend>
+            <p>
+               <input type="checkbox" id="copy-personal" />&nbsp; Click here to use Personal Information
+               for shipping and billing purposes</p>
+            <label class="oe-label">
+               First Name</label>
+            <input type="text" name="ShipToFirstName" id="ship-to-firstname" class="oe-text" />
+            <label class="oe-label">
+               Last Name</label>
+            <input type="text" name="ShipToLastName" id="ship-to-lastname" class="oe-text" />
+            <label class="oe-label">
+               Address</label>
+            <input type="text" name="ShipToAddress1" id="ship-to-address1" class="oe-text" />
+            <label class="oe-label">
+               Address(cont.)</label>
+            <input type="text" name="ShipToAddress2" id="ship-to-address2" class="oe-text" />
+            <label class="oe-label">
+               City</label>
+            <input type="text" name="ShipToCity" id="ship-to-city" class="oe-text" />
+            <label class="oe-label">
+               State</label>
+            <input type="text" name="ShipToState" id="ship-to-state" class="oe-text" />
+            <label class="oe-label">
+               ZIP</label>
+            <input type="text" name="ShipToPostalcode" id="ship-to-postalcode" class="oe-text" />
+         </fieldset>
+
+         <label class='oe-prev' onclick="goto('#personal');" >&lt;&lt;&nbsp;Back</label> 
+         <label class='oe-next' onclick="goto('#confirmation')" >Next &gt;&gt;</label> 
+
+      </div>
+ 
+      <div class="oe-panel" id="confirmation">
+         <script type="text/javascript">
+
+         </script>
+         <fieldset>
+            <legend>Order Confirmation</legend>
+            <p>
+               Please review the following information. If you need to make any changes, just click
+               on the tabs, and make your corrections.</p>
+            @if (service != null)
+               {
+               <div class="oe-div" id="consult-review">
+               </div>
+            }
+            <div class="oe-div" id="pump-selection-review">
+            </div>
+            <div class="oe-div" id="personal-review">
+            </div>
+            <div class="oe-div" id="shipping-review">
+            </div>
+         </fieldset>
+
+         <label class='oe-prev' onclick="goto('#shipping');" >&lt;&lt;&nbsp;Back</label> 
+
+         <input type="submit" class='oe-next' value="Submit&nbsp;Order" />
+      </div>
+
+   </div>  <!-- oe-container -->
+</div> <!-- oe-panels -->
+
+<fieldset class="hidden"> 
+   <input type="hidden" id="current-tab" name="CurrentTab" />
+   <input type="hidden" id="pump-model-no" name="PumpModelNo" />
+</fieldset>
+
+</form>

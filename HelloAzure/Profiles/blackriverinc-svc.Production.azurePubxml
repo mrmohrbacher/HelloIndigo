@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AzureCredentials>{"ServiceManagementEndpoint":"https:\/\/management.core.windows.net\/","SubscriptionId":"f78f0972-249a-4df3-aca2-08f96c9c9336"}</AzureCredentials>
+    <AzureHostedServiceName>blackriverinc-svc</AzureHostedServiceName>
+    <AzureHostedServiceLabel>blackriverinc-svc</AzureHostedServiceLabel>
+    <AzureSlot>Production</AzureSlot>
+    <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
+    <AzureEnableProfiling>False</AzureEnableProfiling>
+    <AzureEnableWebDeploy>True</AzureEnableWebDeploy>
+    <AzureStorageAccountName>blackriverinc</AzureStorageAccountName>
+    <AzureStorageAccountLabel>blackriverinc</AzureStorageAccountLabel>
+    <AzureDeploymentLabel>HelloAzure</AzureDeploymentLabel>
+    <AzureSolutionConfiguration>Debug</AzureSolutionConfiguration>
+    <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
+    <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
+    <AzureEnableRemoteDesktop>True</AzureEnableRemoteDesktop>
+    <AzureDeploymentReplacementMethod>AutomaticUpgrade</AzureDeploymentReplacementMethod>
+    <AzureDeleteDeploymentOnFailure>False</AzureDeleteDeploymentOnFailure>
+    <AzureFallbackToDeleteAndRecreateIfUpgradeFails>True</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
+  </PropertyGroup>
+</Project>

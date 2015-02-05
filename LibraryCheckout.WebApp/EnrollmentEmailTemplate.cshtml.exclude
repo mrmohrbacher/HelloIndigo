@@ -1,0 +1,68 @@
+﻿@using System.Collections.Specialized
+@using System.Diagnostics
+@using BookCorpModel
+@using OrderEntry.WebApp
+@using Blackriverinc.Framework.DataStore;
+@{  
+   Layout = "~/_BasePage.cshtml";
+   Page.Title = "BookCorp Enrollment";
+
+   // Access Form variables   
+   IKeyedDataStore data = new KeyedDataStore(new HttpRequestDataStoreAdapter(Request));
+   string name = null;
+   if (!data.get("MothersName", ref name))
+      {
+      data.get("Name", ref name);
+      }
+      
+   string email = null;
+   if (!data.get("HomeEmail", ref email))
+      {
+      data.get("WorkEmail", ref email);
+      }
+
+   // Extract the client identifier from the form/session variables
+   int clientId = -1;
+   data.get("ClientId", ref clientId);
+
+   
+   // ---------------------------------------------------------
+   // Build the data model for the Order Entry Page
+   // ---------------------------------------------------------
+   ProductEx service = null;
+   using (BookCorpEntities context = new BookCorpEntities())
+      {
+      service = (from cp in context.ClientProducts
+                 where cp.ClientId == clientId
+                 join s in context.Products
+                        on cp.ModelNo equals s.ModelNo
+                 where s.ProductType == "SERVICE"
+                 select
+                   new ProductEx()
+                   {
+                      CompanyName = cp.Client.CompanyName,
+                      AccountExec = cp.Client.AccountExec,
+                      ModelNo = s.ModelNo,
+                      ProductSpecs = s.ProductSpecs,
+                      ProductName = s.ProductName,
+                      ProductType = s.ProductType,
+                      EnrolleePrice = cp.EnrolleePrice,
+                      ShippingCosts = cp.ShippingCosts
+                   }).FirstOrDefault();
+
+      }
+}
+<div id="oe-email">
+   <h2>Lactation Program Enrollment</h2>
+   <fieldset style="margin-left: 27px; margin-right: 27px;">
+   <label class="oe-label" style="margin-top: 2pt;">
+      Expectant Mother's Name</label>
+   <input type="text" name="MothersName" id="mothers-name" class="oe-text" value="@data["MothersName"]" />
+   <label class="oe-label" style="margin-top: 2pt;">
+      Personal Email</label>
+   <input type="text" name="HomeEmail" id="home-email" class="email oe-text" value="@data["HomeEmail"]"/>
+   <label class="oe-label">
+      Personal Phone</label>
+   <input type="text" name="HomePhone" id="home-phone" class="oe-text phoneUS" value="@data["HomePhone"]" />
+   </fieldset>
+</div>
