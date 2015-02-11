@@ -49,26 +49,40 @@ namespace Client
 
       public void Run()
          {
-			using (EchoServiceClient proxy = new EchoServiceClient(_echoServiceEndpointName))
-            {
-            string result = "";
+			try
+				{
+				using (EchoServiceClient proxy = new EchoServiceClient(_echoServiceEndpointName))
+					{
+					string result = "";
 
-            result = proxy.Ping();
-            Console.WriteLine(string.Format("EchoService : {0}", result));
-            }
+					result = proxy.Ping();
+					Console.WriteLine(string.Format("EchoService : {0}", result));
+					}
+				}
+			catch (System.ServiceModel.EndpointNotFoundException epnfex)
+				{
+				Trace.WriteLine(string.Format("!Note! : No enpoint listening at [{0}]", _echoServiceEndpointName));
+				}
 
 			using (LibraryServiceClient proxy = new LibraryServiceClient(_libraryServiceEndpointName))
             {
             Book book = null;
 
-				Console.WriteLine("LIST - Return a list of Books using the Search Pattern.");
-				Console.WriteLine("READ - Return a Book using the Key value.");				
-            Console.WriteLine("Press ENTER to terminate.");
+				Action prompt = new Action(() =>
+					{
+					Console.WriteLine("LIST - Return a list of Books using the Search Pattern.");
+					Console.WriteLine("READ - Return a Book using the Key value.");				
+					Console.WriteLine("Press ENTER to terminate.");
+					});
+
+				prompt();
+
             string input = "";
             StringBuilder sb = new StringBuilder();
             while ((input = Console.ReadLine().ToUpper()).Length > 0)
                {
-               switch (input)
+					string[] tokens = input.Split(' ');
+					switch ((tokens.Length) > 0?tokens[0]:"")
                   {
                   case "LIST":
                      Console.Write("Search Pattern : ");
@@ -95,6 +109,9 @@ namespace Client
 								Console.WriteLine(" *Not Found*");
                         }
                      break;
+						default:
+							prompt();
+							break;
                   }
 
                }            

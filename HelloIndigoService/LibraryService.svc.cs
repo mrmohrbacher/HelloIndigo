@@ -16,7 +16,9 @@ using LibraryModel;
 
 namespace HelloIndigo
 	{
-	[ServiceBehavior(IncludeExceptionDetailInFaults = true, Name = "HelloIndigo.LibraryService")]
+	[ServiceBehavior(IncludeExceptionDetailInFaults = true,
+						  Name = "HelloIndigo.LibraryService",
+						  InstanceContextMode=InstanceContextMode.PerCall)]
 	public class LibraryService : ILibraryService
 		{
 		static AppTraceListener tracer = null;
@@ -28,11 +30,8 @@ namespace HelloIndigo
          {
 			try
 				{
-				IDataStoreProvider provider = WebConfigProvider.Open();
-				if (provider != null)
-					{
-					iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
-					}
+				IDataStoreProvider provider = ConfigProvider.Open();
+				iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
 
 				string logPath = iconfig["LogPath"] ?? @"C:\Logs\HelloIndigo";
 				// Running in the Cloud; look for the local drive

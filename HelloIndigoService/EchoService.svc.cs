@@ -29,7 +29,6 @@ namespace HelloIndigo
 
       static EchoService()
          {
-			System.Diagnostics.Trace.Listeners.Add(new ConsoleTraceListener());
 			initializeTracer();				
 			}
 

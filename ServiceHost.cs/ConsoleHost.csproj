@@ -55,14 +55,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\wcf.bindings.cfg">
+      <Link>wcf.bindings.cfg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
+      <Project>{ddd1d805-d47e-4c26-ac60-4efaf74aea4c}</Project>
+      <Name>DataStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
       <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
       <Name>Utility</Name>

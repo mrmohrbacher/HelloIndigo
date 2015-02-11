@@ -42,6 +42,8 @@ namespace HelloIndigo.ServiceClient
 			{
 			try
 				{
+				Trace.Listeners.Add(new ConsoleTraceListener());
+
 				tracer = new AppTraceListener(@"C:\Logs\HelloIndigoClient");
 
 				if (args.Length > 0 && args[0].ToUpper() == "ECHO")

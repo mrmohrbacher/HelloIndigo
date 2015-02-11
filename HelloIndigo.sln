@@ -44,6 +44,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWeb", "HelloWeb\HelloW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailClient", "..\Framework\EmailClient\EmailClient.csproj", "{2A9D3D1D-466F-4003-9085-51B809238D65}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlobalConfiguration", "GlobalConfiguration", "{A20E35BA-43D6-41D9-97DE-3E69424DBBE7}"
+	ProjectSection(SolutionItems) = preProject
+		wcf.bindings.cfg = wcf.bindings.cfg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = HelloIndigo.vsmdi
@@ -249,5 +254,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A20E35BA-43D6-41D9-97DE-3E69424DBBE7} = {9739BE65-04E8-4E10-BB5B-93A3EC0D3747}
 	EndGlobalSection
 EndGlobal
