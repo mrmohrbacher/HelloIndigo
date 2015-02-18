@@ -1,0 +1,50 @@
+﻿.oe-button {
+    color: blue;
+    width: 84px;
+    text-align: center;
+    line-height: 100%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    margin: 5px 5px 13px 13px;
+    padding: 8px 8px 8px 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    border: 2px solid ActiveBorder;
+    background: transparent url("../images/button-slice.jpg") repeat-x top;
+}
+
+
+.oe-panel .oe-next {
+    right: 0px;
+}
+
+    .oe-panel .oe-next:hover {
+        background: transparent url("../images/button-slice.jpg") repeat-x bottom;
+    }
+
+.oe-panel .oe-prev {
+    left: 0px;
+}
+
+    .oe-panel .oe-prev:hover {
+        background: transparent url("../images/button-slice.jpg") repeat-x bottom;
+    }
+
+.oe-button.oe-next .oe-button-label::after {
+    border: 6px solid transparent;
+    border-left-color: blue;
+    display: inline-block;
+    margin-left: 8px;
+    content: ' ';
+}
+
+.oe-button.oe-prev .oe-button-label::before {
+    border: 6px solid transparent;
+    border-right-color: blue;
+    display: inline-block;
+    margin-right: 8px;
+    content: ' ';
+}
+

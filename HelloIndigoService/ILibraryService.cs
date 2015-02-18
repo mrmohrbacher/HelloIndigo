@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.ServiceModel;
 
 using LibraryModel;
@@ -22,5 +23,8 @@ namespace HelloIndigo
 
       [OperationContract]
       bool Delete(string key, DateTime timeStamp);
+
+		[OperationContract]
+		bool Load(Stream input);
       }
    }

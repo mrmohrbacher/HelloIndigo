@@ -18,7 +18,7 @@ namespace HelloIndigo
 	{
 	[ServiceBehavior(IncludeExceptionDetailInFaults = true,
 						  Name = "HelloIndigo.LibraryService",
-						  InstanceContextMode=InstanceContextMode.PerCall)]
+						  InstanceContextMode = InstanceContextMode.PerCall)]
 	public class LibraryService : ILibraryService
 		{
 		static AppTraceListener tracer = null;
@@ -27,7 +27,7 @@ namespace HelloIndigo
 		static KeyedDataStore iconfig;
 
 		static LibraryService()
-         {
+			{
 			try
 				{
 				IDataStoreProvider provider = ConfigProvider.Open();
@@ -61,7 +61,7 @@ namespace HelloIndigo
 				{
 				Trace.WriteLine(exp.ToString());
 				}
-         }
+			}
 
 		public LibraryService()
 			{
@@ -73,16 +73,11 @@ namespace HelloIndigo
 
 					// Populate the Books Table
 					LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
-
+						
 					if (!context.BooksTableExists)
 						{
-						bool created = context.CreateBooks(true);
-						if (created)
-							{
-							Stream xstream = StreamFactory.Create(@"res://AppData.Books.xml");
-							context.DeserializeBooks(xstream);
-							context.SaveChanges();
-							}
+						Stream xstream = StreamFactory.Create(@"res://AppData.Books.xml");
+						this.Load(xstream);						
 						}
 					}
 				}
@@ -101,6 +96,22 @@ namespace HelloIndigo
 			}
 
 		#region ILibraryService Implementation
+
+		public bool Load(Stream xstream)
+			{
+			// Populate the Books Table
+			LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
+
+			context.DropBooks(true);
+			bool created = context.CreateBooks(true);
+			if (created)
+				{
+				context.DeserializeBooks(xstream);
+				context.SaveChanges();
+				}
+
+			return true;
+			}
 
 		public bool List(string searchPattern, out Book[] books)
 			{

@@ -23,8 +23,8 @@
   <Metadata>
     <MetadataFile FileName="HelloIndigo.wsdl" MetadataType="Wsdl" ID="78a6ecaa-1e83-4266-a1dc-147019507ad7" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?wsdl" />
     <MetadataFile FileName="EchoService.wsdl" MetadataType="Wsdl" ID="e2fb3d44-ab97-4401-8fbe-1fafeece1b26" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="EchoService.xsd" MetadataType="Schema" ID="acd42e83-0c02-4a25-aa35-b46566650c83" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?xsd=xsd1" />
     <MetadataFile FileName="EchoService1.xsd" MetadataType="Schema" ID="9d90077f-e067-4311-83ae-047e4645c38f" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EchoService.xsd" MetadataType="Schema" ID="acd42e83-0c02-4a25-aa35-b46566650c83" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?xsd=xsd1" />
     <MetadataFile FileName="EchoService.disco" MetadataType="Disco" ID="22aca2ae-7593-4bdc-bb90-3253b14da480" SourceId="1" SourceUrl="http://localhost:8088/EchoService.svc?disco" />
   </Metadata>
   <Extensions>

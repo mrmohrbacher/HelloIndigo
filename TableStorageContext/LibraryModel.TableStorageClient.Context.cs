@@ -153,7 +153,81 @@ namespace LibraryModel
     			}
     		}
     	private TableObjectSet<Book> _books;
+    	public bool BookCheckoutsTableExists
+    		{
+    			get
+    			{
+    			return client.DoesTableExist(BookCheckout.TableName);
+    			}
+    		}
+    
+    	public bool CreateBookCheckouts(bool testForExistence = false)
+    		{
+    		bool created = true;
+    		if (testForExistence)
+    			created = client.CreateTableIfNotExist(BookCheckout.TableName);
+    		else
+    			client.CreateTable(BookCheckout.TableName);
+    		return created;
+    		}
+    		
+    	public bool DropBookCheckouts(bool testForExistence = false)
+    		{
+    		bool existed = true;
+    		if (testForExistence)
+    			existed = client.DeleteTableIfExist(BookCheckout.TableName);
+    		else
+    			client.DeleteTable(BookCheckout.TableName);
+    		return existed;
+    		}
+    		
+    	public void DeserializeBookCheckouts(Stream xstream)
+    		{
+    		XDocument xdoc = XDocument.Load(xstream);
+    		// Just write a custom deserializer for now...
+    		foreach (XElement xelem in xdoc.Descendants("BookCheckout"))
+    			{
+    			BookCheckout entity = new BookCheckout()
+    				{
+    				ISBN = xelem.Element("ISBN").Value,
+    				Name = xelem.Element("Name").Value,
+    				Address = xelem.Element("Address").Value,
+    				City = xelem.Element("City").Value,
+    				State = xelem.Element("State").Value,
+    				ZIP = xelem.Element("ZIP").Value,
+    				Email = xelem.Element("Email").Value
+    				};
+    			BookCheckouts.AddObject(entity);
+    			}
+    		}
+    		
+    	public void SerializeBookCheckouts(Stream xstream)
+    		{
+    		XDocument xdoc = new XDocument();
+    		XElement root = new XElement("BookCheckouts");
+    		xdoc.Add(root);
+    			{
+    			root.Add(new XElement("ISBN"));
+    			root.Add(new XElement("Name"));
+    			root.Add(new XElement("Address"));
+    			root.Add(new XElement("City"));
+    			root.Add(new XElement("State"));
+    			root.Add(new XElement("ZIP"));
+    			root.Add(new XElement("Email"));			
+    			}
+    		xdoc.Save(xstream);
+    		}
+    
+    	public IObjectSet<BookCheckout> BookCheckouts
+    		{
+    		get 
+    			{
+    			return _bookCheckouts??(_bookCheckouts  = new TableObjectSet<BookCheckout>(client.BaseUri.ToString(), client.Credentials));		
+    			}
+    		}
+    	private TableObjectSet<BookCheckout> _bookCheckouts;
 
     #endregion
+
     }
 }

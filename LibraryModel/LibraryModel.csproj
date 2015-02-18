@@ -48,6 +48,9 @@
     <Compile Include="Book.cs">
       <DependentUpon>LibraryModel.TableStorageClient.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookCheckout.cs">
+      <DependentUpon>LibraryModel.TableStorageClient.tt</DependentUpon>
+    </Compile>
     <Compile Include="LibraryModel.TableStorageClient.cs">
       <DependentUpon>LibraryModel.TableStorageClient.tt</DependentUpon>
       <AutoGen>True</AutoGen>

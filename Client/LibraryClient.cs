@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Blackriverinc.Framework.DataStore;
@@ -45,6 +47,17 @@ namespace Client
 				}
 			Trace.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", _libraryServiceEndpointName));
 
+			// Resolve streams out of resource fork.
+			StreamFactory.Register("res", (path, args) =>
+			{
+				Assembly assembly = Assembly.GetExecutingAssembly();
+				string resourcePath = string.Format("{0}.{1}",
+						assembly.GetName().Name,
+						path);
+				Trace.WriteLine(string.Format("StreamFactory::Create(res://{0})", resourcePath));
+				Stream result = assembly.GetManifestResourceStream(resourcePath);
+				return result;
+			});
 			}
 
       public void Run()
@@ -59,9 +72,9 @@ namespace Client
 					Console.WriteLine(string.Format("EchoService : {0}", result));
 					}
 				}
-			catch (System.ServiceModel.EndpointNotFoundException epnfex)
+			catch (System.ServiceModel.EndpointNotFoundException)
 				{
-				Trace.WriteLine(string.Format("!Note! : No enpoint listening at [{0}]", _echoServiceEndpointName));
+				Trace.WriteLine(string.Format("!Note! : No endpoint listening at [{0}]", _echoServiceEndpointName));
 				}
 
 			using (LibraryServiceClient proxy = new LibraryServiceClient(_libraryServiceEndpointName))
@@ -81,39 +94,50 @@ namespace Client
             StringBuilder sb = new StringBuilder();
             while ((input = Console.ReadLine().ToUpper()).Length > 0)
                {
-					string[] tokens = input.Split(' ');
-					switch ((tokens.Length) > 0?tokens[0]:"")
-                  {
-                  case "LIST":
-                     Console.Write("Search Pattern : ");
-                     string searchPattern =  Console.ReadLine();
-                     proxy.List(out books, searchPattern);
+					try
+						{
+						string[] tokens = input.Split(' ');
+						switch ((tokens.Length) > 0 ? tokens[0] : "")
+							{
+							case "LIST":
+								Console.Write("Search Pattern : ");
+								string searchPattern = Console.ReadLine();
+								proxy.List(out books, searchPattern);
 
-                     sb.Length = 0;
-                     XmlSerializeHelper.SerializeToString(ref sb, books.ToList());
-                     Console.Write(sb.ToString());
+								sb.Length = 0;
+								XmlSerializeHelper.SerializeToString(ref sb, books.ToList());
+								Console.Write(sb.ToString());
 
-                     break;
+								break;
 
-                  case "READ":
-                     Console.Write("Key : ");
-                     string key = Console.ReadLine();
-                     if (proxy.Read(out book, key))
-                        {
-                        sb.Length = 0;
-                        XmlSerializeHelper.SerializeToString(ref sb, book);
-                        Console.Write(sb.ToString().Trim());
-                        }
-                     else
-                        {
-								Console.WriteLine(" *Not Found*");
-                        }
-                     break;
-						default:
-							prompt();
-							break;
-                  }
+							case "LOAD":
+								Stream xstream = StreamFactory.Create(@"res://AppData.Books.xml");
+								Console.WriteLine(string.Format("Load = {0}", proxy.Load(xstream)));
+								break;
 
+							case "READ":
+								Console.Write("Key : ");
+								string key = Console.ReadLine();
+								if (proxy.Read(out book, key))
+									{
+									sb.Length = 0;
+									XmlSerializeHelper.SerializeToString(ref sb, book);
+									Console.Write(sb.ToString().Trim());
+									}
+								else
+									{
+									Console.WriteLine(" *Not Found*");
+									}
+								break;
+							default:
+								prompt();
+								break;
+							}
+						}
+					catch (Exception exp)
+						{
+						Trace.WriteLine(string.Format("Error {0} : {1}", input, exp.Message));
+						}
                }            
             }
          }

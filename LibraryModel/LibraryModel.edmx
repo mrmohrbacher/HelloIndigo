@@ -14,6 +14,7 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Books" EntityType="LibraryModel.Book" />
+          <EntitySet Name="BookCheckouts" EntityType="LibraryModel.BookCheckout" />
         </EntityContainer>
         <EntityType Name="Book">
           <Key>
@@ -28,6 +29,19 @@
               <LongDescription>HTML Document containing synopsis of Book's contents.</LongDescription>
             </Documentation>
           </Property>
+        </EntityType>
+        <EntityType Name="BookCheckout" >
+          <Key>
+            <PropertyRef Name="ISBN" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Type="String" Name="ISBN" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" />
+          <Property Type="String" Name="City" Nullable="false" />
+          <Property Type="String" Name="State" Nullable="false" />
+          <Property Type="String" Name="ZIP" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -61,6 +75,7 @@
         <EntityTypeShape EntityType="LibraryModel.Books" Width="2.25" PointX="1.5" PointY="3.125" Height="1.7879850260416665" />
         <InheritanceConnector EntityType="LibraryModel.Books" />
         <EntityTypeShape EntityType="LibraryModel.Book" Width="1.5" PointX="1.625" PointY="1" Height="1.9802864583333331" />
+        <EntityTypeShape EntityType="LibraryModel.BookCheckout" Width="1.5" PointX="1.875" PointY="4.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

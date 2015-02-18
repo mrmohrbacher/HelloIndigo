@@ -53,6 +53,11 @@
     <Compile Include="EchoClient.cs" />
     <Compile Include="LibraryClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Service References\EchoService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,10 +121,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppData\Books.xml">
+    <EmbeddedResource Include="AppData\Books.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
+    <None Include="Service References\LibraryService\LibraryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LibraryService\LibraryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LibraryService\LibraryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LibraryService\LibraryService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\LibraryService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -138,6 +155,12 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EchoService\" />
     <WCFMetadataStorage Include="Service References\LibraryService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

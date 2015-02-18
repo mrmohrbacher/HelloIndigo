@@ -1,0 +1,58 @@
+﻿.oe-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .oe-nav > li {
+        float: left;
+        margin-right: 5px;
+        background-image: url("../images/button-slice.jpg");
+        background-position: right top;
+        background-repeat: repeat-x;
+        background-color: transparent;
+        border-width: 2px;
+        border-color:ActiveBorder;
+        border-style: solid;
+        -webkit-border-top-left-radius: 8px;
+        border-top-left-radius: 8px;
+        -webkit-border-top-right-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-color: transparent;
+    }
+
+        /*.oe-nav > li:hover {
+            background-position: right bottom;
+            background-color: transparent;
+        }*/
+
+        .oe-nav > li.active {
+            float: left;
+            margin-right: 5px;
+            background-color: transparent;
+            background-image: url("../images/current-tab-slice.jpg");
+        }
+
+        .oe-nav > li > a {
+            display: block;
+            text-decoration: none;
+            padding: 3px 5px;
+            font-size: 12pt;
+            margin-bottom: -1px;
+        }
+
+            /*.oe-nav > li > a:hover {
+                background-position: left bottom;
+                background-color: transparent;
+            }*/
+
+            .oe-nav > li > a.active {
+                display: block;
+                text-decoration: none;
+                padding: 3px 5px;
+                font-size: 12pt;
+                margin-bottom: -1px;
+                background-position: left top;
+                background-repeat: repeat-x;
+                background-color: transparent;
+            }

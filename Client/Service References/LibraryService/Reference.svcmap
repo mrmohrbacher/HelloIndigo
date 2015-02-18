@@ -21,9 +21,10 @@
     <MetadataSource Address="http://localhost:8088/LibraryService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LibraryService.xsd" MetadataType="Schema" ID="1853de72-21d2-437d-80c7-300ce8b5937c" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?xsd=xsd0" />
-    <MetadataFile FileName="LibraryService.disco" MetadataType="Disco" ID="a0c60b3c-1310-498f-a082-4050f5d22360" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?disco" />
+    <MetadataFile FileName="LibraryService4.xsd" MetadataType="Schema" ID="e3b5bc36-cc94-4bf4-9969-765b2512cc8f" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?xsd=xsd4" />
     <MetadataFile FileName="LibraryService.wsdl" MetadataType="Wsdl" ID="148e47c2-dd65-4b7e-812e-e727775b1e52" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="LibraryService.disco" MetadataType="Disco" ID="a0c60b3c-1310-498f-a082-4050f5d22360" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?disco" />
+    <MetadataFile FileName="LibraryService.xsd" MetadataType="Schema" ID="1853de72-21d2-437d-80c7-300ce8b5937c" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?xsd=xsd0" />
     <MetadataFile FileName="LibraryService1.xsd" MetadataType="Schema" ID="e905898c-fa22-4093-a57b-7185ec8ceb88" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?xsd=xsd2" />
     <MetadataFile FileName="LibraryService2.xsd" MetadataType="Schema" ID="98a698d5-68bb-4e93-b5cd-46461238b8cf" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?xsd=xsd3" />
     <MetadataFile FileName="HelloIndigo.wsdl" MetadataType="Wsdl" ID="aea4d552-7b11-4943-af97-1ae0ec6d872f" SourceId="1" SourceUrl="http://localhost:8088/LibraryService.svc?wsdl" />
