@@ -103,6 +103,7 @@
     <Content Include="packages.config" />
     <Content Include="_bin_deployableAssemblies\Utility.dll" />
     <Content Include="CheckoutEmailTemplate.cshtml" />
+    <Content Include="LibraryModel.Book.datasource" />
     <None Include="Properties\PublishProfiles\blackriverinc-svc - Production.pubxml" />
     <None Include="Properties\PublishProfiles\GearHost.pubxml" />
     <None Include="_bin_deployableAssemblies\WebMatrix.WebData.xml" />
@@ -124,9 +125,6 @@
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.xml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="Service References\BlackriverincSvc\HelloIndigo.wsdl" />
-    <None Include="Service References\BlackriverincSvc\LibraryCheckout.WebApp.BlackriverincSvc.Book.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\BlackriverincSvc\LibraryService.disco" />
     <None Include="Service References\BlackriverincSvc\configuration91.svcinfo" />
     <None Include="Service References\BlackriverincSvc\configuration.svcinfo" />

@@ -214,7 +214,7 @@ $(document).ready(function () {
     }); // End of '#billing-information .oe-text' blur
 
 
-    $('#submit-cmd').click(function () {
+    $('.oe-panel submit').click(function () {
         var formData = $('#order-entry').serialize();
         $.post('CheckoutBook.ashx', formData, checkoutResults).error(checkoutFail);
     });

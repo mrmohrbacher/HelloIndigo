@@ -49,6 +49,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Load">
+      <soap:operation soapAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Load" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="HelloIndigo.LibraryService">
     <wsdl:port name="basicHttp" binding="tns:basicHttp">

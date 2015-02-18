@@ -38,6 +38,12 @@
   <wsdl:message name="ILibraryService_Delete_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="ILibraryService_Load_InputMessage">
+    <wsdl:part name="parameters" element="tns:Load" />
+  </wsdl:message>
+  <wsdl:message name="ILibraryService_Load_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoadResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILibraryService">
     <wsdl:operation name="List">
       <wsdl:input wsaw:Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/List" message="tns:ILibraryService_List_InputMessage" />
@@ -58,6 +64,10 @@
     <wsdl:operation name="Delete">
       <wsdl:input wsaw:Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Delete" message="tns:ILibraryService_Delete_InputMessage" />
       <wsdl:output wsaw:Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/DeleteResponse" message="tns:ILibraryService_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Load">
+      <wsdl:input wsaw:Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Load" message="tns:ILibraryService_Load_InputMessage" />
+      <wsdl:output wsaw:Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/LoadResponse" message="tns:ILibraryService_Load_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

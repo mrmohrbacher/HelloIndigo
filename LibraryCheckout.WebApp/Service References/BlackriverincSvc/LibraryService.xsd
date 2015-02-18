@@ -75,4 +75,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Load">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pathSpec" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoadResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoadResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -344,10 +344,9 @@ input[type="text"].error-field, input[type="password"].error-field {
 
 .oe-nav-footer
 {
-   margin: 27px 27px 27px 27px;
-   float:left;
-   bottom: 0px;
+   margin: 27px 0px;
    width:100%;
+   position: relative;
 }
 
 .oe-div
