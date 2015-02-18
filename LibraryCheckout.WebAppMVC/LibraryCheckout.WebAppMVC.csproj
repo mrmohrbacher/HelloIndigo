@@ -202,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -238,9 +237,9 @@
       <Project>{545070de-50f6-4710-aa5f-8365a9b76fdc}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibraryModel\LibraryModel.csproj">
+    <ProjectReference Include="..\LibraryModel\Library.Model.TableStorage.csproj">
       <Project>{072fdf3f-9291-466b-beec-8f17c1e5ff13}</Project>
-      <Name>LibraryModel</Name>
+      <Name>Library.Model.TableStorage</Name>
     </ProjectReference>
     <ProjectReference Include="..\TableStorageContext\TableStorageContext.csproj">
       <Project>{f2ba1f03-ea6d-4bb6-a368-3de64bf2cfbd}</Project>

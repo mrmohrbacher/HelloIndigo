@@ -107,9 +107,9 @@
       <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibraryModel\LibraryModel.csproj">
+    <ProjectReference Include="..\LibraryModel\Library.Model.TableStorage.csproj">
       <Project>{072FDF3F-9291-466B-BEEC-8F17C1E5FF13}</Project>
-      <Name>LibraryModel</Name>
+      <Name>Library.Model.TableStorage</Name>
     </ProjectReference>
     <ProjectReference Include="..\TableStorageContext\TableStorageContext.csproj">
       <Project>{F2BA1F03-EA6D-4BB6-A368-3DE64BF2CFBD}</Project>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <FieldMap>
-   <Map src="ShipToName" target="NAMESHIPTO"></Map>
+   <Map src="SubscriberName" target="NAMESHIPTO"></Map>
    <Map src="ShipToAddress" target="ADDRESSSHIPTO"></Map>
 </FieldMap>

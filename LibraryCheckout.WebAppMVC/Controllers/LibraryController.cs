@@ -54,6 +54,5 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
 			return View(new List<Book>(books));
 			}
-
 		}
 	}

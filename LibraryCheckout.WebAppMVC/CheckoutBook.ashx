@@ -68,7 +68,7 @@ public class CheckoutBook : IHttpHandler
          writer.WriteLine("         <fieldset style='{0}'>", 
                           "margin-left: 27px; margin-right: 27px;");
          
-         write("ShipToName", "name");
+         write("SubscriberName", "name");
          write("BookISBN", "book-isbn");
          write("BookTitle", "book-title");
          write("CheckoutDate", "checkout-date");
