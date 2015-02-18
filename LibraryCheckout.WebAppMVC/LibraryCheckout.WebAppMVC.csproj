@@ -197,6 +197,8 @@
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="ErrorPage.cshtml" />
     <Content Include="Views\Shared\_BasePage.cshtml" />
+    <Content Include="CheckoutBook.ashx" />
+    <Content Include="Views\Library\CheckoutEmailTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

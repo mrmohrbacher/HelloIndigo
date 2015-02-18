@@ -63,9 +63,12 @@ function showPanel(panel) {
    $(selector).click();
 }
 
-function checkoutFail() {
+function checkoutFail(response, url) {
     $('#email-review').show()
-    $('#email-confirmation').text("Checkout Failed!");
+    $('#email-confirmation').text('Checkout Failed! ('
+                                    + response.status
+                                    + ') ' + response.statusText
+                                    + ' ' + url);
 }
 
 function checkoutResults(data, status, response) {
@@ -214,9 +217,11 @@ $(document).ready(function () {
     }); // End of '#billing-information .oe-text' blur
 
 
-    $('.oe-panel submit').click(function () {
+    $('.oe-panel .submit').click(function () {
         var formData = $('#order-entry').serialize();
-        $.post('CheckoutBook.ashx', formData, checkoutResults).error(checkoutFail);
+        var postUrl = 'CheckoutBook.ashx';
+        $.post(postUrl, formData, checkoutResults)
+            .error(function () { checkoutFail(arguments[0], postUrl); });
     });
 
     // Program the State Entry AutoComplete
