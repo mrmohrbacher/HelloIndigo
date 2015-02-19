@@ -16,17 +16,17 @@ namespace Client.LibraryService {
     public interface ILibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/List", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ListResponse")]
-        bool List(out LibraryModel.Book[] books, string searchKey);
+        bool List(out Library.Model.Book[] books, string searchKey);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Read", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ReadResponse")]
-        bool Read(out LibraryModel.Book book, string key);
+        bool Read(out Library.Model.Book book, string key);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Update", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/UpdateResponse" +
             "")]
-        bool Update(ref LibraryModel.Book book);
+        bool Update(ref Library.Model.Book book);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Add", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/AddResponse")]
-        bool Add(LibraryModel.Book book);
+        bool Add(Library.Model.Book book);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Delete", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/DeleteResponse" +
             "")]
@@ -63,19 +63,19 @@ namespace Client.LibraryService {
                 base(binding, remoteAddress) {
         }
         
-        public bool List(out LibraryModel.Book[] books, string searchKey) {
+        public bool List(out Library.Model.Book[] books, string searchKey) {
             return base.Channel.List(out books, searchKey);
         }
         
-        public bool Read(out LibraryModel.Book book, string key) {
+        public bool Read(out Library.Model.Book book, string key) {
             return base.Channel.Read(out book, key);
         }
         
-        public bool Update(ref LibraryModel.Book book) {
+        public bool Update(ref Library.Model.Book book) {
             return base.Channel.Update(ref book);
         }
         
-        public bool Add(LibraryModel.Book book) {
+        public bool Add(Library.Model.Book book) {
             return base.Channel.Add(book);
         }
         

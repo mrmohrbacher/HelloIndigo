@@ -2,7 +2,7 @@
 @using System.Diagnostics
 @using Blackriverinc.Framework.DataStore
 @using Blackriverinc.Framework.Utility
-@model IEnumerable<LibraryCheckout.WebAppMVC.HelloIndigoService.Book>
+@model IEnumerable<Library.Model.Book>
 @{  
     Layout = "~/Views/Shared/_BasePage.cshtml";
     Page.Title = "Black River Systems, Inc - Lending Library";
@@ -49,7 +49,7 @@
                     <ul id="book-list" style="list-style: none;">
                         @foreach (var book in @Model)
                             {
-                            <li class="oe-modelitem" id="item-@book.RowKey">
+                            <li class="oe-modelitem" id="item-@book.ISBN">
                                 <p>
                                     <img src="Images/@(book.ISBN).jpg" alt="@book.ISBN"  height="120px" />
                                 </p>
@@ -57,7 +57,7 @@
                                     @book.Title
                                 </p>
                                 <p style="margin-top: 6pt; margin-bottom: 6pt;" class="oe-choice">
-                                    <input type="radio" id="choice-book-@book.RowKey" name="ChoiceBook" />
+                                    <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" />
                                     ISBN: @book.ISBN
                                 </p>
                             </li>

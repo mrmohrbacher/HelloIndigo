@@ -11,6 +11,8 @@ using BookSelection.WebApp;
 using LibraryCheckout.WebAppMVC;
 using LibraryCheckout.WebAppMVC.HelloIndigoService;
 
+
+using Library.Model;
 namespace LibraryCheckout.WebAppMVC.Controllers
 	{
 	public class LibraryController : Controller
@@ -31,7 +33,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 				provider = new CloudSettingsProvider(provider);
 				IKeyedDataStore settings = new KeyedDataStore(provider);
 
-				string endpointName = settings["LibraryServiceEndpoint"];
+				string endpointName = settings["LibraryServiceEndpoint"] as string;
 				if (endpointName == null)
 					{
 					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");

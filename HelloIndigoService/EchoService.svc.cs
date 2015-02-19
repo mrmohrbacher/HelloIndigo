@@ -9,8 +9,6 @@ using Microsoft.WindowsAzure.ServiceRuntime;
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 
-using LibraryModel;
-
 namespace HelloIndigo
    {
    [ServiceBehavior(IncludeExceptionDetailInFaults = true, 
@@ -34,10 +32,10 @@ namespace HelloIndigo
 
 		private static void initializeTracer()
 			{
-			IDataStoreProvider provider = ConfigProvider.Open();
+			IDataStoreProvider provider = ConfigProviderBase.Open();
 			iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
 
-			_logPath = iconfig["LogPath"] ?? @"C:\Logs\HelloIndigo";
+			_logPath = (iconfig["LogPath"] as string)?? @"C:\Logs\HelloIndigo";
 
 			// Running in the Cloud; look for the local drive
 			if (!Path.IsPathRooted(_logPath)

@@ -6,8 +6,6 @@ using System.Threading;
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 
-using LibraryModel;
-
 namespace HelloIndigo.ServiceClient
 	{
 	class ConsoleClient

@@ -10,9 +10,11 @@ using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.ScheduledJob;
 using Blackriverinc.Framework.Utility;
 
-using LibraryModel;
 using Client.LibraryService;
 using Client.EchoService;
+
+using Library.Model;
+using Library.Model.Helpers;
 
 namespace Client
    {
@@ -104,9 +106,9 @@ namespace Client
 								string searchPattern = Console.ReadLine();
 								proxy.List(out books, searchPattern);
 
-								sb.Length = 0;
-								XmlSerializeHelper.SerializeToString(ref sb, books.ToList());
-								Console.Write(sb.ToString());
+								Stream stream = new MemoryStream();
+								EntitySerializationHelpers.SerializeBooks(books.ToList(), stream);							
+								Console.WriteLine(stream.ContentsToString());
 
 								break;
 
@@ -120,9 +122,9 @@ namespace Client
 								string key = Console.ReadLine();
 								if (proxy.Read(out book, key))
 									{
-									sb.Length = 0;
-									XmlSerializeHelper.SerializeToString(ref sb, book);
-									Console.Write(sb.ToString().Trim());
+									stream = new MemoryStream();
+									EntitySerializationHelpers.SerializeBook(book, stream);
+									Console.WriteLine(stream.ContentsToString());
 									}
 								else
 									{

@@ -32,7 +32,7 @@ namespace Blackriverinc.Framework.Tests
 			{
 			string expected = "A string pulled from 'setting' [string-1].";
 			trace("Expected : {0}", expected);
-			string actual = _store["string-1"];
+			string actual = _store["string-1"] as string;
 			trace(" Actual : {0}", actual);
 
 			Assert.AreEqual(expected, actual);

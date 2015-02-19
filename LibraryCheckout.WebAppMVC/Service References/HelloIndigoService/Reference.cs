@@ -9,174 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Book", Namespace="http://schemas.datacontract.org/2004/07/LibraryModel")]
-    [System.SerializableAttribute()]
-    public partial class Book : LibraryCheckout.WebAppMVC.HelloIndigoService.TableServiceEntityBase {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AuthorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ISBNField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PublisherField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SynopsisField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Author {
-            get {
-                return this.AuthorField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AuthorField, value) != true)) {
-                    this.AuthorField = value;
-                    this.RaisePropertyChanged("Author");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ISBN {
-            get {
-                return this.ISBNField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ISBNField, value) != true)) {
-                    this.ISBNField = value;
-                    this.RaisePropertyChanged("ISBN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Publisher {
-            get {
-                return this.PublisherField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PublisherField, value) != true)) {
-                    this.PublisherField = value;
-                    this.RaisePropertyChanged("Publisher");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Synopsis {
-            get {
-                return this.SynopsisField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SynopsisField, value) != true)) {
-                    this.SynopsisField = value;
-                    this.RaisePropertyChanged("Synopsis");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TableServiceEntityBase", Namespace="http://schemas.datacontract.org/2004/07/TableStorageSet")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(LibraryCheckout.WebAppMVC.HelloIndigoService.Book))]
-    public partial class TableServiceEntityBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PartitionKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RowKeyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimestampField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PartitionKey {
-            get {
-                return this.PartitionKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PartitionKeyField, value) != true)) {
-                    this.PartitionKeyField = value;
-                    this.RaisePropertyChanged("PartitionKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RowKey {
-            get {
-                return this.RowKeyField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RowKeyField, value) != true)) {
-                    this.RowKeyField = value;
-                    this.RaisePropertyChanged("RowKey");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Timestamp {
-            get {
-                return this.TimestampField;
-            }
-            set {
-                if ((this.TimestampField.Equals(value) != true)) {
-                    this.TimestampField = value;
-                    this.RaisePropertyChanged("Timestamp");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", ConfigurationName="HelloIndigoService.ILibraryService")]
@@ -206,10 +39,10 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
         System.Threading.Tasks.Task<LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateResponse> UpdateAsync(LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Add", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/AddResponse")]
-        bool Add(LibraryCheckout.WebAppMVC.HelloIndigoService.Book book);
+        bool Add(Library.Model.Book book);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Add", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/AddResponse")]
-        System.Threading.Tasks.Task<bool> AddAsync(LibraryCheckout.WebAppMVC.HelloIndigoService.Book book);
+        System.Threading.Tasks.Task<bool> AddAsync(Library.Model.Book book);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Delete", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/DeleteResponse" +
             "")]
@@ -251,12 +84,12 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
         public bool ListResult;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
-        public LibraryCheckout.WebAppMVC.HelloIndigoService.Book[] books;
+        public Library.Model.Book[] books;
         
         public ListResponse() {
         }
         
-        public ListResponse(bool ListResult, LibraryCheckout.WebAppMVC.HelloIndigoService.Book[] books) {
+        public ListResponse(bool ListResult, Library.Model.Book[] books) {
             this.ListResult = ListResult;
             this.books = books;
         }
@@ -287,12 +120,12 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
         public bool ReadResult;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
-        public LibraryCheckout.WebAppMVC.HelloIndigoService.Book book;
+        public Library.Model.Book book;
         
         public ReadResponse() {
         }
         
-        public ReadResponse(bool ReadResult, LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public ReadResponse(bool ReadResult, Library.Model.Book book) {
             this.ReadResult = ReadResult;
             this.book = book;
         }
@@ -304,12 +137,12 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
     public partial class UpdateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
-        public LibraryCheckout.WebAppMVC.HelloIndigoService.Book book;
+        public Library.Model.Book book;
         
         public UpdateRequest() {
         }
         
-        public UpdateRequest(LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public UpdateRequest(Library.Model.Book book) {
             this.book = book;
         }
     }
@@ -323,12 +156,12 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
         public bool UpdateResult;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
-        public LibraryCheckout.WebAppMVC.HelloIndigoService.Book book;
+        public Library.Model.Book book;
         
         public UpdateResponse() {
         }
         
-        public UpdateResponse(bool UpdateResult, LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public UpdateResponse(bool UpdateResult, Library.Model.Book book) {
             this.UpdateResult = UpdateResult;
             this.book = book;
         }
@@ -366,7 +199,7 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
             return base.Channel.List(request);
         }
         
-        public bool List(string searchKey, out LibraryCheckout.WebAppMVC.HelloIndigoService.Book[] books) {
+        public bool List(string searchKey, out Library.Model.Book[] books) {
             LibraryCheckout.WebAppMVC.HelloIndigoService.ListRequest inValue = new LibraryCheckout.WebAppMVC.HelloIndigoService.ListRequest();
             inValue.searchKey = searchKey;
             LibraryCheckout.WebAppMVC.HelloIndigoService.ListResponse retVal = ((LibraryCheckout.WebAppMVC.HelloIndigoService.ILibraryService)(this)).List(inValue);
@@ -383,7 +216,7 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
             return base.Channel.Read(request);
         }
         
-        public bool Read(string key, out LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public bool Read(string key, out Library.Model.Book book) {
             LibraryCheckout.WebAppMVC.HelloIndigoService.ReadRequest inValue = new LibraryCheckout.WebAppMVC.HelloIndigoService.ReadRequest();
             inValue.key = key;
             LibraryCheckout.WebAppMVC.HelloIndigoService.ReadResponse retVal = ((LibraryCheckout.WebAppMVC.HelloIndigoService.ILibraryService)(this)).Read(inValue);
@@ -400,7 +233,7 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
             return base.Channel.Update(request);
         }
         
-        public bool Update(ref LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public bool Update(ref Library.Model.Book book) {
             LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateRequest inValue = new LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateRequest();
             inValue.book = book;
             LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateResponse retVal = ((LibraryCheckout.WebAppMVC.HelloIndigoService.ILibraryService)(this)).Update(inValue);
@@ -412,11 +245,11 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
             return base.Channel.UpdateAsync(request);
         }
         
-        public bool Add(LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public bool Add(Library.Model.Book book) {
             return base.Channel.Add(book);
         }
         
-        public System.Threading.Tasks.Task<bool> AddAsync(LibraryCheckout.WebAppMVC.HelloIndigoService.Book book) {
+        public System.Threading.Tasks.Task<bool> AddAsync(Library.Model.Book book) {
             return base.Channel.AddAsync(book);
         }
         

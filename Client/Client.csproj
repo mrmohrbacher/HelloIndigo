@@ -79,6 +79,7 @@
     <None Include="HelloIndigo.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Library.Model.Book.datasource" />
     <None Include="Properties\DataSources\LibraryModel.Book.datasource" />
     <None Include="Service References\EchoService\EchoService.wsdl" />
     <None Include="Service References\EchoService\EchoService.xsd">
@@ -107,17 +108,9 @@
       <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibraryModel\Library.Model.TableStorage.csproj">
-      <Project>{072FDF3F-9291-466B-BEEC-8F17C1E5FF13}</Project>
-      <Name>Library.Model.TableStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TableStorageContext\TableStorageContext.csproj">
-      <Project>{F2BA1F03-EA6D-4BB6-A368-3DE64BF2CFBD}</Project>
-      <Name>TableStorageContext</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TableStorageSet\TableStorageSet.csproj">
-      <Project>{18D2585D-CF01-4604-ACF5-214BA78A211F}</Project>
-      <Name>TableStorageSet</Name>
+    <ProjectReference Include="..\Library.Model\Library.Model.csproj">
+      <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
+      <Name>Library.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +125,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\LibraryService\LibraryService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\LibraryService\LibraryService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\LibraryService\Reference.svcmap">

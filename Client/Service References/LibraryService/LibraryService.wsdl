@@ -4,9 +4,8 @@
     <xsd:schema targetNamespace="uri://blackriverinc.com/helloindigo/LibraryService/Imports">
       <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd0" namespace="uri://blackriverinc.com/helloindigo/LibraryService" />
       <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/LibraryModel" />
-      <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TableStorageSet" />
-      <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Library.Model" />
+      <xsd:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILibraryService_List_InputMessage">

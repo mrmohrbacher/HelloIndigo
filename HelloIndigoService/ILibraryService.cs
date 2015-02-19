@@ -2,7 +2,7 @@
 using System.IO;
 using System.ServiceModel;
 
-using LibraryModel;
+using Library.Model;
 
 namespace HelloIndigo
    {
@@ -10,7 +10,7 @@ namespace HelloIndigo
    public interface ILibraryService
       {
       [OperationContract]
-      bool List(string searchKey, out Book[] books);
+		bool List(out Book[] books, string searchKey);
 
       [OperationContract]
       bool Read(string key, out Book book);

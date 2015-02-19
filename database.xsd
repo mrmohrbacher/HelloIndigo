@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="databaseConfigurationSection">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="databaseConfigurations">
+               <xs:complexType>
+                  <xs:sequence>
+                     <xs:element maxOccurs="unbounded" name="environment">
+                        <xs:complexType>
+                           <xs:attribute name="name" type="xs:string" use="required" />
+                           <xs:attribute name="server" type="xs:string" use="required" />
+                           <xs:attribute name="catalog" type="xs:string" use="required" />
+                           <xs:attribute name="integratedAuth" type="xs:boolean" use="optional" />
+                           <xs:attribute name="uid" type="xs:string" use="optional" />
+                           <xs:attribute name="password" type="xs:string" use="optional" />
+                        </xs:complexType>
+                     </xs:element>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

@@ -20,7 +20,7 @@ namespace Client
 			try
 				{
 				var config = new KeyedDataStore(new AppConfigProvider());
-				endPointName = config["EchoServiceEndpoint"];
+				endPointName = config["EchoServiceEndpoint"] as string;
 				Trace.WriteLine(string.Format("+ EchoClient : EndPointName '{0}'", endPointName??"*null*"));
 				}
 			catch (Exception exp)

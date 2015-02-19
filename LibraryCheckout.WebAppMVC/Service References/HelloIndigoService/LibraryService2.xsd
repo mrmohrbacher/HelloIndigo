@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LibraryModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LibraryModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8088/LibraryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TableStorageSet" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Library.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Library.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="ArrayOfBook">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Book" nillable="true" type="tns:Book" />
@@ -8,17 +7,35 @@
   </xs:complexType>
   <xs:element name="ArrayOfBook" nillable="true" type="tns:ArrayOfBook" />
   <xs:complexType name="Book">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/TableStorageSet" base="q1:TableServiceEntityBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Author" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ISBN" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Publisher" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Synopsis" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element name="_x003C_Author_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_BookCheckouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfBookCheckout" />
+      <xs:element name="_x003C_ISBN_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Publisher_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Synopsis_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Title_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
   </xs:complexType>
   <xs:element name="Book" nillable="true" type="tns:Book" />
+  <xs:complexType name="ArrayOfBookCheckout">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookCheckout" nillable="true" type="tns:BookCheckout" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookCheckout" nillable="true" type="tns:ArrayOfBookCheckout" />
+  <xs:complexType name="BookCheckout">
+    <xs:sequence>
+      <xs:element name="_x003C_Address_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Book_x003E_k__BackingField" nillable="true" type="tns:Book" />
+      <xs:element name="_x003C_City_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DateIn_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_DateOut_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_Email_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ISBN_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_State_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ZIP_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BookCheckout" nillable="true" type="tns:BookCheckout" />
 </xs:schema>

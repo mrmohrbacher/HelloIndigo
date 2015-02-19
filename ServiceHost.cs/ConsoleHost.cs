@@ -23,7 +23,7 @@ namespace HelloIndigo.ServiceHost
             {
             tracer = new AppTraceListener(@"C:\Logs\HelloIndigoConsoleHost");
 
-				var parameters = new KeyedDataStore(Environment.CommandLine.CommandLineParser(new Dictionary<string, object>(),
+				var parameters = new KeyedDataStore(System.Environment.CommandLine.CommandLineParser(new Dictionary<string, object>(),
 																							  StringFunction.DictionaryNotFoundOptions.AddKey));
 
 				bool debugFlag = false;
@@ -31,7 +31,7 @@ namespace HelloIndigo.ServiceHost
 				if (debugFlag)
 					Debugger.Break();
 
-				string typeName = parameters["Service"];
+				string typeName = parameters["Service"] as string;
 				var serviceType = TypeHandler.GetReferencedTypeByName(typeName, "HelloIndigo", "HelloIndigoService");
 				if (serviceType == null)
 					throw new Exception(string.Format("Type [{0}] not available", typeName));

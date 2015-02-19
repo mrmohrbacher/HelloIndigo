@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,12 +8,17 @@ using System.Resources;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 
-using LibraryModel;
+using Library.Model;
+using Library.Model.Helpers;
 
 namespace HelloIndigo
 	{
@@ -24,16 +30,14 @@ namespace HelloIndigo
 		static AppTraceListener tracer = null;
 		static int instanceCount = 0;
 
-		static KeyedDataStore iconfig;
-
 		static LibraryService()
 			{
 			try
 				{
-				IDataStoreProvider provider = ConfigProvider.Open();
-				iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
+				IDataStoreProvider provider = ConfigProviderBase.Open();
+				GlobalCache.LoadConfigurationSettings(provider, true);
 
-				string logPath = iconfig["LogPath"] ?? @"C:\Logs\HelloIndigo";
+				string logPath = (GlobalCache.GetResolvedString("LogPath") ?? @"C:\Logs\HelloIndigo");
 				// Running in the Cloud; look for the local drive
 				if (!Path.IsPathRooted(logPath)
 				&& RoleEnvironment.IsAvailable
@@ -72,12 +76,13 @@ namespace HelloIndigo
 					Trace.WriteLine(string.Format("+ LibraryService[{0}]+", instanceCount));
 
 					// Populate the Books Table
-					LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
-						
-					if (!context.BooksTableExists)
+					using(LibraryEntities context = new LibraryEntities(""))
 						{
-						Stream xstream = StreamFactory.Create(@"res://AppData.Books.xml");
-						this.Load(xstream);						
+						if (context.Books.Count() == 0)
+							{
+							Stream xstream = StreamFactory.Create(@"res://AppData.Books.xml");
+							this.Load(xstream);
+							}
 						}
 					}
 				}
@@ -100,20 +105,15 @@ namespace HelloIndigo
 		public bool Load(Stream xstream)
 			{
 			// Populate the Books Table
-			LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
-
-			context.DropBooks(true);
-			bool created = context.CreateBooks(true);
-			if (created)
+			using (LibraryEntities context = new LibraryEntities(""))
 				{
 				context.DeserializeBooks(xstream);
 				context.SaveChanges();
 				}
-
 			return true;
 			}
 
-		public bool List(string searchPattern, out Book[] books)
+		public bool List(out Book[] books, string searchPattern)
 			{
 			Trace.WriteLine(string.Format("List searchPattern='{0}'", searchPattern));
 			try
@@ -122,13 +122,26 @@ namespace HelloIndigo
 					searchPattern = @".*";
 				Regex regex = new Regex(searchPattern, RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
-				Func<Book, bool> searchPredicate = ((book) => (regex.IsMatch(book.RowKey)));
+				Func<Book, bool> searchPredicate = ((book) => {
+					string rowData = book.ToCSVString();
+					return (regex.IsMatch(rowData));
+					});
 
-				LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
+				var list = new List<Book>();
 
-				var result = (from book in context.Books
-								  select book);
-				books = result.Where(searchPredicate).ToArray();
+				using (LibraryEntities context = new LibraryEntities(""))
+					{
+					var result = (from book in context.Books
+									  select book)
+									  .Where(searchPredicate).ToList();
+					foreach (var book in result)
+						{
+						list.Add(new Book(book as Book));
+						}
+					}
+
+				books = list.ToArray();
+
 				}
 			catch (Exception exp)
 				{
@@ -147,12 +160,12 @@ namespace HelloIndigo
 				return false;
 				}
 
-			LibraryEntities<AppConfigProvider> context = new LibraryEntities<AppConfigProvider>(iconfig["LibraryEntities.ConnectionString"]);
-
-			book = (from b in context.Books
-					  where b.RowKey == key
-					  select b).FirstOrDefault();
-
+			using (LibraryEntities context = new LibraryEntities(""))
+				{
+				book = new Book((from b in context.Books
+						  where b.ISBN == key
+						  select b).FirstOrDefault());
+				}
 			return (book != null);
 			}
 
