@@ -83,7 +83,7 @@ public class CheckoutBook : IHttpHandler
          response = responseStream.ContentsToString();         
 #endif
          // Send confirmation Email
-         string emailConnection = data["EMailConnectionMock"];
+         string emailConnection = data["EMailConnectionMock"] as string;
          Encryption encryptor = new Encryption();
          IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
          client.Send("mike@blackriverinc.com",

@@ -224,6 +224,10 @@ $(document).ready(function () {
             .error(function () { checkoutFail(arguments[0], postUrl); });
     });
 
+    $('.oe-panel .export').click(function () {
+        $.get('/Library/Export');
+    });
+
     // Program the State Entry AutoComplete
     $("#shipto-state").autocomplete({ source: states });
 

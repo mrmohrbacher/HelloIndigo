@@ -1,6 +1,7 @@
 ﻿.oe-button {
     color: blue;
     width: 84px;
+    text-decoration: none;
     text-align: center;
     line-height: 100%;
     display: block;
@@ -15,6 +16,12 @@
     background: transparent url("../images/button-slice.jpg") repeat-x top;
 }
 
+.oe-nav-footer {
+    text-align: center;
+}
+    .oe-button.center {
+        display: inline-block;        
+    }
 
 .oe-panel .oe-next {
     right: 0px;
