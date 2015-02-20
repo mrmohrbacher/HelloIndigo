@@ -1,19 +1,161 @@
-﻿@model Library.Model.Book
-
-@{
-    Layout = null;
+﻿@using System.Collections.Generic;
+@using System.Diagnostics
+@using Blackriverinc.Framework.DataStore
+@using Blackriverinc.Framework.Utility
+@model IEnumerable<Library.Model.Book>
+@{  
+    Layout = "~/Views/Shared/_BasePage.cshtml";
+    Page.Title = "Black River Systems, Inc - Lending Library";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        
+@*
+ *
+ *  
+ *
+ *@
+<form id="order-entry" action="CheckoutBook.ashx" method="post">
+    <div class="oe-panels">
+        <div id="menu-header">
+            <ul class="oe-nav" id="order-entry-menu">
+                <li><a href="#welcome">Welcome!</a></li>
+                <li><a href="#book-selection">Select a Book</a></li>
+                <li><a href="#information">Personal Information</a></li>
+                <li><a href="#confirmation">Confirm Order</a></li>
+            </ul>
+        </div>
+        <div class="oe-container">
+            <div class="oe-panel" id="welcome">
+                <fieldset>
+                    <legend>Welcome!</legend>
+                    <p>
+                        If you are looking for something to read amongst are numerous titles, you have come
+               to right place!
+                    </p>
+                    <p>
+                        Press <span style='font-style: italic'>Next</span> to continue...
+                    </p>
+                </fieldset>
+                <br style="clear: both;" />
+                <div class="oe-nav-footer">
+                    <label class='oe-next oe-button' onclick="showPanel('#book-selection');">
+                        <span class='oe-button-label'>Next</span></label>
+                </div>
+            </div>
+            <div class="oe-panel" id="book-selection">
+                <fieldset>
+                    <legend>Book Selection</legend>
+                    <p>
+                        Choose any one of the titles below.
+                    </p>
+                    <ul id="book-list" style="list-style: none;">
+                        @foreach (var book in @Model)
+                            {
+                            <li class="oe-modelitem" id="item-@book.ISBN">
+                                <p>
+                                    <img src="Images/@(book.ISBN).jpg" alt="@book.ISBN"  height="120px" />
+                                </p>
+                                <p id="book-title-@book.ISBN">
+                                    @book.Title
+                                </p>
+                                <p style="margin-top: 6pt; margin-bottom: 6pt;" class="oe-choice">
+                                    <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" />
+                                    ISBN: @book.ISBN
+                                </p>
+                            </li>
+                            }
+                    </ul>
+                    <br style="clear: left;" />
+                    <div>
+                        <input type="radio" id="choice-book-none" name="ChoiceBook" />
+                        <p id="book-title-none" style="display: inline;">
+                            No, thanks! I will not be borrowing a book today.
+                        </p>
+                    </div>
+                </fieldset>
+                <br style="clear: both;" />
+                <div class="oe-nav-footer">
+                    <label class='oe-prev oe-button' onclick="showPanel('#welcome');">
+                        <span class='oe-button-label'>Back</span></label>
+                    <a class="oe-button center" href="/Library/Export"><span class='oe-button-label'>Export...</span></a></label>
+                    <label class='oe-next oe-button' onclick="showPanel('#information');">
+                        <span class='oe-button-label'>Next</span></label>
+                </div>
+            </div>
+            <div class="oe-panel" id="information">
+                <fieldset>
+                    <legend>Shipping Information</legend>
+                    <div style="display: block;">
+                        <label class="oe-label" style="float: right; margin: 15px 27px 27px 27px; display: block">
+                            <strong>*&nbsp;Entries required</strong>
+                        </label>
+                        <div id="shipping-information" style="float: left; margin-right: 27px; border: 1px single black">
+                            <label class="oe-label">
+                                Name *</label>
+                            <input type="text" name="SubscriberName" id="shipto-name" class="oe-text required" title="Entry required" />
+                            <label class="oe-label">
+                                Address *</label>
+                            <input type="text" name="ShipToAddress" id="shipto-address" class="oe-text required"
+                                title="Entry required" />
+                            <label class="oe-label">
+                                City *</label>
+                            <input type="text" name="ShipToCity" id="shipto-city" class="oe-text required" title="Entry required" />
+                            <label class="oe-label">
+                                State *</label>
+                            <input type="text" name="ShipToState" id="shipto-state" class="oe-text required"
+                                title="Entry required" style="width: 2em;" />
+                            <label class="oe-label">
+                                ZIP *</label>
+                            <input type="text" name="ShipToPostalcode" id="shipto-postalcode" class="oe-text required"
+                                title="Entry required" />
+                            <label class="oe-label" style="margin-top: 2pt;">
+                                Email *</label>
+                            <input type="text" name="Email" id="home-email" class="email oe-text required"
+                                title="Entry required" />
+                        </div>
+                    </div>
+                </fieldset>
+                <br style="clear: both;" />
+                <div class="oe-nav-footer">
+                    <label class='oe-prev oe-button' onclick="showPanel('#book-selection');">
+                        <span class='oe-button-label'>Back</span></label>
+                    <label class='oe-next oe-button' onclick="showPanel('#confirmation')">
+                        <span class='oe-button-label'>Next</span></label>
+                </div>
+            </div>
+            <div class="oe-panel" id="confirmation">
+                <fieldset style="display: block;">
+                    <legend>Order Confirmation</legend>
+                    <p>
+                        Please review the following information. If you need to make any changes, just click
+               on the tabs and make your corrections.
+                    </p>
+                    <!-- Keep seperate 'div' tag/end-tags; empty-tag after
+                 empty-tag causes succeeding element to disappear. -->
+                    <div class="oe-div" id="book-selection-review">
+                        <!-- -->
+                    </div>
+                    <div class="oe-div" id="shipping-review">
+                        <!-- -->
+                    </div>
+                    <div class="oe-div" id="email-review">
+                        <label class='oe-label' id="email-confirmation">
+                        </label>
+                    </div>
+                </fieldset>
+                <br style="clear: both;" />
+                <div class="oe-nav-footer">
+                    <label class='oe-prev oe-button' onclick="showPanel('#information');">
+                        <span class='oe-button-label'>Back</span></label>
+                    <label class='oe-next oe-button submit'>
+                        Submit Order</label>
+                </div>
+            </div>
+            <!-- oe-container -->
+        </div>
+        <!-- oe-panels -->
+        <fieldset class="hidden">
+            <input type="hidden" id="current-tab" name="CurrentTab" value="" />
+            <input type="hidden" id="book-isbn" name="BookISBN" value="notpicked" />
+            <input type="hidden" id="book-title" name="BookTitle" value="" />
+        </fieldset>
     </div>
-</body>
-</html>
+</form>

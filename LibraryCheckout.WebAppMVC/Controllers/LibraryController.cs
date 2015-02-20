@@ -71,7 +71,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
       //
       // GET: /Library/
       [HttpGet]
-      public ActionResult BookSelection()
+      public ActionResult Index()
          {
          Book[] books = null;
          try

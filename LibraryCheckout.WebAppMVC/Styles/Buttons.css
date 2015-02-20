@@ -1,7 +1,6 @@
 ﻿.oe-button {
     color: blue;
     width: 84px;
-    text-decoration: none;
     text-align: center;
     line-height: 100%;
     display: block;
@@ -16,6 +15,11 @@
     background: transparent url("../images/button-slice.jpg") repeat-x top;
 }
 
+    a.oe-button {
+        text-decoration:none;
+        color: blue;
+    }
+
 .oe-nav-footer {
     text-align: center;
 }
@@ -23,21 +27,19 @@
         display: inline-block;        
     }
 
+    
+    .oe-panel .oe-button:hover {
+        background: transparent url("../images/button-slice.jpg") repeat-x bottom;
+        color: darkblue;
+    }
+
 .oe-panel .oe-next {
     right: 0px;
 }
 
-    .oe-panel .oe-next:hover {
-        background: transparent url("../images/button-slice.jpg") repeat-x bottom;
-    }
-
 .oe-panel .oe-prev {
     left: 0px;
 }
-
-    .oe-panel .oe-prev:hover {
-        background: transparent url("../images/button-slice.jpg") repeat-x bottom;
-    }
 
 .oe-button.oe-next .oe-button-label::after {
     border: 6px solid transparent;
