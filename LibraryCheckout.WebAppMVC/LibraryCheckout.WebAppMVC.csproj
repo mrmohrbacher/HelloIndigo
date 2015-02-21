@@ -159,6 +159,15 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Properties\DataSources\Library.Model.Book.datasource" />
     <None Include="Service References\HelloIndigoService\HelloIndigo.wsdl" />
+    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.ListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.ReadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\HelloIndigoService\LibraryService.disco" />
     <None Include="Service References\HelloIndigoService\configuration91.svcinfo" />
     <None Include="Service References\HelloIndigoService\configuration.svcinfo" />
