@@ -3,3 +3,4 @@
 **/csx
 **/packages
 **/TestResults
+/Library.Database/*.dbmdl
