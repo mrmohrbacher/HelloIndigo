@@ -42,7 +42,7 @@ public class CheckoutBook : IHttpHandler
 
          TextWriter writer = new StreamWriter(responseStream);
 
-         Action<string, string> write = ((name, id) =>
+         Action<string, string> emitField = ((name, id) =>
             {
                writer.WriteLine("         <label class='{0}' style='{1}'>", 
                         "oe-label", "display:block;margin-top: 5pt;margin-bottom:0pt");
@@ -67,11 +67,11 @@ public class CheckoutBook : IHttpHandler
 
          writer.WriteLine("         <fieldset style='{0}'>", 
                           "margin-left: 27px; margin-right: 27px;");
-         
-         write("SubscriberName", "name");
-         write("BookISBN", "book-isbn");
-         write("BookTitle", "book-title");
-         write("CheckoutDate", "checkout-date");
+
+         emitField("SubscriberName", "name");
+         emitField("BookISBN", "book-isbn");
+         emitField("BookTitle", "book-title");
+         emitField("CheckoutDate", "checkout-date");
          
          writer.WriteLine("        </fieldset>");
          writer.WriteLine("      </div>");
@@ -83,11 +83,11 @@ public class CheckoutBook : IHttpHandler
          response = responseStream.ContentsToString();         
 #endif
          // Send confirmation Email
-         string emailConnection = data["EMailConnectionMock"];
+         string emailConnection = data["EMailConnectionMock"] as string;
          Encryption encryptor = new Encryption();
          IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
          client.Send("mike@blackriverinc.com",
-                      context.Request.Form.Get("HomeEmail"),
+                      context.Request.Form.Get("Email"),
                       "Library Checkout Confirmation",
                       response);
 

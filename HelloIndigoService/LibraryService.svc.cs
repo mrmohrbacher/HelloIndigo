@@ -12,7 +12,9 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
+#if _AZURE
 using Microsoft.WindowsAzure.ServiceRuntime;
+#endif
 
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
@@ -38,6 +40,8 @@ namespace HelloIndigo
 				GlobalCache.LoadConfigurationSettings(provider, true);
 
 				string logPath = (GlobalCache.GetResolvedString("LogPath") ?? @"C:\Logs\HelloIndigo");
+
+#if _AZURE
 				// Running in the Cloud; look for the local drive
 				if (!Path.IsPathRooted(logPath)
 				&& RoleEnvironment.IsAvailable
@@ -46,7 +50,7 @@ namespace HelloIndigo
 					LocalResource localResource = RoleEnvironment.GetLocalResource("LogFiles");
 					logPath = Path.Combine(localResource.RootPath, logPath);
 					}
-
+#endif
 				tracer = new AppTraceListener(logPath);
 
 				// Resolve streams out of resource fork.
@@ -133,15 +137,15 @@ namespace HelloIndigo
 				using (LibraryEntities context = new LibraryEntities(""))
 					{
 					var result = (from book in context.Books
-									  select book)
+									  select new Book(book))
 									  .Where(searchPredicate).ToList();
 					foreach (var book in result)
 						{
 						list.Add(new Book(book as Book));
 						}
-					}
 
-				books = list.ToArray();
+               books = list.ToArray();
+               }
 
 				}
 			catch (Exception exp)

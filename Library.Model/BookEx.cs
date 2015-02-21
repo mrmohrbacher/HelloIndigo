@@ -11,7 +11,8 @@ namespace Library.Model
 
 	public class BookValidationModel
 		{
-
+      
+      public string ISBN;
 		}
 
 	}

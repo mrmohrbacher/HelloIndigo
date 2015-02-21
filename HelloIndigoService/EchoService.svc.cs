@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.ServiceModel;
 using System.Threading;
+#if _AZURE
 using Microsoft.WindowsAzure.ServiceRuntime;
+#endif
 
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
@@ -36,7 +38,7 @@ namespace HelloIndigo
 			iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
 
 			_logPath = (iconfig["LogPath"] as string)?? @"C:\Logs\HelloIndigo";
-
+#if _AZURE
 			// Running in the Cloud; look for the local drive
 			if (!Path.IsPathRooted(_logPath)
 			&& RoleEnvironment.IsAvailable
@@ -45,7 +47,7 @@ namespace HelloIndigo
 				LocalResource localResource = RoleEnvironment.GetLocalResource("LogFiles");
 				_logPath = Path.Combine(localResource.RootPath, _logPath);
 				}
-
+#endif
 			tracer = new AppTraceListener(_logPath);
 			}
 
@@ -68,16 +70,20 @@ namespace HelloIndigo
          string location = "Local";
          try
             {
+#if _AZURE
             if (RoleEnvironment.IsAvailable)
                {
                env = "Azure";
                location = (RoleEnvironment.IsEmulated) ? "Local" : "Cloud";
                }
+#endif
             }
+#if _AZURE
          catch (RoleEnvironmentException ree)
             {
             Trace.WriteLine(ree.ToString());
             }
+#endif
          catch (Exception exp)
             {
             Trace.WriteLine(exp.ToString());

@@ -16,7 +16,7 @@ namespace LibraryCheckout.WebAppMVC
 			routes.MapRoute(
 				 name: "Default",
 				 url: "{controller}/{action}/{id}",
-				 defaults: new { controller = "Library", action = "BookSelection", id = UrlParameter.Optional }
+				 defaults: new { controller = "Library", action = "Index", id = UrlParameter.Optional }
 			);
 			}
 		}
