@@ -218,9 +218,6 @@
     <Content Include="Images\beveled tile.xcf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Library\BookSelection.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>

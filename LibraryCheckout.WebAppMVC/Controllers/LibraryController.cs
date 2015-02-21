@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Blackriverinc.Framework.DataStore;
+using Blackriverinc.EmailClient;
 using Blackriverinc.Framework.Utility;
 using BookSelection.WebApp;
 using LibraryCheckout.WebAppMVC;
@@ -111,7 +112,93 @@ namespace LibraryCheckout.WebAppMVC.Controllers
       [HttpPost]
       public ActionResult Checkout(Library.Model.BookCheckout Selection)
          {
-         return null;
+         StringBuilder sb = new StringBuilder();
+         try
+            {
+
+            string response = null;
+
+            IDataStoreProvider provider =
+                  new HttpRequestDataStoreProvider(Request, new WebConfigProvider());
+            if (provider == null)
+               {
+               return null;
+               }
+            IKeyedDataStore data = new KeyedDataStore(provider);
+            data.Add("CheckoutDate", DateTime.Now.ToString("MMM dd, yyyy HH:mm"));
+#if _WTF         
+         // Create Confirmation from Template.
+         Uri responseURI;
+         response = BookSelection.WebApp.Helper.PostRequest(
+                                                          out responseURI,
+                                                          context.Request,
+                                                          "CheckoutEmailTemplate.cshtml?SendEmail=false");
+#else
+            MemoryStream responseStream = new MemoryStream(2048);
+
+            TextWriter writer = new StreamWriter(responseStream);
+
+            Action<string, string> emitField = ((name, id) =>
+            {
+               writer.WriteLine("         <label class='{0}' style='{1}'>",
+                        "oe-label", "display:block;margin-top: 5pt;margin-bottom:0pt");
+               writer.Write(name.CamelCaseToDelimitted());
+               writer.WriteLine("         </label>");  //                </label>
+
+               writer.WriteLine("         <input type='{0}' name='{1}' id='{2}' style='{3}' value='{4}' readonly />",
+                                       "text", name, id, "width:80%;color:Blue", data[name]);
+            });
+
+            writer.WriteLine("<html>");
+            writer.WriteLine("<head>");
+            writer.Write("<title>");
+            writer.Write("Black River Systems, Inc - Library Checkout");
+            writer.Write("</title>");
+            writer.WriteLine("</head>");
+
+            writer.WriteLine("   <body>");
+            writer.WriteLine("      <div id='oe-mail'>");
+
+            writer.WriteLine("         <h2>{0}</h2>", "Checkout Confirmation");
+
+            writer.WriteLine("         <fieldset style='{0}'>",
+                             "margin-left: 27px; margin-right: 27px;");
+
+            emitField("SubscriberName", "name");
+            emitField("BookISBN", "book-isbn");
+            emitField("BookTitle", "book-title");
+            emitField("CheckoutDate", "checkout-date");
+
+            writer.WriteLine("        </fieldset>");
+            writer.WriteLine("      </div>");
+            writer.WriteLine("   </body>");
+            writer.WriteLine("</html>");
+
+            writer.Flush();
+
+            response = responseStream.ContentsToString();
+#endif
+            // Send confirmation Email
+            string emailConnection = data["EMailConnectionMock"] as string;
+            Encryption encryptor = new Encryption();
+            IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
+            client.Send("mike@blackriverinc.com",
+                         Request.Form.Get("Email"),
+                         "Library Checkout Confirmation",
+                         response);
+
+
+            sb.AppendFormat("{0} - A confirmation email has been sent.",
+                  data["CheckoutDate"]);
+            }
+         catch (Exception exp)
+            {
+            Trace.WriteLine(string.Format("Exception CheckoutBook::ProcessRequest\n{0}", exp.Message));
+            Request.PostError(exp);
+            }
+
+         Response.ContentType = "text/text";
+         return Content(sb.ToString());
          }
 
       }

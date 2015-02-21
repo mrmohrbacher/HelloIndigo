@@ -136,15 +136,15 @@ namespace HelloIndigo
 				using (LibraryEntities context = new LibraryEntities(""))
 					{
 					var result = (from book in context.Books
-									  select book)
+									  select new Book(book))
 									  .Where(searchPredicate).ToList();
 					foreach (var book in result)
 						{
 						list.Add(new Book(book as Book));
 						}
-					}
 
-				books = list.ToArray();
+               books = list.ToArray();
+               }
 
 				}
 			catch (Exception exp)

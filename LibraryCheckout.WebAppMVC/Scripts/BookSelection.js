@@ -219,7 +219,8 @@ $(document).ready(function () {
 
     $('.oe-panel .submit').click(function () {
         var formData = $('#order-entry').serialize();
-        var postUrl = 'CheckoutBook.ashx';
+        var postUrl = 'Library/Checkout';
+        //var postUrl = 'CheckoutBook.ashx';
         $.post(postUrl, formData, checkoutResults)
             .error(function () { checkoutFail(arguments[0], postUrl); });
     });
