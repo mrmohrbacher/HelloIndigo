@@ -104,7 +104,7 @@ namespace Client
 							case "LIST":
 								Console.Write("Search Pattern : ");
 								string searchPattern = Console.ReadLine();
-								proxy.List(out books, searchPattern, 17);
+								proxy.List(searchPattern, out books);
 
 								Stream stream = new MemoryStream();
 								EntitySerializationHelpers.SerializeBooks(books.ToList(), stream);							
@@ -120,7 +120,7 @@ namespace Client
 							case "READ":
 								Console.Write("Key : ");
 								string key = Console.ReadLine();
-								if (proxy.Read(out book, key))
+								if (proxy.Read(key, out book))
 									{
 									stream = new MemoryStream();
 									EntitySerializationHelpers.SerializeBook(book, stream);

@@ -67,15 +67,11 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
         public string searchKey;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
-        public int qParm;
-        
         public ListRequest() {
         }
         
-        public ListRequest(string searchKey, int qParm) {
+        public ListRequest(string searchKey) {
             this.searchKey = searchKey;
-            this.qParm = qParm;
         }
     }
     
@@ -203,10 +199,9 @@ namespace LibraryCheckout.WebAppMVC.HelloIndigoService {
             return base.Channel.List(request);
         }
         
-        public bool List(string searchKey, int qParm, out Library.Model.Book[] books) {
+        public bool List(string searchKey, out Library.Model.Book[] books) {
             LibraryCheckout.WebAppMVC.HelloIndigoService.ListRequest inValue = new LibraryCheckout.WebAppMVC.HelloIndigoService.ListRequest();
             inValue.searchKey = searchKey;
-            inValue.qParm = qParm;
             LibraryCheckout.WebAppMVC.HelloIndigoService.ListResponse retVal = ((LibraryCheckout.WebAppMVC.HelloIndigoService.ILibraryService)(this)).List(inValue);
             books = retVal.books;
             return retVal.ListResult;

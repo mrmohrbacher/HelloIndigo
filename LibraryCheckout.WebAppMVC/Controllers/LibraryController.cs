@@ -25,15 +25,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 			Book[] books = null;
 			try
 				{
-				IDataStoreProvider provider = WebConfigProvider.Open();
-				if (provider == null)
-					{
-					throw new ApplicationException("Could not open Web Configuration Settings.");
-					}
-				provider = new CloudSettingsProvider(provider);
-				IKeyedDataStore settings = new KeyedDataStore(provider);
-
-				string endpointName = settings["LibraryServiceEndpoint"] as string;
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
 				if (endpointName == null)
 					{
 					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
@@ -45,7 +37,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 				// ---------------------------------------------------------
 				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
 					{
-					proxy.List(null, 18, out books);
+					proxy.List(null, out books);
 					}
 
 				}
@@ -54,8 +46,6 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 				Request.PostError(exp, false);
 				}
 
-			Response.ContentType = "text/csv";
-			Response.ContentEncoding = System.Text.ASCIIEncoding.ASCII;
 			StringBuilder content = new StringBuilder();
 			StringWriter writer = new StringWriter(content);
 			foreach (var book in books)
@@ -76,15 +66,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 			Book[] books = null;
 			try
 				{
-				IDataStoreProvider provider = WebConfigProvider.Open();
-				if (provider == null)
-					{
-					throw new ApplicationException("Could not open Web Configuration Settings.");
-					}
-				provider = new CloudSettingsProvider(provider);
-				IKeyedDataStore settings = new KeyedDataStore(provider);
-
-				string endpointName = settings["LibraryServiceEndpoint"] as string;
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
 				if (endpointName == null)
 					{
 					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");

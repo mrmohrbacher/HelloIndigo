@@ -10,10 +10,10 @@ namespace HelloIndigo
    public interface ILibraryService
       {
       [OperationContract]
-		bool List(out Book[] books, string searchKey, int qParm);
+		bool List(string searchKey, out Book[] books);
 
       [OperationContract]
-      bool Read(string key, out Book book);
+		bool Read(string key, out Book book);
 
       [OperationContract]
       bool Update(ref Book book);
