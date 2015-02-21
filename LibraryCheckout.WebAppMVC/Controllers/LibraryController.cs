@@ -45,7 +45,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 				// ---------------------------------------------------------
 				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
 					{
-					proxy.List(null, out books);
+					proxy.List(null, 18, out books);
 					}
 
 				}

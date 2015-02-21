@@ -16,7 +16,7 @@ namespace Client.LibraryService {
     public interface ILibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/List", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ListResponse")]
-        bool List(out Library.Model.Book[] books, string searchKey);
+        bool List(out Library.Model.Book[] books, string searchKey, int qParm);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Read", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ReadResponse")]
         bool Read(out Library.Model.Book book, string key);
@@ -63,8 +63,8 @@ namespace Client.LibraryService {
                 base(binding, remoteAddress) {
         }
         
-        public bool List(out Library.Model.Book[] books, string searchKey) {
-            return base.Channel.List(out books, searchKey);
+        public bool List(out Library.Model.Book[] books, string searchKey, int qParm) {
+            return base.Channel.List(out books, searchKey, qParm);
         }
         
         public bool Read(out Library.Model.Book book, string key) {

@@ -113,9 +113,10 @@ namespace HelloIndigo
 			return true;
 			}
 
-		public bool List(out Book[] books, string searchPattern)
+		public bool List(out Book[] books, string searchPattern, int qParm)
 			{
-			Trace.WriteLine(string.Format("List searchPattern='{0}'", searchPattern));
+			Trace.WriteLine(string.Format("List searchPattern='{0}' qParm = {1}", 
+					searchPattern, qParm));
 			try
 				{
 				if (searchPattern == null || searchPattern.Trim().Length == 0)
