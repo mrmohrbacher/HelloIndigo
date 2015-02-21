@@ -80,7 +80,7 @@ namespace HelloIndigo
 					Trace.WriteLine(string.Format("+ LibraryService[{0}]+", instanceCount));
 
 					// Populate the Books Table
-					using(LibraryEntities context = new LibraryEntities(""))
+					using (LibraryEntities context = new LibraryEntities(""))
 						{
 						if (context.Books.Count() == 0)
 							{
@@ -119,7 +119,7 @@ namespace HelloIndigo
 
 		public bool List(string searchPattern, out Book[] books)
 			{
-			Trace.WriteLine(string.Format("List searchPattern='{0}' ", 
+			Trace.WriteLine(string.Format("List searchPattern='{0}' ",
 					searchPattern));
 			try
 				{
@@ -127,25 +127,24 @@ namespace HelloIndigo
 					searchPattern = @".*";
 				Regex regex = new Regex(searchPattern, RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
-				Func<Book, bool> searchPredicate = ((book) => {
+				Func<Book, bool> searchPredicate = ((book) =>
+				{
 					string rowData = book.ToCSVString();
 					return (regex.IsMatch(rowData));
-					});
+				});
 
-				var list = new List<Book>();
+				var results = new List<Book>();
 
 				using (LibraryEntities context = new LibraryEntities(""))
 					{
-					var result = (from book in context.Books
-									  select new Book(book))
+					var query = (from book in context.Books
+									 select book)
 									  .Where(searchPredicate).ToList();
-					foreach (var book in result)
-						{
-						list.Add(new Book(book as Book));
-						}
+					foreach (var entity in query)
+						results.Add(new Book(entity as Book));
 
-               books = list.ToArray();
-               }
+					books = results.ToArray();
+					}
 
 				}
 			catch (Exception exp)
@@ -168,8 +167,8 @@ namespace HelloIndigo
 			using (LibraryEntities context = new LibraryEntities(""))
 				{
 				book = new Book((from b in context.Books
-						  where b.ISBN == key
-						  select b).FirstOrDefault());
+									  where b.ISBN == key
+									  select b).FirstOrDefault());
 				}
 			return (book != null);
 			}

@@ -5,55 +5,47 @@
     <ISBN>0-596-00712-4</ISBN>
     <Publisher>O'Reilly</Publisher>
     <Title>Head First Design Patterns</Title>
-    <Synopsis>Get ahead of the competition.</Synopsis>
   </Book>
   <Book>
     <Author>Musciano,Chuck;Kennedy, Bill</Author>
     <ISBN>1-56592-492-4</ISBN>
     <Publisher>O'Reilly</Publisher>
     <Title>HTML: The Definitive Guide</Title>
-    <Synopsis>A definitive, but dry look at the least exciting subject in the world.</Synopsis>
   </Book>
   <Book>
     <Author>Meyer, Eric A.</Author>
     <ISBN>0-596-00525-3</ISBN>
     <Publisher>O'Reilly</Publisher>
     <Title>Cascading Style Sheets: The Definitive Guide, Second Edition</Title>
-    <Synopsis>I cannot wait for the 3rd edition. I mean it, I cannot wait for the 3rd edition, I am reading CSS: The Missing Manual.</Synopsis>
   </Book>
   <Book>
     <Author>Jones, Allen</Author>
     <ISBN>0-7356-1930-1</ISBN>
     <Publisher>Microsoft Press</Publisher>
     <Title>C# Programmer's Cookbook</Title>
-    <Synopsis>Join Allen in the kithchem when whip a tasty dish of C# code.</Synopsis>
   </Book>
   <Book>
     <Author>McFarland, David Sawyer</Author>
     <ISBN>978-0-596-52687-0</ISBN>
     <Publisher>O'Reilly Media Inc.</Publisher>
     <Title>CSS: The Missing Manual</Title>
-    <Synopsis>Styling for the hypertextual man.</Synopsis>
   </Book>
   <Book>
     <Author>Troelsen,Andrew</Author>
     <ISBN>978-1-4302-2549-2</ISBN>
     <Publisher>Apress</Publisher>
     <Title>Pro C# 2010 and the .NET 4 Platform, Fifth Edition</Title>
-    <Synopsis>Everything you need to know about writing C# code for .NET 4.</Synopsis>
   </Book>
   <Book>
     <Author>Clarke,Andy</Author>
     <ISBN>0-321-41097-1</ISBN>
     <Publisher>New Riders</Publisher>
     <Title>Transcending CSS, The Fine Art of Web Design</Title>
-    <Synopsis>Web pages can be beautiful, and well-structured.</Synopsis>
   </Book>
   <Book>
     <Author>McCullough,David</Author>
     <ISBN>978-1-4165-7176-6</ISBN>
     <Publisher>Simon &amp; Schuster</Publisher>
     <Title>The Greater Journey, Americans in Paris</Title>
-    <Synopsis>Americans believe in the romance of Paris.</Synopsis>
   </Book>
 </Books>

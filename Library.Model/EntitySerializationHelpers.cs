@@ -19,21 +19,27 @@ namespace Library.Model.Helpers
 			// Just write a custom deserializer for now...
 			foreach (XElement xelem in xdoc.Descendants("Book"))
 				{
-				Book entity = new Book()
+				Book book = new Book()
 				{
-					ISBN = xelem.Element("ISBN").Value,
-					Title = xelem.Element("Title").Value,
-					Publisher = xelem.Element("Publisher").Value,
-					Author = xelem.Element("Author").Value,
-					Synopsis = xelem.Element("Synopsis").Value
+					ISBN = xelem.Element("ISBN") != null?xelem.Element("ISBN").Value:null,
+					Title = xelem.Element("Title") != null?xelem.Element("Title").Value:null,
+					Publisher = xelem.Element("Publisher") != null?xelem.Element("Publisher").Value:null,
+					Author = xelem.Element("Author") != null ? xelem.Element("Author").Value : null,
+					Synopsis = xelem.Element("Synopsis") != null ? xelem.Element("Synopsis").Value : null
 				};
 				var result = context.Books
-										.Where(b => (b.ISBN == entity.ISBN))
+										.Where(b => (b.ISBN == book.ISBN))
 										.FirstOrDefault();
 				if (result == null)
-					context.Books.Add(entity);
+					context.Books.Add(book);
 				else
-					result = entity;
+					{
+					result.ISBN = book.ISBN;
+					result.Title = book.Title;
+					result.Author = book.Author;
+					result.Publisher = book.Publisher;
+					result.Synopsis = book.Synopsis;
+					}					
 				}
 
 			return context.Books;

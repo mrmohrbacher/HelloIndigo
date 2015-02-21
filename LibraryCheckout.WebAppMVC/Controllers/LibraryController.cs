@@ -1,23 +1,17 @@
-﻿using System;
+﻿using Blackriverinc.EmailClient;
+using Blackriverinc.Framework.DataStore;
+using Blackriverinc.Framework.Utility;
+using BookSelection.WebApp;
+using Library.Model;
+using LibraryCheckout.WebAppMVC.HelloIndigoService;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 
-using Blackriverinc.Framework.DataStore;
-using Blackriverinc.EmailClient;
-using Blackriverinc.Framework.Utility;
-using BookSelection.WebApp;
-using LibraryCheckout.WebAppMVC;
-using LibraryCheckout.WebAppMVC.HelloIndigoService;
-
-
-using Library.Model;
 namespace LibraryCheckout.WebAppMVC.Controllers
-<<<<<<< HEAD
    {
    public class LibraryController : Controller
       {
@@ -27,15 +21,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
          Book[] books = null;
          try
             {
-            IDataStoreProvider provider = WebConfigProvider.Open();
-            if (provider == null)
-               {
-               throw new ApplicationException("Could not open Web Configuration Settings.");
-               }
-            provider = new CloudSettingsProvider(provider);
-            IKeyedDataStore settings = new KeyedDataStore(provider);
-
-            string endpointName = settings["LibraryServiceEndpoint"] as string;
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
             if (endpointName == null)
                {
                throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
@@ -78,15 +64,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
          Book[] books = null;
          try
             {
-            IDataStoreProvider provider = WebConfigProvider.Open();
-            if (provider == null)
-               {
-               throw new ApplicationException("Could not open Web Configuration Settings.");
-               }
-            provider = new CloudSettingsProvider(provider);
-            IKeyedDataStore settings = new KeyedDataStore(provider);
-
-            string endpointName = settings["LibraryServiceEndpoint"] as string;
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
             if (endpointName == null)
                {
                throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
@@ -119,14 +97,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
             string response = null;
 
-            IDataStoreProvider provider =
-                  new HttpRequestDataStoreProvider(Request, new WebConfigProvider());
-            if (provider == null)
-               {
-               return null;
-               }
-            IKeyedDataStore data = new KeyedDataStore(provider);
-            data.Add("CheckoutDate", DateTime.Now.ToString("MMM dd, yyyy HH:mm"));
+				GlobalCache.Update("CheckoutDate", DateTime.Now);
 #if _WTF         
          // Create Confirmation from Template.
          Uri responseURI;
@@ -147,7 +118,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
                writer.WriteLine("         </label>");  //                </label>
 
                writer.WriteLine("         <input type='{0}' name='{1}' id='{2}' style='{3}' value='{4}' readonly />",
-                                       "text", name, id, "width:80%;color:Blue", data[name]);
+													"text", name, id, "width:80%;color:Blue", Request.Form[name]);
             });
 
             writer.WriteLine("<html>");
@@ -180,7 +151,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
             response = responseStream.ContentsToString();
 #endif
             // Send confirmation Email
-            string emailConnection = data["EMailConnectionMock"] as string;
+            string emailConnection = GlobalCache.GetResolvedString("EMailConnectionMock");
             Encryption encryptor = new Encryption();
             IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
             client.Send("mike@blackriverinc.com",
@@ -189,8 +160,8 @@ namespace LibraryCheckout.WebAppMVC.Controllers
                          response);
 
 
-            sb.AppendFormat("{0} - A confirmation email has been sent.",
-                  data["CheckoutDate"]);
+            sb.AppendFormat("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
+                  GlobalCache.GetResolvedString("CheckoutDate"));
             }
          catch (Exception exp)
             {
@@ -204,80 +175,3 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
       }
    }
-=======
-	{
-	public class LibraryController : Controller
-		{
-		[HttpGet]
-		public ActionResult Export()
-			{
-			Book[] books = null;
-			try
-				{
-				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
-				if (endpointName == null)
-					{
-					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
-					}
-				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
-
-				// ---------------------------------------------------------
-				// 
-				// ---------------------------------------------------------
-				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
-					{
-					proxy.List(null, out books);
-					}
-
-				}
-			catch (Exception exp)
-				{
-				Request.PostError(exp, false);
-				}
-
-			StringBuilder content = new StringBuilder();
-			StringWriter writer = new StringWriter(content);
-			foreach (var book in books)
-				{
-				if (content.Length == 0)
-					writer.WriteLine(book.ToPropertyNameList("ISBN Author Title Publisher Synopsis"));
-				writer.WriteLine(book.ToCSVString("ISBN Author Title Publisher Synopsis"));
-				}
-
-			return File(new System.Text.UTF8Encoding().GetBytes(content.ToString()), "text/csv", "Library.csv");
-			}
-
-		//
-		// GET: /Library/
-		[HttpGet]
-		public ActionResult BookSelection()
-			{
-			Book[] books = null;
-			try
-				{
-				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
-				if (endpointName == null)
-					{
-					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
-					}
-				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
-
-				// ---------------------------------------------------------
-				// 
-				// ---------------------------------------------------------
-				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
-					{
-					proxy.List(null, out books);
-					}
-
-				}
-			catch (Exception exp)
-				{
-				Request.PostError(exp, false);
-				}
-
-			return View(new List<Book>(books));
-			}
-		}
-	}
->>>>>>> 3fe7d53947f9cfdf089e6066e6c8399fccce1f60
