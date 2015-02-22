@@ -10,6 +10,7 @@
     <xs:sequence>
       <xs:element name="_x003C_Author_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_BookCheckouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfBookCheckout" />
+      <xs:element name="_x003C_CheckedOut_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
       <xs:element name="_x003C_ISBN_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Publisher_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Synopsis_x003E_k__BackingField" nillable="true" type="xs:string" />
@@ -33,8 +34,8 @@
       <xs:element name="_x003C_Email_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ISBN_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_PostalCode_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_State_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_ZIP_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BookCheckout" nillable="true" type="tns:BookCheckout" />

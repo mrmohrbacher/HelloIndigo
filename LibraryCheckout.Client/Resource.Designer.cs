@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client {
+namespace LibraryCheckout.Client {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Client {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LibraryCheckout.Client.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -68,17 +68,14 @@ namespace Client {
         ///    &lt;ISBN&gt;0-596-00712-4&lt;/ISBN&gt;
         ///    &lt;Publisher&gt;O&apos;Reilly&lt;/Publisher&gt;
         ///    &lt;Title&gt;Head First Design Patterns&lt;/Title&gt;
+        ///    &lt;Synopsis&gt;Get ahead of the competition.&lt;/Synopsis&gt;
         ///  &lt;/Book&gt;
         ///  &lt;Book&gt;
         ///    &lt;Author&gt;Musciano,Chuck;Kennedy, Bill&lt;/Author&gt;
         ///    &lt;ISBN&gt;1-56592-492-4&lt;/ISBN&gt;
         ///    &lt;Publisher&gt;O&apos;Reilly&lt;/Publisher&gt;
         ///    &lt;Title&gt;HTML: The Definitive Guide&lt;/Title&gt;
-        ///  &lt;/Book&gt;
-        ///  &lt;Book&gt;
-        ///    &lt;Author&gt;Meyer, Eric A.&lt;/Author&gt;
-        ///    &lt;ISBN&gt;0-596-00525-3&lt;/ISBN&gt;
-        ///    &lt; [rest of string was truncated]&quot;;.
+        ///    &lt;Synopsis&gt;A definitive, but dry loo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AppData_Books {
             get {

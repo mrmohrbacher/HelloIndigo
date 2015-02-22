@@ -201,7 +201,7 @@ namespace HelloIndigo
 			{
 			throw new NotImplementedException();
 			}
-
+#if _LATER
 		public bool Checkout(BookCheckout checkout, out DateTime checkedout)
 			{
 			bool result = false;
@@ -254,6 +254,7 @@ namespace HelloIndigo
 
 			return result;
 			}
+#endif
 		#endregion
 		}
 	}

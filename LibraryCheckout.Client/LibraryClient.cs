@@ -10,8 +10,8 @@ using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.ScheduledJob;
 using Blackriverinc.Framework.Utility;
 
-using Client.LibraryService;
-using Client.EchoService;
+using LibraryCheckout.Client.LibraryService;
+using LibraryCheckout.Client.EchoService;
 
 using Library.Model;
 using Library.Model.Helpers;

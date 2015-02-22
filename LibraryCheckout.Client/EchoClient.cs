@@ -36,7 +36,7 @@ namespace Client
 
       public void Run()
          {
-			using (Client.EchoService.EchoServiceClient proxy = new Client.EchoService.EchoServiceClient(endPointName))
+			using (var proxy = new LibraryCheckout.Client.EchoService.EchoServiceClient(endPointName))
             {
             string result = "";
 
@@ -47,7 +47,7 @@ namespace Client
             string input = "";
             while ((input = Console.ReadLine()).Length > 0)
                {
-               proxy.Echo(out result, input);
+               proxy.Echo(input, out result);
                Console.WriteLine(string.Format("{0} => {1}", input, result));
                }
             }

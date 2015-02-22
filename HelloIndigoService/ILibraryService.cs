@@ -26,5 +26,5 @@ namespace HelloIndigo
 
 		[OperationContract]
 		bool Load(Stream input);
-      }
+		}
    }

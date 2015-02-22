@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.LibraryService {
+namespace LibraryCheckout.Client.LibraryService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,27 +16,27 @@ namespace Client.LibraryService {
     public interface ILibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/List", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ListResponse")]
-        Client.LibraryService.ListResponse List(Client.LibraryService.ListRequest request);
+        LibraryCheckout.Client.LibraryService.ListResponse List(LibraryCheckout.Client.LibraryService.ListRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/List", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ListResponse")]
-        System.Threading.Tasks.Task<Client.LibraryService.ListResponse> ListAsync(Client.LibraryService.ListRequest request);
+        System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.ListResponse> ListAsync(LibraryCheckout.Client.LibraryService.ListRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Read", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ReadResponse")]
-        Client.LibraryService.ReadResponse Read(Client.LibraryService.ReadRequest request);
+        LibraryCheckout.Client.LibraryService.ReadResponse Read(LibraryCheckout.Client.LibraryService.ReadRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Read", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/ReadResponse")]
-        System.Threading.Tasks.Task<Client.LibraryService.ReadResponse> ReadAsync(Client.LibraryService.ReadRequest request);
+        System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.ReadResponse> ReadAsync(LibraryCheckout.Client.LibraryService.ReadRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Update", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/UpdateResponse" +
             "")]
-        Client.LibraryService.UpdateResponse Update(Client.LibraryService.UpdateRequest request);
+        LibraryCheckout.Client.LibraryService.UpdateResponse Update(LibraryCheckout.Client.LibraryService.UpdateRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Update", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/UpdateResponse" +
             "")]
-        System.Threading.Tasks.Task<Client.LibraryService.UpdateResponse> UpdateAsync(Client.LibraryService.UpdateRequest request);
+        System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.UpdateResponse> UpdateAsync(LibraryCheckout.Client.LibraryService.UpdateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Add", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/AddResponse")]
         bool Add(Library.Model.Book book);
@@ -168,12 +168,12 @@ namespace Client.LibraryService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ILibraryServiceChannel : Client.LibraryService.ILibraryService, System.ServiceModel.IClientChannel {
+    public interface ILibraryServiceChannel : LibraryCheckout.Client.LibraryService.ILibraryService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LibraryServiceClient : System.ServiceModel.ClientBase<Client.LibraryService.ILibraryService>, Client.LibraryService.ILibraryService {
+    public partial class LibraryServiceClient : System.ServiceModel.ClientBase<LibraryCheckout.Client.LibraryService.ILibraryService>, LibraryCheckout.Client.LibraryService.ILibraryService {
         
         public LibraryServiceClient() {
         }
@@ -195,53 +195,53 @@ namespace Client.LibraryService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.LibraryService.ListResponse Client.LibraryService.ILibraryService.List(Client.LibraryService.ListRequest request) {
+        LibraryCheckout.Client.LibraryService.ListResponse LibraryCheckout.Client.LibraryService.ILibraryService.List(LibraryCheckout.Client.LibraryService.ListRequest request) {
             return base.Channel.List(request);
         }
         
         public bool List(string searchKey, out Library.Model.Book[] books) {
-            Client.LibraryService.ListRequest inValue = new Client.LibraryService.ListRequest();
+            LibraryCheckout.Client.LibraryService.ListRequest inValue = new LibraryCheckout.Client.LibraryService.ListRequest();
             inValue.searchKey = searchKey;
-            Client.LibraryService.ListResponse retVal = ((Client.LibraryService.ILibraryService)(this)).List(inValue);
+            LibraryCheckout.Client.LibraryService.ListResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).List(inValue);
             books = retVal.books;
             return retVal.ListResult;
         }
         
-        public System.Threading.Tasks.Task<Client.LibraryService.ListResponse> ListAsync(Client.LibraryService.ListRequest request) {
+        public System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.ListResponse> ListAsync(LibraryCheckout.Client.LibraryService.ListRequest request) {
             return base.Channel.ListAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.LibraryService.ReadResponse Client.LibraryService.ILibraryService.Read(Client.LibraryService.ReadRequest request) {
+        LibraryCheckout.Client.LibraryService.ReadResponse LibraryCheckout.Client.LibraryService.ILibraryService.Read(LibraryCheckout.Client.LibraryService.ReadRequest request) {
             return base.Channel.Read(request);
         }
         
         public bool Read(string key, out Library.Model.Book book) {
-            Client.LibraryService.ReadRequest inValue = new Client.LibraryService.ReadRequest();
+            LibraryCheckout.Client.LibraryService.ReadRequest inValue = new LibraryCheckout.Client.LibraryService.ReadRequest();
             inValue.key = key;
-            Client.LibraryService.ReadResponse retVal = ((Client.LibraryService.ILibraryService)(this)).Read(inValue);
+            LibraryCheckout.Client.LibraryService.ReadResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).Read(inValue);
             book = retVal.book;
             return retVal.ReadResult;
         }
         
-        public System.Threading.Tasks.Task<Client.LibraryService.ReadResponse> ReadAsync(Client.LibraryService.ReadRequest request) {
+        public System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.ReadResponse> ReadAsync(LibraryCheckout.Client.LibraryService.ReadRequest request) {
             return base.Channel.ReadAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Client.LibraryService.UpdateResponse Client.LibraryService.ILibraryService.Update(Client.LibraryService.UpdateRequest request) {
+        LibraryCheckout.Client.LibraryService.UpdateResponse LibraryCheckout.Client.LibraryService.ILibraryService.Update(LibraryCheckout.Client.LibraryService.UpdateRequest request) {
             return base.Channel.Update(request);
         }
         
         public bool Update(ref Library.Model.Book book) {
-            Client.LibraryService.UpdateRequest inValue = new Client.LibraryService.UpdateRequest();
+            LibraryCheckout.Client.LibraryService.UpdateRequest inValue = new LibraryCheckout.Client.LibraryService.UpdateRequest();
             inValue.book = book;
-            Client.LibraryService.UpdateResponse retVal = ((Client.LibraryService.ILibraryService)(this)).Update(inValue);
+            LibraryCheckout.Client.LibraryService.UpdateResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).Update(inValue);
             book = retVal.book;
             return retVal.UpdateResult;
         }
         
-        public System.Threading.Tasks.Task<Client.LibraryService.UpdateResponse> UpdateAsync(Client.LibraryService.UpdateRequest request) {
+        public System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.UpdateResponse> UpdateAsync(LibraryCheckout.Client.LibraryService.UpdateRequest request) {
             return base.Channel.UpdateAsync(request);
         }
         

@@ -124,16 +124,6 @@
     </Compile>
     <Compile Include="Helpers\ContextHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\HelloIndigoService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -166,24 +156,6 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Properties\DataSources\Library.Model.Book.datasource" />
-    <None Include="Service References\HelloIndigoService\HelloIndigo.wsdl" />
-    <None Include="Service References\HelloIndigoService\LibraryService.disco" />
-    <None Include="Service References\HelloIndigoService\configuration91.svcinfo" />
-    <None Include="Service References\HelloIndigoService\configuration.svcinfo" />
-    <None Include="Service References\HelloIndigoService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Service References\ServiceReference1\EchoService.disco" />
-    <Content Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <Content Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <Content Include="Service References\ServiceReference1\LibraryCheckout.WebAppMVC.ServiceReference1.EchoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
     <Content Include="Styles\Buttons.css" />
     <Content Include="Styles\jquery-ui-1.8.18.custom.css" />
     <Content Include="Styles\Site.css" />
@@ -204,26 +176,6 @@
     <Content Include="Views\Shared\_BasePage.cshtml" />
     <Content Include="CheckoutBook.ashx" />
     <Content Include="Views\Library\CheckoutEmailTemplate.cshtml" />
-    <None Include="Service References\HelloIndigoService\LibraryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\HelloIndigoService\LibraryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\HelloIndigoService\LibraryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\HelloIndigoService\LibraryService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\ServiceReference1\EchoService.wsdl" />
-    <None Include="Service References\ServiceReference1\EchoService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\EchoService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\ServiceReference1\HelloIndigo.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -254,13 +206,10 @@
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\HelloIndigoService\" />
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\HelloIndigoService\LibraryService.wsdl" />
+    <ProjectReference Include="..\LibraryCheckout.Client\LibraryCheckout.Client.csproj">
+      <Project>{0bf613ac-d9da-440d-86f7-9b56f1f6f9be}</Project>
+      <Name>LibraryCheckout.Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

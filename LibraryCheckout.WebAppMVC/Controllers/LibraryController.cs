@@ -10,6 +10,8 @@ using System.IO;
 using System.Text;
 using System.Web.Mvc;
 
+using LibraryCheckout.Client.LibraryService;
+
 namespace LibraryCheckout.WebAppMVC.Controllers
    {
    public class LibraryController : Controller
@@ -102,11 +104,12 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
 					}
 				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
+#if _CHECKOUT
 				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
 					{
 					proxy.Checkout(Checkout);
 					}
-				
+#endif				
 #if _WTF         
          // Create Confirmation from Template.
          Uri responseURI;
@@ -181,6 +184,5 @@ namespace LibraryCheckout.WebAppMVC.Controllers
          Response.ContentType = "text/text";
          return Content(sb.ToString());
          }
-
       }
    }
