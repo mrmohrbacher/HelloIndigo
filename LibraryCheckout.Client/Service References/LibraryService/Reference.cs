@@ -57,6 +57,24 @@ namespace LibraryCheckout.Client.LibraryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Load", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/LoadResponse")]
         System.Threading.Tasks.Task<bool> LoadAsync(System.IO.Stream input);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkin", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/CheckinRespons" +
+            "e")]
+        LibraryCheckout.Client.LibraryService.CheckinResponse Checkin(LibraryCheckout.Client.LibraryService.CheckinRequest request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkin", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/CheckinRespons" +
+            "e")]
+        System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.CheckinResponse> CheckinAsync(LibraryCheckout.Client.LibraryService.CheckinRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkout", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/CheckoutRespon" +
+            "se")]
+        LibraryCheckout.Client.LibraryService.CheckoutResponse Checkout(LibraryCheckout.Client.LibraryService.CheckoutRequest request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkout", ReplyAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/CheckoutRespon" +
+            "se")]
+        System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.CheckoutResponse> CheckoutAsync(LibraryCheckout.Client.LibraryService.CheckoutRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -167,6 +185,82 @@ namespace LibraryCheckout.Client.LibraryService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Checkin", WrapperNamespace="uri://blackriverinc.com/helloindigo/LibraryService", IsWrapped=true)]
+    public partial class CheckinRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
+        public string isbn;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
+        public System.DateTime checkedout;
+        
+        public CheckinRequest() {
+        }
+        
+        public CheckinRequest(string isbn, System.DateTime checkedout) {
+            this.isbn = isbn;
+            this.checkedout = checkedout;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckinResponse", WrapperNamespace="uri://blackriverinc.com/helloindigo/LibraryService", IsWrapped=true)]
+    public partial class CheckinResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
+        public bool CheckinResult;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
+        public System.Nullable<System.DateTime> checkedin;
+        
+        public CheckinResponse() {
+        }
+        
+        public CheckinResponse(bool CheckinResult, System.Nullable<System.DateTime> checkedin) {
+            this.CheckinResult = CheckinResult;
+            this.checkedin = checkedin;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Checkout", WrapperNamespace="uri://blackriverinc.com/helloindigo/LibraryService", IsWrapped=true)]
+    public partial class CheckoutRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
+        public Library.Model.BookCheckout checkout;
+        
+        public CheckoutRequest() {
+        }
+        
+        public CheckoutRequest(Library.Model.BookCheckout checkout) {
+            this.checkout = checkout;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CheckoutResponse", WrapperNamespace="uri://blackriverinc.com/helloindigo/LibraryService", IsWrapped=true)]
+    public partial class CheckoutResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
+        public bool CheckoutResult;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
+        public System.Nullable<System.DateTime> checkedout;
+        
+        public CheckoutResponse() {
+        }
+        
+        public CheckoutResponse(bool CheckoutResult, System.Nullable<System.DateTime> checkedout) {
+            this.CheckoutResult = CheckoutResult;
+            this.checkedout = checkedout;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ILibraryServiceChannel : LibraryCheckout.Client.LibraryService.ILibraryService, System.ServiceModel.IClientChannel {
     }
@@ -267,6 +361,41 @@ namespace LibraryCheckout.Client.LibraryService {
         
         public System.Threading.Tasks.Task<bool> LoadAsync(System.IO.Stream input) {
             return base.Channel.LoadAsync(input);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LibraryCheckout.Client.LibraryService.CheckinResponse LibraryCheckout.Client.LibraryService.ILibraryService.Checkin(LibraryCheckout.Client.LibraryService.CheckinRequest request) {
+            return base.Channel.Checkin(request);
+        }
+        
+        public bool Checkin(string isbn, System.DateTime checkedout, out System.Nullable<System.DateTime> checkedin) {
+            LibraryCheckout.Client.LibraryService.CheckinRequest inValue = new LibraryCheckout.Client.LibraryService.CheckinRequest();
+            inValue.isbn = isbn;
+            inValue.checkedout = checkedout;
+            LibraryCheckout.Client.LibraryService.CheckinResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).Checkin(inValue);
+            checkedin = retVal.checkedin;
+            return retVal.CheckinResult;
+        }
+        
+        public System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.CheckinResponse> CheckinAsync(LibraryCheckout.Client.LibraryService.CheckinRequest request) {
+            return base.Channel.CheckinAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        LibraryCheckout.Client.LibraryService.CheckoutResponse LibraryCheckout.Client.LibraryService.ILibraryService.Checkout(LibraryCheckout.Client.LibraryService.CheckoutRequest request) {
+            return base.Channel.Checkout(request);
+        }
+        
+        public bool Checkout(Library.Model.BookCheckout checkout1, out System.Nullable<System.DateTime> checkedout) {
+            LibraryCheckout.Client.LibraryService.CheckoutRequest inValue = new LibraryCheckout.Client.LibraryService.CheckoutRequest();
+            inValue.checkout = checkout1;
+            LibraryCheckout.Client.LibraryService.CheckoutResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).Checkout(inValue);
+            checkedout = retVal.checkedout;
+            return retVal.CheckoutResult;
+        }
+        
+        public System.Threading.Tasks.Task<LibraryCheckout.Client.LibraryService.CheckoutResponse> CheckoutAsync(LibraryCheckout.Client.LibraryService.CheckoutRequest request) {
+            return base.Channel.CheckoutAsync(request);
         }
     }
 }
