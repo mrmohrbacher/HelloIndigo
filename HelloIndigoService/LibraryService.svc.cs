@@ -201,12 +201,12 @@ namespace HelloIndigo
 			{
 			throw new NotImplementedException();
 			}
-#if _LATER
-		public bool Checkout(BookCheckout checkout, out DateTime checkedout)
+
+		public bool Checkout(BookCheckout checkout, out DateTime? checkedout)
 			{
 			bool result = false;
 			string isbn = checkout.ISBN;
-			checkedout = DateTime.MinValue;
+			checkedout = null;
 
 			using (LibraryEntities context = new LibraryEntities(""))
 				{
@@ -217,7 +217,7 @@ namespace HelloIndigo
 					return false;
 
 				checkedout = DateTime.UtcNow;
-				checkout.DateOut = checkedout;
+				checkout.DateOut = checkedout.Value;
 				context.BookCheckouts.Add(checkout);
 
 				result = (context.SaveChanges() > 0);
@@ -227,10 +227,10 @@ namespace HelloIndigo
 			}
 
 
-		public bool Checkin(string isbn, DateTime checkedout, out DateTime checkedin)
+		public bool Checkin(string isbn, DateTime checkedout, out DateTime? checkedin)
 			{
 			bool result = false;
-			checkedin = DateTime.MaxValue;
+			checkedin = null;
 
 			using (LibraryEntities context = new LibraryEntities(""))
 				{
@@ -254,7 +254,7 @@ namespace HelloIndigo
 
 			return result;
 			}
-#endif
+
 		#endregion
 		}
 	}

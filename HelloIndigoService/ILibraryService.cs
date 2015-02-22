@@ -26,5 +26,11 @@ namespace HelloIndigo
 
 		[OperationContract]
 		bool Load(Stream input);
+
+		[OperationContract]
+		bool Checkin(string isbn, DateTime checkedout, out DateTime? checkedin);
+
+		[OperationContract]
+		bool Checkout(BookCheckout checkout, out DateTime? checkedout);
 		}
    }

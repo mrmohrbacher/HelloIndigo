@@ -58,6 +58,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Checkin">
+      <soap:operation soapAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Checkout">
+      <soap:operation soapAction="uri://blackriverinc.com/helloindigo/LibraryService/ILibraryService/Checkout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="HelloIndigo.LibraryService">
     <wsdl:port name="basicHttp" binding="tns:basicHttp">

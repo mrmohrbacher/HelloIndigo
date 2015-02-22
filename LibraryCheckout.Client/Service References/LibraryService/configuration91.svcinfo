@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="XbkDAIHEVBwIQ8jEHjNn+OdRqzk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="R3D3AdgP52r0pbwLXaqDsvKh1wI=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="basicHttp2">
+    <bindingConfiguration bindingType="basicHttpBinding" name="basicHttp1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>basicHttp2</serializedValue>
+          <serializedValue>basicHttp1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="basicHttp1" contract="LibraryService.ILibraryService" bindingType="basicHttpBinding" address="http://localhost:8088/LibraryService.svc/LibraryService" bindingConfiguration="basicHttp2">
+    <endpoint name="basicHttp1" contract="LibraryService.ILibraryService" bindingType="basicHttpBinding" address="http://localhost:8088/LibraryService.svc/LibraryService" bindingConfiguration="basicHttp1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:8088/LibraryService.svc/LibraryService</serializedValue>
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>basicHttp2</serializedValue>
+          <serializedValue>basicHttp1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>LibraryService.ILibraryService</serializedValue>
