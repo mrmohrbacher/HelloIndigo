@@ -80,7 +80,7 @@ namespace HelloIndigo
 					Trace.WriteLine(string.Format("+ LibraryService[{0}]+", instanceCount));
 
 					// Populate the Books Table
-					using (LibraryEntities context = new LibraryEntities(""))
+					using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 						{
 						if (context.Books.Count() == 0)
 							{
@@ -109,7 +109,7 @@ namespace HelloIndigo
 		public bool Load(Stream xstream)
 			{
 			// Populate the Books Table
-			using (LibraryEntities context = new LibraryEntities(""))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 				{
 				context.DeserializeBooks(xstream);
 				context.SaveChanges();
@@ -135,7 +135,7 @@ namespace HelloIndigo
 
 				var results = new List<Book>();
 
-				using (LibraryEntities context = new LibraryEntities(""))
+				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 					{
 					var query = (from book in context.Books
 									 select book)
@@ -172,7 +172,7 @@ namespace HelloIndigo
 				return false;
 				}
 
-			using (LibraryEntities context = new LibraryEntities(""))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 				{
 				book = new Book((from b in context.Books
 									  where b.ISBN == isbn
@@ -208,7 +208,7 @@ namespace HelloIndigo
 			string isbn = checkout.ISBN;
 			checkedout = null;
 
-			using (LibraryEntities context = new LibraryEntities(""))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 				{
 				var book = new Book((from b in context.Books
 											where b.ISBN == isbn
@@ -232,7 +232,7 @@ namespace HelloIndigo
 			bool result = false;
 			checkedin = null;
 
-			using (LibraryEntities context = new LibraryEntities(""))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 				{
 				var book = context.Books
 										.Where(b => (b.ISBN == isbn))

@@ -175,7 +175,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
 
 						sb.AppendFormat("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
-								GlobalCache.GetResolvedString("CheckoutDate"));
+												checkedout);
 						}
 					else
 						{
