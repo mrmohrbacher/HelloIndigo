@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{831b68c9-8026-41c7-9c56-bcb7dd0f75a6}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library.Database.Local.publish.xml" />
+    <None Include="Azure.Library.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Library.Database.refactorlog" />
