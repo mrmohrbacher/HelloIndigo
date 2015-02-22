@@ -129,6 +129,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -144,7 +149,9 @@
     <Content Include="Images\978-1-4165-7176-6.jpg" />
     <Content Include="Images\978-1-4302-2549-2.jpg" />
     <Content Include="Images\body-bg.gif" />
+    <Content Include="Images\button-slice.jpg" />
     <Content Include="Images\button.jpg" />
+    <Content Include="Images\gray-screen.png" />
     <Content Include="Images\nav-left.gif" />
     <Content Include="Images\nav-left.jpg" />
     <Content Include="Images\nav-rght-cur.jpg" />
@@ -160,15 +167,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Properties\DataSources\Library.Model.Book.datasource" />
     <None Include="Service References\HelloIndigoService\HelloIndigo.wsdl" />
-    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.ListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.ReadResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\HelloIndigoService\LibraryCheckout.WebAppMVC.HelloIndigoService.UpdateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\HelloIndigoService\LibraryService.disco" />
     <None Include="Service References\HelloIndigoService\configuration91.svcinfo" />
     <None Include="Service References\HelloIndigoService\configuration.svcinfo" />
@@ -176,6 +174,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ServiceReference1\EchoService.disco" />
+    <Content Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <Content Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <Content Include="Service References\ServiceReference1\LibraryCheckout.WebAppMVC.ServiceReference1.EchoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <Content Include="Styles\Buttons.css" />
     <Content Include="Styles\jquery-ui-1.8.18.custom.css" />
     <Content Include="Styles\Site.css" />
@@ -191,6 +199,14 @@
     <Content Include="..\database.config">
       <Link>database.config</Link>
     </Content>
+    <Content Include="Views\Library\Index.cshtml" />
+    <Content Include="ErrorPage.cshtml" />
+    <Content Include="Views\Shared\_BasePage.cshtml" />
+    <Content Include="CheckoutBook.ashx" />
+    <Content Include="Views\Library\CheckoutEmailTemplate.cshtml" />
+    <None Include="Service References\HelloIndigoService\LibraryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\HelloIndigoService\LibraryService1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -200,14 +216,14 @@
     <None Include="Service References\HelloIndigoService\LibraryService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\HelloIndigoService\LibraryService4.xsd">
+    <Content Include="Service References\ServiceReference1\EchoService.wsdl" />
+    <None Include="Service References\ServiceReference1\EchoService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Library\Index.cshtml" />
-    <Content Include="ErrorPage.cshtml" />
-    <Content Include="Views\Shared\_BasePage.cshtml" />
-    <Content Include="CheckoutBook.ashx" />
-    <Content Include="Views\Library\CheckoutEmailTemplate.cshtml" />
+    <None Include="Service References\ServiceReference1\EchoService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\ServiceReference1\HelloIndigo.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -220,12 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\HelloIndigoService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\HelloIndigoService\LibraryService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
@@ -244,6 +254,13 @@
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\HelloIndigoService\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HelloIndigoService\LibraryService.wsdl" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

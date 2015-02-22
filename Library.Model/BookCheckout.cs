@@ -21,7 +21,7 @@ namespace Library.Model
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string ZIP { get; set; }
+        public string PostalCode { get; set; }
         public string Email { get; set; }
         public System.DateTime DateOut { get; set; }
         public Nullable<System.DateTime> DateIn { get; set; }

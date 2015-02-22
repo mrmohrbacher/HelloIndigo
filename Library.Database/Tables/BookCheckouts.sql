@@ -7,7 +7,7 @@
     [Address] NVARCHAR(128)  NOT NULL,
     [City] NVARCHAR(32)  NOT NULL,
     [State] CHAR(2)  NOT NULL,
-    [ZIP] CHAR(10)  NOT NULL,
+    [PostalCode] CHAR(10)  NOT NULL,
 
 	CONSTRAINT [PK_BookCheckouts]
     PRIMARY KEY CLUSTERED ([ISBN], [Email], [DateOut] ASC),

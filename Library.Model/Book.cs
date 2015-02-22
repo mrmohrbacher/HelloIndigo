@@ -21,7 +21,7 @@ namespace Library.Model
             this.BookCheckouts = new HashSet<BookCheckout>();
         }
     
-        public Book(Book source) : this()
+        public Book(Book source)
         {
             if (source != null)
             {

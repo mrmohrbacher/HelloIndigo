@@ -66,4 +66,7 @@
   <ItemGroup>
     <None Include="Library.Database.Local.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Library.Database.refactorlog" />
+  </ItemGroup>
 </Project>

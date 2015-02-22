@@ -59,7 +59,7 @@ namespace Library.Model.Helpers
 					Address = xelem.Element("Address").Value,
 					City = xelem.Element("City").Value,
 					State = xelem.Element("State").Value,
-					ZIP = xelem.Element("ZIP").Value,
+					PostalCode = xelem.Element("PostalCode").Value,
 					Email = xelem.Element("Email").Value
 				};
 				var result = context.BookCheckouts

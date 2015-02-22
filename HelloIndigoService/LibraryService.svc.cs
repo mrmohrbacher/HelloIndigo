@@ -141,8 +141,16 @@ namespace HelloIndigo
 									 select book)
 									  .Where(searchPredicate).ToList();
 					foreach (var entity in query)
-						results.Add(new Book(entity as Book));
+						{
+						Book book = new Book(entity as Book);
 
+						BookCheckout checkout = context.BookCheckouts
+															.Where(bc => bc.DateIn == null
+                                                       && bc.ISBN == book.ISBN)
+															.FirstOrDefault();
+						book.CheckedOut = (checkout != null ? checkout.DateOut : (DateTime?)null);
+						results.Add(book);
+						}
 					books = results.ToArray();
 					}
 
@@ -155,10 +163,10 @@ namespace HelloIndigo
 			return (books.Length > 0);
 			}
 
-		public bool Read(string key, out Book book)
+		public bool Read(string isbn, out Book book)
 			{
-			Trace.WriteLine(string.Format("Read key='{0}'", key));
-			if (key == null || key.Trim().Length == 0)
+			Trace.WriteLine(string.Format("Read key='{0}'", isbn));
+			if (isbn == null || isbn.Trim().Length == 0)
 				{
 				book = null;
 				return false;
@@ -167,8 +175,14 @@ namespace HelloIndigo
 			using (LibraryEntities context = new LibraryEntities(""))
 				{
 				book = new Book((from b in context.Books
-									  where b.ISBN == key
+									  where b.ISBN == isbn
 									  select b).FirstOrDefault());
+
+				BookCheckout checkout = context.BookCheckouts
+													.Where(bc => bc.DateIn == null
+																 && bc.ISBN == isbn)
+													.FirstOrDefault();
+				book.CheckedOut = (checkout != null ? checkout.DateOut : (DateTime?)null);
 				}
 			return (book != null);
 			}
@@ -188,6 +202,58 @@ namespace HelloIndigo
 			throw new NotImplementedException();
 			}
 
+		public bool Checkout(BookCheckout checkout, out DateTime checkedout)
+			{
+			bool result = false;
+			string isbn = checkout.ISBN;
+			checkedout = DateTime.MinValue;
+
+			using (LibraryEntities context = new LibraryEntities(""))
+				{
+				var book = new Book((from b in context.Books
+											where b.ISBN == isbn
+									  select b).FirstOrDefault());
+				if (book == null)
+					return false;
+
+				checkedout = DateTime.UtcNow;
+				checkout.DateOut = checkedout;
+				context.BookCheckouts.Add(checkout);
+
+				result = (context.SaveChanges() > 0);
+				}
+
+			return result;
+			}
+
+
+		public bool Checkin(string isbn, DateTime checkedout, out DateTime checkedin)
+			{
+			bool result = false;
+			checkedin = DateTime.MaxValue;
+
+			using (LibraryEntities context = new LibraryEntities(""))
+				{
+				var book = context.Books
+										.Where(b => (b.ISBN == isbn))
+										.FirstOrDefault();
+				if (book == null)
+					return false;
+
+				BookCheckout checkout = context.BookCheckouts
+															.Where(bc => bc.DateOut == checkedout
+																       && bc.DateIn == null
+																		 && bc.ISBN == isbn)
+															.FirstOrDefault();
+				if (checkout == null)
+					return false;
+
+				checkout.DateIn = checkedin = DateTime.UtcNow;
+				result = (context.SaveChanges() > 0);
+				}
+
+			return result;
+			}
 		#endregion
 		}
 	}

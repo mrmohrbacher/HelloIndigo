@@ -3,7 +3,6 @@ using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 using BookSelection.WebApp;
 using Library.Model;
-using LibraryCheckout.WebAppMVC.HelloIndigoService;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -89,7 +88,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
          }
 
       [HttpPost]
-      public ActionResult Checkout(Library.Model.BookCheckout Selection)
+      public ActionResult Checkout(Library.Model.BookCheckout Checkout)
          {
          StringBuilder sb = new StringBuilder();
          try
@@ -97,7 +96,17 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
             string response = null;
 
-				GlobalCache.Update("CheckoutDate", DateTime.Now);
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
+				if (endpointName == null)
+					{
+					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
+					}
+				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
+				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
+					{
+					proxy.Checkout(Checkout);
+					}
+				
 #if _WTF         
          // Create Confirmation from Template.
          Uri responseURI;
@@ -137,8 +146,8 @@ namespace LibraryCheckout.WebAppMVC.Controllers
                              "margin-left: 27px; margin-right: 27px;");
 
             emitField("SubscriberName", "name");
-            emitField("BookISBN", "book-isbn");
-            emitField("BookTitle", "book-title");
+            emitField("ISBN", "isbn");
+            emitField("Title", "title");
             emitField("CheckoutDate", "checkout-date");
 
             writer.WriteLine("        </fieldset>");

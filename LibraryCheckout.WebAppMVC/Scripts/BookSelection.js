@@ -111,7 +111,7 @@ $(document).ready(function () {
 
             //------------------------------------------------
             // #book-selection
-            if ($('#book-isbn').val() == null || $('#book-isbn').val() == "notpicked") {
+            if ($('#isbn').val() == null || $('#isbn').val() == "notpicked") {
                 $('#choice-book-none').click();
                 $('#choice-book-none').attr('checked', 'checked');
                 showPanel('#book-selection');
@@ -129,7 +129,7 @@ $(document).ready(function () {
                 return;
             }
 
-            if ($("#shipto-name").val() == "") {
+            if ($("#name").val() == "") {
                 showPanel('#information');
                 return;
             }
@@ -171,8 +171,8 @@ $(document).ready(function () {
 
         // 'Book Selection' Review
         var reviewDiv = $('#book-selection-review');
-        var bookISBN = $('#book-isbn').val();
-        var bookTitle = $('#book-title').val();
+        var bookISBN = $('#isbn').val();
+        var bookTitle = $('#title').val();
         reviewDiv.html("<label class='oe-label'>Book selected:</label>&nbsp;" +
                "<label>" +
                bookISBN +
@@ -181,11 +181,11 @@ $(document).ready(function () {
 
         var shippingReview = $('#shipping-review');
         shippingReview.html(("<label class='oe-label'>Shipping Information:</label>"
-               + "<label class='oe-label'>" + "Name : " + $('#shipto-name').val() + "</label>"
-               + "<label class='oe-label'>" + "Address : " + $('#shipto-address').val() + "</label>"
-               + "<label class='oe-label'>" + "City : " + $('#shipto-city').val() + " State : " + $('#shipto-state').val() + "</label>"
-               + "<label class='oe-label'>" + "ZIP : " + $('#shipto-postalcode').val() + "</label>"
-               + "<label class='oe-label'>" + "Email : " + $('#home-email').val() + "</label>"
+               + "<label class='oe-label'>" + "Name : " + $('#name').val() + "</label>"
+               + "<label class='oe-label'>" + "Address : " + $('#address').val() + "</label>"
+               + "<label class='oe-label'>" + "City : " + $('#city').val() + " State : " + $('#state').val() + "</label>"
+               + "<label class='oe-label'>" + "PostalCode : " + $('#postalcode').val() + "</label>"
+               + "<label class='oe-label'>" + "Email : " + $('#email').val() + "</label>"
                ));
 
         window.console && console.log('- confirmation -');
@@ -200,19 +200,19 @@ $(document).ready(function () {
         var choice = $this.attr('id').slice('choice-book-'.length);
         window.console && console.log('Book: %s', choice);
 
-        $('#book-isbn').val((choice == 'none') ? '' : choice);
+        $('#isbn').val((choice == 'none') ? '' : choice);
 
-        $('#book-title').val($('#book-title-' + choice).html().trim());
+        $('#title').val($('#title-' + choice).html().trim());
     });
 
     $('#information .oe-text').blur(function () {
 
-        if ($('#shipto-name').val() == 'Mike Mohrbacher') {
-            $('#shipto-address').val('115 N Archimedes Lane');
-            $('#shipto-city').val('Arlington Heights');
-            $('#shipto-state').val('IL');
-            $('#shipto-postalcode').val('60004');
-            $('#home-email').val('mike@blackriverinc.com');
+        if ($('#name').val() == 'Mike Mohrbacher') {
+            $('#address').val('115 N Archimedes Lane');
+            $('#city').val('Arlington Heights');
+            $('#state').val('IL');
+            $('#postalcode').val('60004');
+            $('#email').val('mike@blackriverinc.com');
         }
     }); // End of '#billing-information .oe-text' blur
 
@@ -230,7 +230,7 @@ $(document).ready(function () {
     });
 
     // Program the State Entry AutoComplete
-    $("#shipto-state").autocomplete({ source: states });
+    $("#state").autocomplete({ source: states });
 
     // Attach jquery.validator to order-entry form
     validator = $('#order-entry').validate();

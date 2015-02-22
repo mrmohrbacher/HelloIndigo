@@ -12,7 +12,7 @@
  *  
  *
  *@
-<form id="order-entry" action="CheckoutBook.ashx" method="post">
+<form id="order-entry" action="Library/Checkout" method="post">
     <div class="oe-panels">
         <div id="menu-header">
             <ul class="oe-nav" id="order-entry-menu">
@@ -49,15 +49,15 @@
                     <ul id="book-list" style="list-style: none;">
                         @foreach (var book in @Model)
                             {
-                            <li class="oe-modelitem" id="item-@book.ISBN">
+                            <li class='oe-modelitem' id='item-@book.ISBN' @(book.CheckedOut != null?"xcheckedout=true":"")>
                                 <p>
-                                    <img src="Images/@(book.ISBN).jpg" alt="@book.ISBN"  height="120px" />
+                                    <img src="images/@(book.ISBN).jpg" alt="@book.ISBN"  height="120px" />
                                 </p>
-                                <p id="book-title-@book.ISBN">
+                                <p id="title-@book.ISBN">
                                     @book.Title
                                 </p>
                                 <p style="margin-top: 6pt; margin-bottom: 6pt;" class="oe-choice">
-                                    <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" />
+                                    <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" @((@book.CheckedOut !=  null)?"disabled":"") />
                                     ISBN: @book.ISBN
                                 </p>
                             </li>
@@ -66,7 +66,7 @@
                     <br style="clear: left;" />
                     <div>
                         <input type="radio" id="choice-book-none" name="ChoiceBook" />
-                        <p id="book-title-none" style="display: inline;">
+                        <p id="title-none" style="display: inline;">
                             No, thanks! I will not be borrowing a book today.
                         </p>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="oe-nav-footer">
                     <label class='oe-prev oe-button' onclick="showPanel('#welcome');">
                         <span class='oe-button-label'>Back</span></label>
-                    <a class="oe-button center" href="/Library/Export"><span class='oe-button-label'>Export...</span></a></label>
+                    <a class="oe-button center" href="/Library/Export"><span class='oe-button-label'>Export...</span></a>
                     <label class='oe-next oe-button' onclick="showPanel('#information');">
                         <span class='oe-button-label'>Next</span></label>
                 </div>
@@ -90,25 +90,25 @@
                         <div id="shipping-information" style="float: left; margin-right: 27px; border: 1px single black">
                             <label class="oe-label">
                                 Name *</label>
-                            <input type="text" name="SubscriberName" id="shipto-name" class="oe-text required" title="Entry required" />
+                            <input type="text" name="Name" id="name" class="oe-text required" title="Entry required" />
                             <label class="oe-label">
                                 Address *</label>
-                            <input type="text" name="ShipToAddress" id="shipto-address" class="oe-text required"
+                            <input type="text" name="Address" id="address" class="oe-text required"
                                 title="Entry required" />
                             <label class="oe-label">
                                 City *</label>
-                            <input type="text" name="ShipToCity" id="shipto-city" class="oe-text required" title="Entry required" />
+                            <input type="text" name="City" id="city" class="oe-text required" title="Entry required" />
                             <label class="oe-label">
                                 State *</label>
-                            <input type="text" name="ShipToState" id="shipto-state" class="oe-text required"
+                            <input type="text" name="State" id="state" class="oe-text required"
                                 title="Entry required" style="width: 2em;" />
                             <label class="oe-label">
-                                ZIP *</label>
-                            <input type="text" name="ShipToPostalcode" id="shipto-postalcode" class="oe-text required"
+                                PostalCode *</label>
+                            <input type="text" name="PostalCode" id="postalcode" class="oe-text required"
                                 title="Entry required" />
                             <label class="oe-label" style="margin-top: 2pt;">
                                 Email *</label>
-                            <input type="text" name="Email" id="home-email" class="email oe-text required"
+                            <input type="text" name="Email" id="email" class="email oe-text required"
                                 title="Entry required" />
                         </div>
                     </div>
@@ -154,8 +154,8 @@
         <!-- oe-panels -->
         <fieldset class="hidden">
             <input type="hidden" id="current-tab" name="CurrentTab" value="" />
-            <input type="hidden" id="book-isbn" name="BookISBN" value="notpicked" />
-            <input type="hidden" id="book-title" name="BookTitle" value="" />
+            <input type="hidden" id="isbn" name="ISBN" value="notpicked" />
+            <input type="hidden" id="title" name="Title" value="" />
         </fieldset>
     </div>
 </form>

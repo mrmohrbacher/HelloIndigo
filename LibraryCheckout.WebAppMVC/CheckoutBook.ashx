@@ -69,8 +69,8 @@ public class CheckoutBook : IHttpHandler
                           "margin-left: 27px; margin-right: 27px;");
 
          emitField("SubscriberName", "name");
-         emitField("BookISBN", "book-isbn");
-         emitField("BookTitle", "book-title");
+         emitField("ISBN", "book-isbn");
+         emitField("Title", "title");
          emitField("CheckoutDate", "checkout-date");
          
          writer.WriteLine("        </fieldset>");

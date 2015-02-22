@@ -16,27 +16,19 @@
     background: transparent url("../images/button-slice.jpg") repeat-x top;
 }
 
-<<<<<<< HEAD
-    a.oe-button {
-        text-decoration:none;
-        color: blue;
-=======
+a.oe-button {
+    text-decoration: none;
+    color: blue;
+    display: none;
+}
 .oe-nav-footer {
     text-align: center;
 }
     .oe-button.center {
         display: inline-block;        
->>>>>>> 3fe7d53947f9cfdf089e6066e6c8399fccce1f60
+        display: none;
     }
-
-.oe-nav-footer {
-    text-align: center;
-}
-    .oe-button.center {
-        display: inline-block;        
-    }
-
-    
+   
     .oe-panel .oe-button:hover {
         background: transparent url("../images/button-slice.jpg") repeat-x bottom;
         color: darkblue;
