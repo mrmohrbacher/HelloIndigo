@@ -58,32 +58,63 @@ var states = [
 { label: "Wyoming", value: "WY" }
 ];
 
-function showPanel(panel) {
-   var selector = '#order-entry-menu > li > a[href=' + panel + ']';
-   $(selector).click();
-}
-
-function checkoutFail(response, url) {
-    $('#email-review').show()
-    $('#email-confirmation').text('Checkout Failed! ('
-                                    + response.status
-                                    + ') ' + response.statusText
-                                    + ' ' + url);
-}
-
-function checkoutResults(data, status, response) {
-    // Results returned an HTML page; replace existing body with new results
-    if (data.search(/<html/i) != -1) {
-        $('#main').html($(data).find('#main').html());
-    } else if (response.status == 200) {
-        $('#email-review').show()
-        $('#email-confirmation').text(data);
-    }
-}
-
 $(document).ready(function () {
 
     window.console && console.log('+ document.ready +');
+
+    //-----------------------------------------------------------------
+    // Bind the property values of 'obj' to the matching <input>
+    // elements.
+    //-----------------------------------------------------------------
+    var bindData = function (obj) {
+        for (var prop in obj) {
+            if (prop === undefined)
+                continue;
+            var $fld = $('input.oe-text[name="' + prop + '"]', '#information');
+            if ($fld.length > 0) {
+                var val = obj[prop];
+                if (val === undefined || val == null) {
+                    var val = '';
+                }
+                $fld.val(val.trim());
+            }
+        }
+    }
+
+    var clearFields = function (fieldList) {
+        for (var index in fieldList) {
+            if (index === undefined || index == null) {
+                continue;
+            }            
+            var $fld = $('input.oe-text[name="' + fieldList[index] + '"]', '#information');
+            if ($fld.length > 0) {
+                $fld.val('');
+            }
+        }
+    }
+
+    var showPanel = function (panel) {
+        var selector = '#order-entry-menu > li > a[href=' + panel + ']';
+        $(selector).click();
+    }
+
+    var checkoutFail = function(response, url) {
+        $('#email-review').show()
+        $('#email-confirmation').text('Checkout Failed! ('
+                                        + response.status
+                                        + ') ' + response.statusText
+                                        + ' ' + url);
+    }
+
+    var checkoutResults = function(data, status, response) {
+        // Results returned an HTML page; replace existing body with new results
+        if (data.search(/<html/i) != -1) {
+            $('#main').html($(data).find('#main').html());
+        } else if (response.status == 200) {
+            $('#email-review').show()
+            $('#email-confirmation').text(data);
+        }
+    }
 
     // Hide all panels
     $('.oe-panel').hide();
@@ -91,8 +122,7 @@ $(document).ready(function () {
     $(document).unload(function () {
         window.console && console.log('document.unload');
         $('#current-tab').val('');
-    }
-   );
+    });
 
     //--------------------------------------------------------
     // Define functors to react to 'click' events
@@ -205,17 +235,27 @@ $(document).ready(function () {
         $('#title').val($('#title-' + choice).html().trim());
     });
 
-    $('#information .oe-text').blur(function () {
+    $('#email.oe-text', '#information').change(function (src) {
+        console.log(src.target);
 
-        if ($('#name').val() == 'Mike Mohrbacher') {
-            $('#address').val('115 N Archimedes Lane');
-            $('#city').val('Arlington Heights');
-            $('#state').val('IL');
-            $('#postalcode').val('60004');
-            $('#email').val('mike@blackriverinc.com');
-        }
-    }); // End of '#billing-information .oe-text' blur
-
+        var email = $(src.target).val();
+        var url = '/Subscriber/Read?email=' + email;
+        $.get(url)
+            .done(function (data) {
+                clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
+                bindData(data);
+            })
+            .fail(function (data) {
+                if (data.status == 404) {
+                    clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
+                } else {
+                alert('(' + data.status + ') ' + data.statusText);
+                }
+            })
+            .always(function () {
+                $(src.target).removeClass('not-handled');
+            });
+    });
 
     $('.oe-panel .submit').click(function () {
         var formData = $('#order-entry').serialize();

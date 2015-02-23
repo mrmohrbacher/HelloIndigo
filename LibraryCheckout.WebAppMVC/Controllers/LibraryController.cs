@@ -109,7 +109,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 
 				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
 					{
-					if (proxy.Checkout(Checkout, out checkedout))
+					if (proxy.Checkout(Checkout, true, out checkedout))
 						{
 						Checkout.DateOut = checkedout.Value;
 #if _WTF         
@@ -192,5 +192,6 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 			Response.ContentType = "text/text";
 			return Content(sb.ToString());
 			}
+
 		}
 	}

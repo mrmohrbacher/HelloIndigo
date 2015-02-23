@@ -13,5 +13,8 @@
     PRIMARY KEY CLUSTERED ([ISBN], [Email], [DateOut] ASC),
 
     CONSTRAINT [FK_BookCheckouts_Books]
-	FOREIGN KEY ([ISBN]) REFERENCES [Books]([ISBN])
+	FOREIGN KEY ([ISBN]) REFERENCES [Books]([ISBN]),
+
+    CONSTRAINT [FK_BookCheckouts_Subscribers]
+	FOREIGN KEY ([Email]) REFERENCES [Subscribers]([Email])
 )

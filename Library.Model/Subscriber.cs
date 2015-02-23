@@ -14,19 +14,33 @@ namespace Library.Model
     
     
     [Serializable]
-    public partial class BookCheckout
+    public partial class Subscriber
     {
-        public string ISBN { get; set; }
+        public Subscriber()
+        {
+            this.BookCheckouts = new HashSet<BookCheckout>();
+        }
+    
+        public Subscriber(Subscriber source)
+        {
+            if (source != null)
+            {
+                this.Email = source.Email;
+                this.Name = source.Name;
+                this.Address = source.Address;
+                this.City = source.City;
+                this.State = source.State;
+                this.PostalCode = source.PostalCode;
+            }
+        }
+    
+        public string Email { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
-        public string Email { get; set; }
-        public System.DateTime DateOut { get; set; }
-        public Nullable<System.DateTime> DateIn { get; set; }
     
-        public virtual Book Book { get; set; }
-        public virtual Subscriber Subscriber { get; set; }
+        public virtual ICollection<BookCheckout> BookCheckouts { get; set; }
     }
 }

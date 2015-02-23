@@ -119,6 +119,7 @@
   <ItemGroup>
     <Compile Include="App_Start\GlobalCacheConfig.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
+    <Compile Include="Controllers\SubscriberController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,6 +157,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Properties\DataSources\Library.Model.Book.datasource" />
+    <Content Include="Properties\DataSources\Library.Model.Subscriber.datasource" />
     <Content Include="Styles\Buttons.css" />
     <Content Include="Styles\jquery-ui-1.8.18.custom.css" />
     <Content Include="Styles\Site.css" />

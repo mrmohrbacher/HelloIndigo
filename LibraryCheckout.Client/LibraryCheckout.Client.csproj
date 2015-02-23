@@ -88,6 +88,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SubscriberService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -100,6 +105,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Library.Model.Book.datasource" />
+    <None Include="Properties\DataSources\Library.Model.Subscriber.datasource" />
     <None Include="Properties\DataSources\LibraryModel.Book.datasource" />
     <None Include="Service References\EchoService\EchoService.wsdl" />
     <None Include="Service References\EchoService\EchoService.xsd">
@@ -141,6 +147,28 @@
     <None Include="Service References\LibraryService\LibraryService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SubscriberService\HelloIndigo.wsdl" />
+    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.ListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.ReadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.UpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SubscriberService\Subscriber.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SubscriberService\Subscriber1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SubscriberService\Subscriber2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SubscriberService\Subscriber3.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
@@ -175,6 +203,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\EchoService\" />
     <WCFMetadataStorage Include="Service References\LibraryService\" />
+    <WCFMetadataStorage Include="Service References\SubscriberService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\EchoService\EchoService.disco" />
@@ -202,6 +231,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\LibraryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriberService\Subscriber.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriberService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriberService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SubscriberService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

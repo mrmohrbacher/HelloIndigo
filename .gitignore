@@ -2,6 +2,7 @@
 **/obj
 **/csx
 **/packages
+**/ServiceReferences
 **/TestResults
 /Library.Database/*.dbmdl
 **/*.v11.suo

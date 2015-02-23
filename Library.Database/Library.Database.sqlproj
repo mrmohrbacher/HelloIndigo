@@ -62,6 +62,7 @@
   <ItemGroup>
     <Build Include="Tables\Books.sql" />
     <Build Include="Tables\BookCheckouts.sql" />
+    <Build Include="Tables\Subscriber.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library.Database.Local.publish.xml" />

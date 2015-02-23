@@ -233,11 +233,15 @@ namespace LibraryCheckout.Client.LibraryService {
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=0)]
         public Library.Model.BookCheckout checkout;
         
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="uri://blackriverinc.com/helloindigo/LibraryService", Order=1)]
+        public bool updateSubscriber;
+        
         public CheckoutRequest() {
         }
         
-        public CheckoutRequest(Library.Model.BookCheckout checkout) {
+        public CheckoutRequest(Library.Model.BookCheckout checkout, bool updateSubscriber) {
             this.checkout = checkout;
+            this.updateSubscriber = updateSubscriber;
         }
     }
     
@@ -386,9 +390,10 @@ namespace LibraryCheckout.Client.LibraryService {
             return base.Channel.Checkout(request);
         }
         
-        public bool Checkout(Library.Model.BookCheckout checkout1, out System.Nullable<System.DateTime> checkedout) {
+        public bool Checkout(Library.Model.BookCheckout checkout1, bool updateSubscriber, out System.Nullable<System.DateTime> checkedout) {
             LibraryCheckout.Client.LibraryService.CheckoutRequest inValue = new LibraryCheckout.Client.LibraryService.CheckoutRequest();
             inValue.checkout = checkout1;
+            inValue.updateSubscriber = updateSubscriber;
             LibraryCheckout.Client.LibraryService.CheckoutResponse retVal = ((LibraryCheckout.Client.LibraryService.ILibraryService)(this)).Checkout(inValue);
             checkedout = retVal.checkedout;
             return retVal.CheckoutResult;

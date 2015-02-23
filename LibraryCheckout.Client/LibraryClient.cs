@@ -29,6 +29,7 @@ namespace Client
 
 		string _echoServiceEndpointName = "IEchoService_LocalHttp";
 		string _libraryServiceEndpointName = "ILibraryService_LocalHttp";
+		string _subscriberServiceEndpointName = "SubscriberService_LocalHostHttp";
 
 		public LibraryClient()
 			{
