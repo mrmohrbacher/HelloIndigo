@@ -4,13 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
+
 
 #if _AZURE
 using Microsoft.WindowsAzure.ServiceRuntime;
@@ -202,7 +199,7 @@ namespace HelloIndigo
 			throw new NotImplementedException();
 			}
 
-		public bool Checkout(BookCheckout checkout, out DateTime? checkedout)
+		public bool Checkout(BookCheckout checkout, bool updateSubscriber, out DateTime? checkedout)
 			{
 			bool result = false;
 			string isbn = checkout.ISBN;
@@ -215,6 +212,26 @@ namespace HelloIndigo
 									  select b).FirstOrDefault());
 				if (book == null)
 					return false;
+
+				var subscriberService = new HelloIndigo.SubscriberService();
+				Subscriber subscriber = null;
+				if (!subscriberService.Read(checkout.Email, out subscriber))
+					{
+					subscriberService.Add(new Subscriber()
+									{
+										Email = checkout.Email,
+										Name = checkout.Name,
+										Address = checkout.Address,
+										City = checkout.City,
+										State = checkout.State,
+										PostalCode = checkout.PostalCode
+									});
+					}
+				else
+					{
+					if (updateSubscriber)
+						subscriberService.Update(ref subscriber);
+					}
 
 				checkedout = DateTime.UtcNow;
 				checkout.DateOut = checkedout.Value;
@@ -256,5 +273,6 @@ namespace HelloIndigo
 			}
 
 		#endregion
+
 		}
 	}

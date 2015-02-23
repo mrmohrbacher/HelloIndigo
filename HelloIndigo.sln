@@ -45,6 +45,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService1", "WcfService1\WcfService1.csproj", "{267C326E-55B6-46E8-A6F5-F3124862FEE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryCheckout.Client", "LibraryCheckout.Client\LibraryCheckout.Client.csproj", "{0BF613AC-D9DA-440D-86F7-9B56F1F6F9BE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1AA4180A-6250-480E-8148-705461F6F974} = {1AA4180A-6250-480E-8148-705461F6F974}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

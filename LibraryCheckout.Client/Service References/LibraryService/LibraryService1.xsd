@@ -36,7 +36,20 @@
       <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_PostalCode_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_State_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Subscriber_x003E_k__BackingField" nillable="true" type="tns:Subscriber" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BookCheckout" nillable="true" type="tns:BookCheckout" />
+  <xs:complexType name="Subscriber">
+    <xs:sequence>
+      <xs:element name="_x003C_Address_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_BookCheckouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfBookCheckout" />
+      <xs:element name="_x003C_City_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Email_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_PostalCode_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_State_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Subscriber" nillable="true" type="tns:Subscriber" />
 </xs:schema>

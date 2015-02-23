@@ -38,5 +38,6 @@ namespace Library.Model
     
         public IDbSet<Library.Model.Book> Books { get; set; }
         public IDbSet<Library.Model.BookCheckout> BookCheckouts { get; set; }
+        public IDbSet<Library.Model.Subscriber> Subscribers { get; set; }
     }
 }
