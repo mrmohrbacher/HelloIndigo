@@ -92,12 +92,10 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 		[HttpPost]
 		public ActionResult Checkout(Library.Model.BookCheckout Checkout)
 			{
-			StringBuilder sb = new StringBuilder();
+			object response = null;
+
 			try
 				{
-
-				string response = null;
-
 				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
 				if (endpointName == null)
 					{
@@ -112,74 +110,28 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 					if (proxy.Checkout(Checkout, true, out checkedout))
 						{
 						Checkout.DateOut = checkedout.Value;
-#if _WTF         
-         // Create Confirmation from Template.
-         Uri responseURI;
-         response = BookSelection.WebApp.Helper.PostRequest(
-                                                          out responseURI,
-                                                          context.Request,
-                                                          "CheckoutEmailTemplate.cshtml?SendEmail=false");
-#else
-						MemoryStream responseStream = new MemoryStream(2048);
 
-						TextWriter writer = new StreamWriter(responseStream);
+						var parameters = new KeyedDataStore(Request.Form);
+						parameters["DateOut"] = checkedout.Value;
+						sendEmailConfirmation(parameters);
 
-						Action<string, string> emitField = ((name, id) =>
-						{
-							writer.WriteLine("         <label class='{0}' style='{1}'>",
-										"oe-label", "display:block;margin-top: 5pt;margin-bottom:0pt");
-							writer.Write(name.CamelCaseToDelimitted());
-							writer.WriteLine("         </label>");  //                </label>
-
-							writer.WriteLine("         <input type='{0}' name='{1}' id='{2}' style='{3}' value='{4}' readonly />",
-															"text", name, id, "width:80%;color:Blue", Request.Form[name]);
-						});
-
-						writer.WriteLine("<html>");
-						writer.WriteLine("<head>");
-						writer.Write("<title>");
-						writer.Write("Black River Systems, Inc - Library Checkout");
-						writer.Write("</title>");
-						writer.WriteLine("</head>");
-
-						writer.WriteLine("   <body>");
-						writer.WriteLine("      <div id='oe-mail'>");
-
-						writer.WriteLine("         <h2>{0}</h2>", "Checkout Confirmation");
-
-						writer.WriteLine("         <fieldset style='{0}'>",
-											  "margin-left: 27px; margin-right: 27px;");
-
-						emitField("SubscriberName", "name");
-						emitField("ISBN", "isbn");
-						emitField("Title", "title");
-						emitField("CheckoutDate", "checkout-date");
-
-						writer.WriteLine("        </fieldset>");
-						writer.WriteLine("      </div>");
-						writer.WriteLine("   </body>");
-						writer.WriteLine("</html>");
-
-						writer.Flush();
-
-						response = responseStream.ContentsToString();
-#endif
-						// Send confirmation Email
-						string emailConnection = GlobalCache.GetResolvedString("EMailConnectionMock");
-						Encryption encryptor = new Encryption();
-						IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
-						client.Send("mike@blackriverinc.com",
-										 Request.Form.Get("Email"),
-										 "Library Checkout Confirmation",
-										 response);
-
-
-						sb.AppendFormat("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
-												checkedout);
+						response = new
+								{
+								code = 200,
+								message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
+													checkedout)
+								};
+						
 						}
 					else
 						{
-						sb.Append("Checkout Processing Failed!");
+						response = new
+							{
+							code = 409,
+							message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - YOur selection was already checked out.",
+												checkedout)
+							};
+						Response.StatusCode = 409;
 						}
 					}
 				}
@@ -189,8 +141,74 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 				Request.PostError(exp);
 				}
 
-			Response.ContentType = "text/text";
-			return Content(sb.ToString());
+			Response.ContentType = "application/json";
+			return Json(response, JsonRequestBehavior.AllowGet);
+			}
+
+		private void sendEmailConfirmation(IKeyedDataStore parameters)
+			{
+#if _WTF         
+         // Create Confirmation from Template.
+         Uri responseURI;
+         response = BookSelection.WebApp.Helper.PostRequest(
+                                                          out responseURI,
+                                                          context.Request,
+                                                          "CheckoutEmailTemplate.cshtml?SendEmail=false");
+#else
+			string emailBody = null;
+
+			MemoryStream stream = new MemoryStream(2048);
+
+			TextWriter writer = new StreamWriter(stream);
+
+			Action<string, string> emitField = ((name, id) =>
+			{
+				writer.WriteLine("         <label class='{0}' style='{1}'>",
+							"oe-label", "display:block;margin-top: 5pt;margin-bottom:0pt");
+				writer.Write(name.CamelCaseToDelimitted());
+				writer.WriteLine("         </label>");  //                </label>
+
+				writer.WriteLine("         <input type='{0}' name='{1}' id='{2}' style='{3}' value='{4}' readonly />",
+												"text", name, id, "width:80%;color:Blue", parameters[name]);
+			});
+
+			writer.WriteLine("<html>");
+			writer.WriteLine("<head>");
+			writer.Write("<title>");
+			writer.Write("Black River Systems, Inc - Library Checkout");
+			writer.Write("</title>");
+			writer.WriteLine("</head>");
+
+			writer.WriteLine("   <body>");
+			writer.WriteLine("      <div id='oe-mail'>");
+
+			writer.WriteLine("         <h2>{0}</h2>", "Checkout Confirmation");
+
+			writer.WriteLine("         <fieldset style='{0}'>",
+								  "margin-left: 27px; margin-right: 27px;");
+
+			emitField("SubscriberName", "name");
+			emitField("ISBN", "isbn");
+			emitField("Title", "title");
+			emitField("CheckoutDate", "checkout-date");
+
+			writer.WriteLine("        </fieldset>");
+			writer.WriteLine("      </div>");
+			writer.WriteLine("   </body>");
+			writer.WriteLine("</html>");
+
+			writer.Flush();
+
+			emailBody = stream.ContentsToString();
+#endif
+			// Send confirmation Email
+			string emailConnection = GlobalCache.GetResolvedString("EMailConnectionMock");
+			Encryption encryptor = new Encryption();
+			IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
+			client.Send("mike@blackriverinc.com",
+							 Request.Form.Get("Email"),
+							 "Library Checkout Confirmation",
+							 emailBody);
 			}
 
 		}

@@ -99,22 +99,31 @@ $(document).ready(function () {
         }
     }
 
-    var checkoutFail = function(response, url) {
-        $('#email-review').show()
-        $('#email-confirmation').text('Checkout Failed! ('
-                                        + response.status
-                                        + ') ' + response.statusText
-                                        + ' ' + url);
+    var checkoutFail = function(response) {
+        var msg = 'Failed!';
+        if (response.status == 409)
+        {
+            var data = JSON.parse(response.responseText);
+            msg = data.message;
+        } else {
+            msg = 'Checkout Failed! ('
+                    + response.status
+                    + ') ' + response.statusText
+                    + ' ' + url;
+        }
+        $('#email-confirmation').text(msg);
+        $('#email-review').show();
     }
 
-    var checkoutResults = function(data, status, response) {
-        // Results returned an HTML page; replace existing body with new results
-        if (data.search(/<html/i) != -1) {
-            $('#main').html($(data).find('#main').html());
-        } else if (response.status == 200) {
-            $('#email-review').show()
-            $('#email-confirmation').text(data);
+    var checkoutOk = function(data, response) {        
+        if (response.status == 200) {
+            $('#email-confirmation').text(data.message);
+            $('#email-review').show();
         }
+        else {
+            checkoutFail(data, Response);
+        }
+        
     }
 
     // Hide all panels
@@ -234,6 +243,8 @@ $(document).ready(function () {
         $('#isbn').val((choice == 'none') ? '' : choice);
 
         $('#title').val($('#title-' + choice).html().trim());
+
+        $('#confirmation .submit').prop('disabled', false);
     });
 
     $('#email.oe-text', '#information').change(function (src) {
@@ -258,13 +269,24 @@ $(document).ready(function () {
             });
     });
 
-    $('.oe-panel .submit').click(function () {
+    $('.submit', '#confirmation').click(function (src) {
+        src.preventDefault();
+        if ($(src.target).prop('disabled')) {
+            return false;
+        }
+        
+        $(src.target).prop('disabled', true);
         var formData = $('#order-entry').serialize();
         var postUrl = 'Library/Checkout';
         //var postUrl = 'CheckoutBook.ashx';
         $.post(postUrl, formData)
-            .done(checkoutResults(data, status, response))
-            .error(function () { checkoutFail(arguments[0], postUrl); });
+            .done(function () {
+                checkoutOk(arguments[0], arguments[2]);
+            })
+            .error(function () {
+                checkoutFail(arguments[0]);
+            });
+        return false;
     });
 
     $('.oe-panel .export').click(function () {

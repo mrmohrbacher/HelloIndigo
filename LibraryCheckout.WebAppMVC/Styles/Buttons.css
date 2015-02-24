@@ -38,6 +38,10 @@ a.oe-button {
     right: 0px;
 }
 
+.oe-panel .submit {
+    right: 0px;
+}
+
 .oe-panel .oe-prev {
     left: 0px;
 }
@@ -58,3 +62,7 @@ a.oe-button {
     content: ' ';
 }
 
+.oe-button[disabled], .oe-button[disabled]:hover {
+    color:dimgray;
+    background: transparent url("../images/button-slice.jpg") repeat-x top;
+}

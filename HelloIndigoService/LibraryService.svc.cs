@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -205,41 +206,75 @@ namespace HelloIndigo
 			string isbn = checkout.ISBN;
 			checkedout = null;
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			try
 				{
-				var book = new Book((from b in context.Books
-											where b.ISBN == isbn
-									  select b).FirstOrDefault());
-				if (book == null)
-					return false;
-
-				var subscriberService = new HelloIndigo.SubscriberService();
-				Subscriber subscriber = null;
-				if (!subscriberService.Read(checkout.Email, out subscriber))
+				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
 					{
-					subscriberService.Add(new Subscriber()
-									{
-										Email = checkout.Email,
-										Name = checkout.Name,
-										Address = checkout.Address,
-										City = checkout.City,
-										State = checkout.State,
-										PostalCode = checkout.PostalCode
-									});
-					}
-				else
-					{
-					if (updateSubscriber)
-						subscriberService.Update(ref subscriber);
-					}
+					//-------------------------------------------------------------
+					// Verify Book exists.
+					//-------------------------------------------------------------
+					var book = new Book((from b in context.Books
+												where b.ISBN == isbn
+												select b).FirstOrDefault());
+					if (book == null)
+						return false;
 
-				checkedout = DateTime.UtcNow;
-				checkout.DateOut = checkedout.Value;
-				context.BookCheckouts.Add(checkout);
+					//-------------------------------------------------------------
+					// Update Subscriber table with MERGE operation.
+					//-------------------------------------------------------------
+					var subscriberService = new HelloIndigo.SubscriberService();
+					Subscriber subscriber = null;
+					if (!subscriberService.Read(checkout.Email, out subscriber))
+						{
+						subscriberService.Add(new Subscriber()
+										{
+											Email = checkout.Email,
+											Name = checkout.Name,
+											Address = checkout.Address,
+											City = checkout.City,
+											State = checkout.State,
+											PostalCode = checkout.PostalCode
+										});
+						}
+					else
+						{
+						if (updateSubscriber)
+							subscriberService.Update(ref subscriber);
+						}
 
-				result = (context.SaveChanges() > 0);
+					//-------------------------------------------------------------
+					// Verify Book not already Checkedout.
+					//-------------------------------------------------------------
+					checkedout = (from co in context.BookCheckouts
+										where co.ISBN == isbn
+											&& co.DateIn == null
+										select (co.DateOut == DateTime.MinValue)
+														? null : (DateTime?)co.DateOut)
+										.FirstOrDefault();
+
+					if (checkedout.HasValue)
+						return false;
+
+					//-------------------------------------------------------------
+					// Checkout Book to Subscriber.
+					// *NOTE*	Times in UTC to make checkout operations
+					//				TZ independent.
+					//-------------------------------------------------------------
+					checkedout = DateTime.UtcNow;
+					checkout.DateOut = checkedout.Value;
+					context.BookCheckouts.Add(checkout);
+
+					result = (context.SaveChanges() > 0);
+					}
 				}
-
+			catch (Exception exp)
+				{
+				StringBuilder msg = new StringBuilder();
+				msg.AppendFormat("*Exception* : {0} ", exp.Message);
+				msg.AppendLine();
+				msg.AppendFormat("  Operation : Checkout {0}", checkout.ToObjectString("ISBN Email Name"));
+				Trace.WriteLine(msg.ToString());
+				}
 			return result;
 			}
 

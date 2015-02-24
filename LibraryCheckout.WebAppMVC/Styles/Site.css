@@ -357,7 +357,6 @@ input[type="text"].error-field, input[type="password"].error-field {
         }
 
 #book-selection {
-    float: left;
     width: 100%;
     line-height: 1;
 }
