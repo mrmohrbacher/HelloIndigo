@@ -58,6 +58,12 @@ var states = [
 { label: "Wyoming", value: "WY" }
 ];
 
+var showPanel = function (panel) {
+    var selector = '#order-entry-menu > li > a[href=' + panel + ']';
+    $(selector).click();
+}
+
+
 $(document).ready(function () {
 
     window.console && console.log('+ document.ready +');
@@ -91,11 +97,6 @@ $(document).ready(function () {
                 $fld.val('');
             }
         }
-    }
-
-    var showPanel = function (panel) {
-        var selector = '#order-entry-menu > li > a[href=' + panel + ']';
-        $(selector).click();
     }
 
     var checkoutFail = function(response, url) {
@@ -210,7 +211,7 @@ $(document).ready(function () {
                "</label>");
 
         var shippingReview = $('#shipping-review');
-        shippingReview.html(("<label class='oe-label'>Shipping Information:</label>"
+        shippingReview.html(("<label class='oe-label'>Subscriber Information:</label>"
                + "<label class='oe-label'>" + "Name : " + $('#name').val() + "</label>"
                + "<label class='oe-label'>" + "Address : " + $('#address').val() + "</label>"
                + "<label class='oe-label'>" + "City : " + $('#city').val() + " State : " + $('#state').val() + "</label>"
@@ -261,7 +262,8 @@ $(document).ready(function () {
         var formData = $('#order-entry').serialize();
         var postUrl = 'Library/Checkout';
         //var postUrl = 'CheckoutBook.ashx';
-        $.post(postUrl, formData, checkoutResults)
+        $.post(postUrl, formData)
+            .done(checkoutResults(data, status, response))
             .error(function () { checkoutFail(arguments[0], postUrl); });
     });
 
@@ -286,5 +288,5 @@ $(document).ready(function () {
 
     window.console && console.log('- document.ready -');
 
-});                                                                                                 // End of document.ready
+});    // End of document.ready
    
