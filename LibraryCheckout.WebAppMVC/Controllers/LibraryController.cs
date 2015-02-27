@@ -90,7 +90,7 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 			}
 
 		[HttpPost]
-		public ActionResult Checkout(Library.Model.BookCheckout Checkout)
+		public ActionResult Checkout(Library.Model.Checkout Checkout)
 			{
 			object response = null;
 
@@ -120,15 +120,14 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 								code = 200,
 								message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
 													checkedout)
-								};
-						
+								};						
 						}
 					else
 						{
 						response = new
 							{
 							code = 409,
-							message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - YOur selection was already checked out.",
+							message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - As of this date, your selection was already checked out.",
 												checkedout)
 							};
 						Response.StatusCode = 409;

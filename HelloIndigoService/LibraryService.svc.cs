@@ -99,7 +99,7 @@ namespace HelloIndigo
 			Interlocked.Add(ref instanceCount, -1);
 			Trace.WriteLine(string.Format("- LibraryService[{0}]-", instanceCount));
 			if (Interlocked.CompareExchange(ref instanceCount, 0, 0) == 0)
-				tracer.Close();
+				if (tracer != null)  tracer.Close();
 			}
 
 		#region ILibraryService Implementation
@@ -142,7 +142,7 @@ namespace HelloIndigo
 						{
 						Book book = new Book(entity as Book);
 
-						BookCheckout checkout = context.BookCheckouts
+						Checkout checkout = context.Checkouts
 															.Where(bc => bc.DateIn == null
                                                        && bc.ISBN == book.ISBN)
 															.FirstOrDefault();
@@ -176,7 +176,7 @@ namespace HelloIndigo
 									  where b.ISBN == isbn
 									  select b).FirstOrDefault());
 
-				BookCheckout checkout = context.BookCheckouts
+				Checkout checkout = context.Checkouts
 													.Where(bc => bc.DateIn == null
 																 && bc.ISBN == isbn)
 													.FirstOrDefault();
@@ -200,7 +200,7 @@ namespace HelloIndigo
 			throw new NotImplementedException();
 			}
 
-		public bool Checkout(BookCheckout checkout, bool updateSubscriber, out DateTime? checkedout)
+		public bool Checkout(Checkout checkout, bool updateSubscriber, out DateTime? checkedout)
 			{
 			bool result = false;
 			string isbn = checkout.ISBN;
@@ -245,7 +245,7 @@ namespace HelloIndigo
 					//-------------------------------------------------------------
 					// Verify Book not already Checkedout.
 					//-------------------------------------------------------------
-					checkedout = (from co in context.BookCheckouts
+					checkedout = (from co in context.Checkouts
 										where co.ISBN == isbn
 											&& co.DateIn == null
 										select (co.DateOut == DateTime.MinValue)
@@ -262,7 +262,7 @@ namespace HelloIndigo
 					//-------------------------------------------------------------
 					checkedout = DateTime.UtcNow;
 					checkout.DateOut = checkedout.Value;
-					context.BookCheckouts.Add(checkout);
+					context.Checkouts.Add(checkout);
 
 					result = (context.SaveChanges() > 0);
 					}
@@ -292,7 +292,7 @@ namespace HelloIndigo
 				if (book == null)
 					return false;
 
-				BookCheckout checkout = context.BookCheckouts
+				Checkout checkout = context.Checkouts
 															.Where(bc => bc.DateOut == checkedout
 																       && bc.DateIn == null
 																		 && bc.ISBN == isbn)

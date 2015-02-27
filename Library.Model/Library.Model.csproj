@@ -54,10 +54,11 @@
     <Compile Include="Book.cs">
       <DependentUpon>Library.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookCheckout.cs">
+    <Compile Include="BookEx.cs" />
+    <Compile Include="Checkout.cs">
       <DependentUpon>Library.Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookEx.cs" />
+    <Compile Include="CheckoutEx.cs" />
     <Compile Include="EntitySerializationHelpers.cs" />
     <Compile Include="LibraryModel.Designer.cs">
       <AutoGen>True</AutoGen>

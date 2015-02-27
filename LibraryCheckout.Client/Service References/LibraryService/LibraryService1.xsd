@@ -9,8 +9,8 @@
   <xs:complexType name="Book">
     <xs:sequence>
       <xs:element name="_x003C_Author_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_BookCheckouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfBookCheckout" />
       <xs:element name="_x003C_CheckedOut_x003E_k__BackingField" nillable="true" type="xs:dateTime" />
+      <xs:element name="_x003C_Checkouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCheckout" />
       <xs:element name="_x003C_ISBN_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Publisher_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Synopsis_x003E_k__BackingField" nillable="true" type="xs:string" />
@@ -18,13 +18,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Book" nillable="true" type="tns:Book" />
-  <xs:complexType name="ArrayOfBookCheckout">
+  <xs:complexType name="ArrayOfCheckout">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookCheckout" nillable="true" type="tns:BookCheckout" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Checkout" nillable="true" type="tns:Checkout" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfBookCheckout" nillable="true" type="tns:ArrayOfBookCheckout" />
-  <xs:complexType name="BookCheckout">
+  <xs:element name="ArrayOfCheckout" nillable="true" type="tns:ArrayOfCheckout" />
+  <xs:complexType name="Checkout">
     <xs:sequence>
       <xs:element name="_x003C_Address_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Book_x003E_k__BackingField" nillable="true" type="tns:Book" />
@@ -39,11 +39,11 @@
       <xs:element name="_x003C_Subscriber_x003E_k__BackingField" nillable="true" type="tns:Subscriber" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="BookCheckout" nillable="true" type="tns:BookCheckout" />
+  <xs:element name="Checkout" nillable="true" type="tns:Checkout" />
   <xs:complexType name="Subscriber">
     <xs:sequence>
       <xs:element name="_x003C_Address_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_BookCheckouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfBookCheckout" />
+      <xs:element name="_x003C_Checkouts_x003E_k__BackingField" nillable="true" type="tns:ArrayOfCheckout" />
       <xs:element name="_x003C_City_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Email_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />

@@ -18,7 +18,7 @@ namespace Library.Model
     {
         public Book()
         {
-            this.BookCheckouts = new HashSet<BookCheckout>();
+            this.Checkouts = new HashSet<Checkout>();
         }
     
         public Book(Book source)
@@ -39,6 +39,6 @@ namespace Library.Model
         public string Author { get; set; }
         public string Synopsis { get; set; }
     
-        public virtual ICollection<BookCheckout> BookCheckouts { get; set; }
+        public virtual ICollection<Checkout> Checkouts { get; set; }
     }
 }

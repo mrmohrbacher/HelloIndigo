@@ -4,6 +4,6 @@
     <StartArguments>/Service=LibraryService</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>/Service=SubscriberService</StartArguments>
+    <StartArguments>/Service=LibraryService</StartArguments>
   </PropertyGroup>
 </Project>

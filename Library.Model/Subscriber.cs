@@ -18,7 +18,7 @@ namespace Library.Model
     {
         public Subscriber()
         {
-            this.BookCheckouts = new HashSet<BookCheckout>();
+            this.Checkouts = new HashSet<Checkout>();
         }
     
         public Subscriber(Subscriber source)
@@ -41,6 +41,6 @@ namespace Library.Model
         public string State { get; set; }
         public string PostalCode { get; set; }
     
-        public virtual ICollection<BookCheckout> BookCheckouts { get; set; }
+        public virtual ICollection<Checkout> Checkouts { get; set; }
     }
 }

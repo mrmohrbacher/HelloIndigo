@@ -109,7 +109,7 @@
   <xs:element name="Checkout">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Library.Model" minOccurs="0" name="checkout" nillable="true" type="q7:BookCheckout" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Library.Model" minOccurs="0" name="checkout" nillable="true" type="q7:Checkout" />
         <xs:element minOccurs="0" name="updateSubscriber" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>

@@ -31,6 +31,6 @@ namespace HelloIndigo
 		bool Checkin(string isbn, DateTime checkedout, out DateTime? checkedin);
 
 		[OperationContract]
-		bool Checkout(BookCheckout checkout, bool updateSubscriber, out DateTime? checkedout);
+		bool Checkout(Checkout checkout, bool updateSubscriber, out DateTime? checkedout);
 		}
    }

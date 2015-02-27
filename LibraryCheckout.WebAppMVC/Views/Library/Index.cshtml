@@ -51,12 +51,12 @@
                             {
                             <li class='oe-modelitem' id='item-@book.ISBN' @(book.CheckedOut != null?"xcheckedout=true":"")>
                                 <p>
-                                    <img src="images/@(book.ISBN).jpg" alt="@book.ISBN"  height="120px" />
+                                    <img src="~/images/@(book.ISBN).jpg" alt="@book.ISBN" />
                                 </p>
                                 <p id="title-@book.ISBN">
                                     @book.Title
                                 </p>
-                                <p style="margin-top: 6pt; margin-bottom: 6pt;" class="oe-choice">
+                                <p class="oe-choice">
                                     <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" @((@book.CheckedOut !=  null)?"disabled":"") />
                                     ISBN: @book.ISBN
                                 </p>

@@ -60,7 +60,7 @@
     <Author>Seemann,Mark</Author>
     <ISBN>978-1-935182-50-4</ISBN>
     <Publisher>Manning Publications Co.</Publisher>
-    <Title>Depenency Injection in .NET</Title>
+    <Title>Dependency Injection in .NET</Title>
     <Synopsis>A Dependency Injection (DI) bill of fare, with sauces.</Synopsis>
   </Book>
 </Books>

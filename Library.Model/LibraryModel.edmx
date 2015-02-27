@@ -6,19 +6,29 @@
     <edmx:StorageModels>
     <Schema Namespace="LibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="LibraryModelStoreContainer">
-          <EntitySet Name="BookCheckouts" EntityType="LibraryModel.Store.BookCheckouts" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Books" EntityType="LibraryModel.Store.Books" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Checkout" EntityType="LibraryModel.Store.Checkout" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Subscribers" EntityType="LibraryModel.Store.Subscribers" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_BookCheckouts_Books" Association="LibraryModel.Store.FK_BookCheckouts_Books">
+          <AssociationSet Name="FK_Checkout_Book" Association="LibraryModel.Store.FK_Checkout_Book">
             <End Role="Books" EntitySet="Books" />
-            <End Role="BookCheckouts" EntitySet="BookCheckouts" />
+            <End Role="Checkout" EntitySet="Checkout" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookCheckouts_Subscribers" Association="LibraryModel.Store.FK_BookCheckouts_Subscribers">
+          <AssociationSet Name="FK_Checkout_Subscriber" Association="LibraryModel.Store.FK_Checkout_Subscriber">
             <End Role="Subscribers" EntitySet="Subscribers" />
-            <End Role="BookCheckouts" EntitySet="BookCheckouts" />
+            <End Role="Checkout" EntitySet="Checkout" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BookCheckouts">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Publisher" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Author" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Synopsis" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Checkout">
           <Key>
             <PropertyRef Name="ISBN" />
             <PropertyRef Name="Email" />
@@ -34,16 +44,6 @@
           <Property Name="State" Type="char" Nullable="false" MaxLength="2" />
           <Property Name="PostalCode" Type="char" Nullable="false" MaxLength="10" />
         </EntityType>
-        <EntityType Name="Books">
-          <Key>
-            <PropertyRef Name="ISBN" />
-          </Key>
-          <Property Name="ISBN" Type="nvarchar" Nullable="false" MaxLength="64" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="Publisher" Type="nvarchar" Nullable="false" MaxLength="64" />
-          <Property Name="Author" Type="nvarchar" Nullable="false" MaxLength="64" />
-          <Property Name="Synopsis" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="Subscribers">
           <Key>
             <PropertyRef Name="Email" />
@@ -55,26 +55,26 @@
           <Property Name="State" Type="char" Nullable="false" MaxLength="2" />
           <Property Name="PostalCode" Type="char" Nullable="false" MaxLength="10" />
         </EntityType>
-        <Association Name="FK_BookCheckouts_Books">
+        <Association Name="FK_Checkout_Book">
           <End Role="Books" Type="LibraryModel.Store.Books" Multiplicity="1" />
-          <End Role="BookCheckouts" Type="LibraryModel.Store.BookCheckouts" Multiplicity="*" />
+          <End Role="Checkout" Type="LibraryModel.Store.Checkout" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Books">
               <PropertyRef Name="ISBN" />
             </Principal>
-            <Dependent Role="BookCheckouts">
+            <Dependent Role="Checkout">
               <PropertyRef Name="ISBN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BookCheckouts_Subscribers">
+        <Association Name="FK_Checkout_Subscriber">
           <End Role="Subscribers" Type="LibraryModel.Store.Subscribers" Multiplicity="1" />
-          <End Role="BookCheckouts" Type="LibraryModel.Store.BookCheckouts" Multiplicity="*" />
+          <End Role="Checkout" Type="LibraryModel.Store.Checkout" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subscribers">
               <PropertyRef Name="Email" />
             </Principal>
-            <Dependent Role="BookCheckouts">
+            <Dependent Role="Checkout">
               <PropertyRef Name="Email" />
             </Dependent>
           </ReferentialConstraint>
@@ -85,17 +85,17 @@
       <Schema Namespace="LibraryModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="Books" EntityType="LibraryModel.Book" />
-          <EntitySet Name="BookCheckouts" EntityType="LibraryModel.BookCheckout" />
-          <AssociationSet Name="FK_BookCheckouts_Books" Association="LibraryModel.FK_BookCheckouts_Books">
-            <End Role="Book" EntitySet="Books" />
-            <End Role="BookCheckout" EntitySet="BookCheckouts" />
-          </AssociationSet>
           <EntitySet Name="Subscribers" EntityType="LibraryModel.Subscriber" />
-          <AssociationSet Name="FK_BookCheckouts_Subscribers" Association="LibraryModel.FK_BookCheckouts_Subscribers">
-            <End Role="Subscriber" EntitySet="Subscribers" />
-            <End Role="BookCheckout" EntitySet="BookCheckouts" />
+          <EntitySet Name="Checkouts" EntityType="LibraryModel.Checkout" />
+          <AssociationSet Name="FK_Checkout_Book" Association="LibraryModel.FK_Checkout_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Checkout" EntitySet="Checkouts" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_Checkout_Subscriber" Association="LibraryModel.FK_Checkout_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="Checkout" EntitySet="Checkouts" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="ISBN" />
@@ -109,38 +109,8 @@
               <LongDescription>HTML Document containing synopsis of Book's contents.</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="BookCheckouts" Relationship="LibraryModel.FK_BookCheckouts_Books" FromRole="Book" ToRole="BookCheckout" />
+          <NavigationProperty Name="Checkouts" Relationship="LibraryModel.FK_Checkout_Book" FromRole="Book" ToRole="Checkout" />
         </EntityType>
-        <EntityType Name="BookCheckout">
-          <Key>
-            <PropertyRef Name="ISBN" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="DateOut" />
-          </Key>
-          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="Address" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="City" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
-          <Property Type="String" Name="State" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
-          <Property Type="String" Name="PostalCode" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_BookCheckouts_Books" FromRole="BookCheckout" ToRole="Book" />
-          <Property Type="DateTime" Name="DateOut" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="DateIn" Precision="3" />
-          <NavigationProperty Name="Subscriber" Relationship="LibraryModel.FK_BookCheckouts_Subscribers" FromRole="BookCheckout" ToRole="Subscriber" />
-        </EntityType>
-        <Association Name="FK_BookCheckouts_Books">
-          <End Type="LibraryModel.Book" Role="Book" Multiplicity="1" />
-          <End Type="LibraryModel.BookCheckout" Role="BookCheckout" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Book">
-              <PropertyRef Name="ISBN" />
-            </Principal>
-            <Dependent Role="BookCheckout">
-              <PropertyRef Name="ISBN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Subscriber">
           <Key>
             <PropertyRef Name="Email" />
@@ -151,21 +121,51 @@
           <Property Type="String" Name="City" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="State" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="PostalCode" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="BookCheckouts" Relationship="LibraryModel.FK_BookCheckouts_Subscribers" FromRole="Subscriber" ToRole="BookCheckout" />
+          <NavigationProperty Name="Checkouts" Relationship="LibraryModel.FK_Checkout_Subscriber" FromRole="Subscriber" ToRole="Checkout" />
         </EntityType>
-        <Association Name="FK_BookCheckouts_Subscribers">
+        <EntityType Name="Checkout">
+          <Key>
+            <PropertyRef Name="ISBN" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="DateOut" />
+          </Key>
+          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateOut" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateIn" Precision="3" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="State" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="PostalCode" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_Checkout_Book" FromRole="Checkout" ToRole="Book" />
+          <NavigationProperty Name="Subscriber" Relationship="LibraryModel.FK_Checkout_Subscriber" FromRole="Checkout" ToRole="Subscriber" />
+        </EntityType>
+        <Association Name="FK_Checkout_Book">
+          <End Type="LibraryModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="LibraryModel.Checkout" Role="Checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ISBN" />
+            </Principal>
+            <Dependent Role="Checkout">
+              <PropertyRef Name="ISBN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Checkout_Subscriber">
           <End Type="LibraryModel.Subscriber" Role="Subscriber" Multiplicity="1" />
-          <End Type="LibraryModel.BookCheckout" Role="BookCheckout" Multiplicity="*" />
+          <End Type="LibraryModel.Checkout" Role="Checkout" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Subscriber">
               <PropertyRef Name="Email" />
             </Principal>
-            <Dependent Role="BookCheckout">
+            <Dependent Role="Checkout">
               <PropertyRef Name="Email" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -182,21 +182,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BookCheckouts">
-      <EntityTypeMapping TypeName="IsTypeOf(LibraryModel.BookCheckout)">
-        <MappingFragment StoreEntitySet="BookCheckouts">
-          <ScalarProperty Name="DateIn" ColumnName="DateIn" />
-                <ScalarProperty Name="DateOut" ColumnName="DateOut" />
-                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
           <EntitySetMapping Name="Subscribers">
             <EntityTypeMapping TypeName="LibraryModel.Subscriber">
               <MappingFragment StoreEntitySet="Subscribers">
@@ -206,6 +191,21 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Checkouts">
+            <EntityTypeMapping TypeName="LibraryModel.Checkout">
+              <MappingFragment StoreEntitySet="Checkout">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+                <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -233,11 +233,11 @@
         <edmx:EntityTypeShape EntityType="LibraryModel.Books" Width="2.25" PointX="1.5" PointY="3.125" Height="1.7879850260416665" />
         <edmx:InheritanceConnector EntityType="LibraryModel.Books" />
         <edmx:EntityTypeShape EntityType="LibraryModel.Book" Width="1.5" PointX="1.625" PointY="1" Height="1.9802864583333331" />
-        <edmx:EntityTypeShape EntityType="LibraryModel.BookCheckout" Width="1.5" PointX="1.875" PointY="4.875" />
-        <edmx:AssociationConnector Association="LibraryModel.FK_BookCheckouts_Books" />
-        <edmx:EntityTypeShape EntityType="LibraryModel.Subscriber" Width="1.5" PointX="4.2094615736089" PointY="26.583493230204795" />
-        <edmx:AssociationConnector Association="LibraryModel.FK_BookCheckouts_Subscribers" />
-      </edmx:Diagram>
+        <edmx:EntityTypeShape EntityType="LibraryModel.Subscriber" Width="1.5" PointX="4.875" PointY="4.875" />
+        <edmx:EntityTypeShape EntityType="LibraryModel.Checkout" Width="1.5" PointX="1.75" PointY="6.25" />
+        <edmx:AssociationConnector Association="LibraryModel.FK_Checkout_Book" />
+        <edmx:AssociationConnector Association="LibraryModel.FK_Checkout_Subscriber" />
+        </edmx:Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

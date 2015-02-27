@@ -239,6 +239,19 @@ fieldset {
         color: Gray;
     }
 
+.oe-panel ul#book-list {
+    list-style: none
+}
+    
+    .oe-modelitem p img {
+     height: 120px;
+     }
+
+    .oe-modelitem .oe-choice {
+        margin-top: 6pt;
+        margin-bottom: 6pt;
+    }
+
 /* Information and errors  
 ----------------------------------------------------------*/
 .message {

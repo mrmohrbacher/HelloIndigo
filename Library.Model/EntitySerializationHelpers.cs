@@ -46,13 +46,13 @@ namespace Library.Model.Helpers
 			}
 
 
-		public static IDbSet<Book> DeserializeBookCheckouts(this LibraryEntities context, Stream xstream)
+		public static IDbSet<Book> DeserializeCheckouts(this LibraryEntities context, Stream xstream)
 			{
 			XDocument xdoc = XDocument.Load(xstream);
 			// Just write a custom deserializer for now...
-			foreach (XElement xelem in xdoc.Descendants("BookCheckout"))
+			foreach (XElement xelem in xdoc.Descendants("Checkout"))
 				{
-				BookCheckout entity = new BookCheckout()
+				Checkout entity = new Checkout()
 				{
 					ISBN = xelem.Element("ISBN").Value,
 					Name = xelem.Element("Name").Value,
@@ -62,11 +62,11 @@ namespace Library.Model.Helpers
 					PostalCode = xelem.Element("PostalCode").Value,
 					Email = xelem.Element("Email").Value
 				};
-				var result = context.BookCheckouts
+				var result = context.Checkouts
 										.Where(bc => (bc.ISBN == entity.ISBN && bc.Email == entity.Email))
 										.FirstOrDefault();
 				if (result == null)
-					context.BookCheckouts.Add(entity);
+					context.Checkouts.Add(entity);
 				else
 					result = entity;
 				}

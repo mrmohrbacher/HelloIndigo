@@ -36,8 +36,9 @@ namespace BookSelection.WebApp
 			{
 			Trace.WriteLine(exp.ToString());
 			StringBuilder sb = new StringBuilder();
-			sb.AppendFormat("~/ErrorPage.cshtml?ErrorMessage={0}&ErrorData=Web Page: {1}",
-									HttpUtility.UrlEncode(exp.Message), context.Request.Url);
+			sb.AppendFormat("~/Home/Error?ErrorMessage={0}&OriginalRequestUrl={1}",
+									HttpUtility.UrlEncode(exp.Message), 
+									context.Request.Url);
 			if (showStack)
 				{
 				sb.AppendFormat("&ShowStack=true");
