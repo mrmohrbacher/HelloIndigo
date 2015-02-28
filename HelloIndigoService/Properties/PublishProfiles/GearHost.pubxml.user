@@ -17,10 +17,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2015 07:41:15</publishTime>
     </File>
     <File Include="bin/DataStore.dll">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:41</publishTime>
     </File>
     <File Include="bin/DataStore.pdb">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:41</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/19/2015 06:46:25</publishTime>
@@ -29,16 +29,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2015 06:46:25</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.dll">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:42</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.pdb">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:42</publishTime>
     </File>
     <File Include="bin/Library.Model.dll">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:42</publishTime>
     </File>
     <File Include="bin/Library.Model.pdb">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:42</publishTime>
     </File>
     <File Include="bin/Microsoft.WindowsAzure.Configuration.dll">
       <publishTime>10/29/2012 14:18:47</publishTime>
@@ -53,10 +53,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2012 14:18:47</publishTime>
     </File>
     <File Include="bin/Utility.dll">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:41</publishTime>
     </File>
     <File Include="bin/Utility.pdb">
-      <publishTime>02/27/2015 10:45:00</publishTime>
+      <publishTime>02/28/2015 12:08:41</publishTime>
     </File>
     <File Include="EchoService.svc">
       <publishTime>03/02/2012 13:42:21</publishTime>
@@ -71,7 +71,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/23/2015 12:59:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/27/2015 18:17:47</publishTime>
+      <publishTime>02/28/2015 12:36:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

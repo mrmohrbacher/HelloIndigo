@@ -8,10 +8,10 @@ using System.Web.Mvc;
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 
-using LibraryCheckout.Client.SubscriberService;
+using LendingLibrary.Client.SubscriberService;
 using Library.Model;
 
-namespace LibraryCheckout.WebAppMVC.Controllers
+namespace LendingLibrary.WebAppMVC.Controllers
 	{
 	public class SubscriberController : Controller
 		{

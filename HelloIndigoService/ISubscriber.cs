@@ -10,7 +10,7 @@ using Library.Model;
 
 namespace HelloIndigo
 	{
-	[ServiceContract]
+	[ServiceContract(Namespace = "uri://blackriverinc.com/helloindigo/SubscriberService")]
 	public interface ISubscriber
 		{
 		[OperationContract]

@@ -8,8 +8,8 @@
     <ProjectGuid>{0BF613AC-D9DA-440D-86F7-9B56F1F6F9BE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LibraryCheckout.Client</RootNamespace>
-    <AssemblyName>LibraryCheckout.Client</AssemblyName>
+    <RootNamespace>LendingLibrary.Client</RootNamespace>
+    <AssemblyName>LendingLibrary.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -157,6 +157,7 @@
     <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.UpdateResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\SubscriberService\Subscriber.wsdl" />
     <None Include="Service References\SubscriberService\Subscriber.xsd">
       <SubType>Designer</SubType>
     </None>

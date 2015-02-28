@@ -255,7 +255,7 @@ $(document).ready(function () {
         console.log(src.target);
 
         var email = $(src.target).val();
-        var url = 'LibraryCheckout/Subscriber/Read?email=' + email;
+        var url = 'LendingLibrary/Subscriber/Read?email=' + email;
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
@@ -281,7 +281,7 @@ $(document).ready(function () {
         
         $(src.target).prop('disabled', true);
         var formData = $('#order-entry').serialize();
-        var postUrl = 'LibraryCheckout/Library/Checkout';
+        var postUrl = 'LendingLibrary/Library/Checkout';
         //var postUrl = 'CheckoutBook.ashx';
         $.post(postUrl, formData)
             .done(function () {

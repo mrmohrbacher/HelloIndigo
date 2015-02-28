@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibraryCheckout.Client.EchoService {
+namespace LendingLibrary.Client.EchoService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -16,11 +16,11 @@ namespace LibraryCheckout.Client.EchoService {
     public interface IEchoService {
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/Echo", ReplyAction="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/EchoResponse")]
-        LibraryCheckout.Client.EchoService.EchoResponse Echo(LibraryCheckout.Client.EchoService.EchoRequest request);
+        LendingLibrary.Client.EchoService.EchoResponse Echo(LendingLibrary.Client.EchoService.EchoRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/Echo", ReplyAction="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/EchoResponse")]
-        System.Threading.Tasks.Task<LibraryCheckout.Client.EchoService.EchoResponse> EchoAsync(LibraryCheckout.Client.EchoService.EchoRequest request);
+        System.Threading.Tasks.Task<LendingLibrary.Client.EchoService.EchoResponse> EchoAsync(LendingLibrary.Client.EchoService.EchoRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/Ping", ReplyAction="uri://blackriverinc.com/helloindigo/EchoService/IEchoService/PingResponse")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="result")]
@@ -68,12 +68,12 @@ namespace LibraryCheckout.Client.EchoService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IEchoServiceChannel : LibraryCheckout.Client.EchoService.IEchoService, System.ServiceModel.IClientChannel {
+    public interface IEchoServiceChannel : LendingLibrary.Client.EchoService.IEchoService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EchoServiceClient : System.ServiceModel.ClientBase<LibraryCheckout.Client.EchoService.IEchoService>, LibraryCheckout.Client.EchoService.IEchoService {
+    public partial class EchoServiceClient : System.ServiceModel.ClientBase<LendingLibrary.Client.EchoService.IEchoService>, LendingLibrary.Client.EchoService.IEchoService {
         
         public EchoServiceClient() {
         }
@@ -95,19 +95,19 @@ namespace LibraryCheckout.Client.EchoService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        LibraryCheckout.Client.EchoService.EchoResponse LibraryCheckout.Client.EchoService.IEchoService.Echo(LibraryCheckout.Client.EchoService.EchoRequest request) {
+        LendingLibrary.Client.EchoService.EchoResponse LendingLibrary.Client.EchoService.IEchoService.Echo(LendingLibrary.Client.EchoService.EchoRequest request) {
             return base.Channel.Echo(request);
         }
         
         public bool Echo(string input, out string result) {
-            LibraryCheckout.Client.EchoService.EchoRequest inValue = new LibraryCheckout.Client.EchoService.EchoRequest();
+            LendingLibrary.Client.EchoService.EchoRequest inValue = new LendingLibrary.Client.EchoService.EchoRequest();
             inValue.input = input;
-            LibraryCheckout.Client.EchoService.EchoResponse retVal = ((LibraryCheckout.Client.EchoService.IEchoService)(this)).Echo(inValue);
+            LendingLibrary.Client.EchoService.EchoResponse retVal = ((LendingLibrary.Client.EchoService.IEchoService)(this)).Echo(inValue);
             result = retVal.result;
             return retVal.EchoResult;
         }
         
-        public System.Threading.Tasks.Task<LibraryCheckout.Client.EchoService.EchoResponse> EchoAsync(LibraryCheckout.Client.EchoService.EchoRequest request) {
+        public System.Threading.Tasks.Task<LendingLibrary.Client.EchoService.EchoResponse> EchoAsync(LendingLibrary.Client.EchoService.EchoRequest request) {
             return base.Channel.EchoAsync(request);
         }
         

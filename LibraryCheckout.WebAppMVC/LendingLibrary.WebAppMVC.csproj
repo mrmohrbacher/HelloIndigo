@@ -143,7 +143,10 @@
     <Content Include="Images\1-56592-492-4.jpg" />
     <Content Include="Images\978-0-596-52687-0.jpg" />
     <Content Include="Images\978-1-4165-7176-6.jpg" />
-    <Content Include="Images\978-1-4302-2549-2.jpg" />
+    <Content Include="Images\978-1-4302-2549-2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\978-1-935182-50-4.jpg" />
     <Content Include="Images\body-bg.gif" />
     <Content Include="Images\button-slice.jpg" />
     <Content Include="Images\button.jpg" />
@@ -213,9 +216,9 @@
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LibraryCheckout.Client\LibraryCheckout.Client.csproj">
+    <ProjectReference Include="..\LibraryCheckout.Client\LendingLibrary.Client.csproj">
       <Project>{0bf613ac-d9da-440d-86f7-9b56f1f6f9be}</Project>
-      <Name>LibraryCheckout.Client</Name>
+      <Name>LendingLibrary.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +250,7 @@
           <IISUrl>http://localhost:53205/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
-          <CustomServerUrl>http://localhost:8000/LibraryCheckout</CustomServerUrl>
+          <CustomServerUrl>http://localhost:8000/LendingLibrary</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

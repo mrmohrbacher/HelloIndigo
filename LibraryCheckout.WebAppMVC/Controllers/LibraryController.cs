@@ -10,9 +10,9 @@ using System.IO;
 using System.Text;
 using System.Web.Mvc;
 
-using LibraryCheckout.Client.LibraryService;
+using LendingLibrary.Client.LibraryService;
 
-namespace LibraryCheckout.WebAppMVC.Controllers
+namespace LendingLibrary.WebAppMVC.Controllers
 	{
 	public class LibraryController : Controller
 		{

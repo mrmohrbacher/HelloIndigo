@@ -17,7 +17,7 @@
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost:8000/LibraryCheckout</StartExternalURL>
+          <StartExternalURL>http://localhost:8000/LendingLibrary</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>

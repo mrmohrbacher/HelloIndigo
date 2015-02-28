@@ -5,7 +5,7 @@ using System.Web;
 
 using Blackriverinc.Framework.DataStore;
 
-namespace LibraryCheckout.WebAppMVC
+namespace LendingLibrary.WebAppMVC
 	{
 	public class GlobalCacheConfig
 		{

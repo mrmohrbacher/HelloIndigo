@@ -84,9 +84,9 @@ namespace Library.Model.Helpers
 				XElement xbook = new XElement("Book");
 				xbook.Add(new XElement("ISBN", book.ISBN.ToString()));
 				xbook.Add(new XElement("Title", book.Title.ToString()));
-				xbook.Add(new XElement("Publisher", book.Publisher.ToString()));
-				xbook.Add(new XElement("Author", book.Author.ToString()));
-				xbook.Add(new XElement("Synopsis", book.Synopsis.ToString()));
+				xbook.Add(new XElement("Publisher", book.Publisher??""));
+				xbook.Add(new XElement("Author", book.Author??""));
+				xbook.Add(new XElement("Synopsis", (book.Synopsis??"")));
 
 				root.Add(xbook);
 				}
@@ -100,9 +100,9 @@ namespace Library.Model.Helpers
 			XElement xbook = new XElement("Book");
 			xbook.Add(new XElement("ISBN", book.ISBN.ToString()));
 			xbook.Add(new XElement("Title", book.Title.ToString()));
-			xbook.Add(new XElement("Publisher", book.Publisher.ToString()));
-			xbook.Add(new XElement("Author", book.Author.ToString()));
-			xbook.Add(new XElement("Synopsis", book.Synopsis.ToString()));
+			xbook.Add(new XElement("Publisher", book.Publisher ?? ""));
+			xbook.Add(new XElement("Author", book.Author ?? ""));
+			xbook.Add(new XElement("Synopsis", (book.Synopsis ?? "")));
 			xbook.Save(xstream);
 
 			return xstream;

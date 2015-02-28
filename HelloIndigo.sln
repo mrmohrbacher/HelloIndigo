@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlobalConfiguration", "Glob
 		wcf.bindings.cfg = wcf.bindings.cfg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryCheckout.WebAppMVC", "LibraryCheckout.WebAppMVC\LibraryCheckout.WebAppMVC.csproj", "{D39B443F-A6D1-4FEA-8A0C-83430A668FC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.WebAppMVC", "LibraryCheckout.WebAppMVC\LendingLibrary.WebAppMVC.csproj", "{D39B443F-A6D1-4FEA-8A0C-83430A668FC7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1AA4180A-6250-480E-8148-705461F6F974} = {1AA4180A-6250-480E-8148-705461F6F974}
 	EndProjectSection
@@ -42,7 +42,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Library.Database", "Library
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Model", "Library.Model\Library.Model.csproj", "{6C568049-7BAB-4E0C-B729-861ACBD4296E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryCheckout.Client", "LibraryCheckout.Client\LibraryCheckout.Client.csproj", "{0BF613AC-D9DA-440D-86F7-9B56F1F6F9BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LendingLibrary.Client", "LibraryCheckout.Client\LendingLibrary.Client.csproj", "{0BF613AC-D9DA-440D-86F7-9B56F1F6F9BE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1AA4180A-6250-480E-8148-705461F6F974} = {1AA4180A-6250-480E-8148-705461F6F974}
 	EndProjectSection

@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="LibraryCheckout.WebAppMVC.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="LendingLibrary.WebAppMVC.MvcApplication" Language="C#" %>

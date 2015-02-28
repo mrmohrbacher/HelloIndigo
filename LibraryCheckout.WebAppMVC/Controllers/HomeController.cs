@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using LibraryCheckout.WebAppMVC.ViewModels;
+using LendingLibrary.WebAppMVC.ViewModels;
 
-namespace LibraryCheckout.WebAppMVC.Controllers
+namespace LendingLibrary.WebAppMVC.Controllers
 {
     public class HomeController : Controller
     {

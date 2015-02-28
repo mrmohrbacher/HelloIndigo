@@ -36,7 +36,7 @@ namespace Client
 
       public void Run()
          {
-			using (var proxy = new LibraryCheckout.Client.EchoService.EchoServiceClient(endPointName))
+			using (var proxy = new LendingLibrary.Client.EchoService.EchoServiceClient(endPointName))
             {
             string result = "";
 
