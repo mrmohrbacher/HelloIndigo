@@ -12,8 +12,9 @@ namespace LibraryCheckout.WebAppMVC
 		public static void Load()
 			{
 			IDataStoreProvider provider = ConfigProviderBase.Open();
+#if _AZURE
 			provider = new CloudSettingsProvider(provider);
-
+#endif
 			GlobalCache.LoadConfigurationSettings(provider, false);
 			}
 		}

@@ -119,7 +119,8 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 								{
 								code = 200,
 								message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - A confirmation email has been sent.",
-													checkedout)
+													checkedout),
+								ISBN = Checkout.ISBN
 								};						
 						}
 					else
@@ -128,7 +129,8 @@ namespace LibraryCheckout.WebAppMVC.Controllers
 							{
 							code = 409,
 							message = string.Format("{0: MM/dd/yyyy HH:mm:ss} - As of this date, your selection was already checked out.",
-												checkedout)
+												checkedout),
+							ISBN = ""
 							};
 						Response.StatusCode = 409;
 						}

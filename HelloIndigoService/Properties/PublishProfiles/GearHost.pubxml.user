@@ -6,6 +6,72 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAE0y43sqk8EWjXDgH95V8mwAAAAACAAAAAAAQZgAAAAEAACAAAACcJDhV0wS8nI/bVUp2pu2aykoVBTZDFJ1Hspb0a4cAIgAAAAAOgAAAAAIAACAAAADwu6LQ5wKkqQdsAgTGd9+8fwnpO88R7Uvi8fvo/zG0nzAAAAAxNYX51C+pTTO/fOPkDM3I7q8L+YH1AFGBBdpOeB4aGFkJ4MHIhQ8M2+4rOQb6fZxAAAAAjZdMupWDNMqbqGcN/aHL9uONXE5VbdcuS7sOo1WE6S41a9Cm8iY00e7OBsQ99ILdg5/Vp8v+2oGJuNT20VpMDg==</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAE0y43sqk8EWjXDgH95V8mwAAAAACAAAAAAAQZgAAAAEAACAAAACzGiebU2E5JJOkaHmDOcU0UR15gB6tGHcL/MxVCjRSNQAAAAAOgAAAAAIAACAAAACbUJmchc02QcbwOcVAfcHKLWbDFdpqAgQy6RLqjgChhzAAAABk/LsqN6zm8wgJHNm/f4zXwdD524C5H1b+pp4kScCgDVxGZ1BWviisW0XHO0kfOCFAAAAAPuV9CfyT0zHrf7BpoMs/vwz41hPY4RMLKVflLRfu77ExDblx8ZIIYYcnDRrbuh8O9L05Fo+wSuMZuL1xNi8kDg==</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.v3.cloudsites.gearhost.com/blackriverinc.com/webroot/HelloIndigoService</_PublishTargetUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/AppData/Books.xml">
+      <publishTime>02/21/2015 14:14:42</publishTime>
+    </File>
+    <File Include="bin/database.config">
+      <publishTime>02/19/2015 07:41:15</publishTime>
+    </File>
+    <File Include="bin/DataStore.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/DataStore.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>02/19/2015 06:46:25</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>02/19/2015 06:46:25</publishTime>
+    </File>
+    <File Include="bin/HelloIndigoService.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/HelloIndigoService.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Library.Model.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Library.Model.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Configuration.dll">
+      <publishTime>10/29/2012 14:18:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Diagnostics.dll">
+      <publishTime>03/20/2014 21:42:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll">
+      <publishTime>03/20/2014 21:42:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.StorageClient.dll">
+      <publishTime>10/29/2012 14:18:47</publishTime>
+    </File>
+    <File Include="bin/Utility.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Utility.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="EchoService.svc">
+      <publishTime>03/02/2012 13:42:21</publishTime>
+    </File>
+    <File Include="LibraryService.svc">
+      <publishTime>03/01/2012 13:11:05</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/19/2015 06:46:25</publishTime>
+    </File>
+    <File Include="Subscriber.svc">
+      <publishTime>02/23/2015 12:59:29</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/27/2015 18:17:47</publishTime>
+    </File>
+  </ItemGroup>
 </Project>

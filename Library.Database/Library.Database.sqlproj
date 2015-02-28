@@ -67,6 +67,7 @@
   <ItemGroup>
     <None Include="Library.Database.Local.publish.xml" />
     <None Include="Azure.Library.Database.publish.xml" />
+    <None Include="Library.Database.GearHost.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Library.Database.refactorlog" />

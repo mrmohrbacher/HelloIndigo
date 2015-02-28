@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAE0y43sqk8EWjXDgH95V8mwAAAAACAAAAAAAQZgAAAAEAACAAAABRrmAUsP+FBB8ihTQ+xV9sK8QVcTQVKHtVVzVYdWWyfAAAAAAOgAAAAAIAACAAAACAmq7K8yZEkaAUzoyO/lib16duy2TK4bLgdyXdevHnpjAAAAAkm2u+DI8wTNzJy9lFPBUwNl1bQrmEsi4sCv/5EkVUN2KjeHtwGqizmlWDfrf1cPpAAAAAoHkyBo1MaIR+fta6bpSLJ20rfZBgMTAXNnwUxRHOqNy0XgkeZFC6ztgX/zzD38qgOrzPJ3idoIBdJ6m4g8RDqw==</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.v3.cloudsites.gearhost.com/blackriverinc.com/webroot/LibraryCheckout</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/AppData/Books.xml">
+      <publishTime>02/24/2015 15:01:04</publishTime>
+    </File>
+    <File Include="bin/DataStore.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/DataStore.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/DataView.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/DataView.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/EmailClient.dll">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/EmailClient.pdb">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>02/19/2015 06:46:25</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>02/19/2015 06:46:25</publishTime>
+    </File>
+    <File Include="bin/Library.Model.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Library.Model.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/LibraryCheckout.Client.exe">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/LibraryCheckout.Client.pdb">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/LibraryCheckout.WebAppMVC.dll">
+      <publishTime>02/27/2015 13:05:36</publishTime>
+    </File>
+    <File Include="bin/LibraryCheckout.WebAppMVC.pdb">
+      <publishTime>02/27/2015 13:05:36</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>02/18/2015 09:16:19</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/18/2015 09:16:18</publishTime>
+    </File>
+    <File Include="bin/ScheduledJobBase.dll">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/ScheduledJobBase.pdb">
+      <publishTime>02/27/2015 10:45:01</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>02/18/2015 09:16:19</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>02/18/2015 09:16:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>02/18/2015 09:16:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/18/2015 09:16:19</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/18/2015 09:11:04</publishTime>
+    </File>
+    <File Include="bin/Utility.dll">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="bin/Utility.pdb">
+      <publishTime>02/27/2015 10:45:00</publishTime>
+    </File>
+    <File Include="CheckoutBook.ashx">
+      <publishTime>02/21/2015 16:32:38</publishTime>
+    </File>
+    <File Include="database.config">
+      <publishTime>02/19/2015 07:41:15</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/18/2015 09:16:18</publishTime>
+    </File>
+    <File Include="Hello.html">
+      <publishTime>02/27/2015 12:53:56</publishTime>
+    </File>
+    <File Include="Images/0-321-41097-1.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/0-596-00525-3.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/0-596-00712-4.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/0-7356-1930-1.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/1-56592-492-4.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/978-0-596-52687-0.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/978-1-4165-7176-6.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/978-1-4302-2549-2.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/beveled tile.xcf">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/body-bg.gif">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/button-slice.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/button.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/gray-screen.png">
+      <publishTime>02/21/2015 18:26:27</publishTime>
+    </File>
+    <File Include="Images/nav-left.gif">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/nav-left.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/nav-rght-cur.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/nav-rght.gif">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/nav-rght.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/tab-left.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="Images/tab-rght.jpg">
+      <publishTime>02/18/2015 09:18:40</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/27/2015 12:40:22</publishTime>
+    </File>
+    <File Include="Properties/DataSources/Library.Model.Book.datasource">
+      <publishTime>02/19/2015 17:49:06</publishTime>
+    </File>
+    <File Include="Properties/DataSources/Library.Model.Subscriber.datasource">
+      <publishTime>02/23/2015 14:09:23</publishTime>
+    </File>
+    <File Include="Scripts/BookSelection.js">
+      <publishTime>02/24/2015 11:41:20</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.7.1.js">
+      <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.8.18.custom.min.js">
+      <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Styles/Buttons.css">
+      <publishTime>02/24/2015 09:44:20</publishTime>
+    </File>
+    <File Include="Styles/jquery-ui-1.8.18.custom.css">
+      <publishTime>02/18/2015 09:18:53</publishTime>
+    </File>
+    <File Include="Styles/Site.css">
+      <publishTime>02/25/2015 16:28:57</publishTime>
+    </File>
+    <File Include="Styles/Tabs.css">
+      <publishTime>02/18/2015 09:18:53</publishTime>
+    </File>
+    <File Include="Views/Home/Hello.cshtml">
+      <publishTime>02/27/2015 12:57:16</publishTime>
+    </File>
+    <File Include="Views/Home/Login.cshtml">
+      <publishTime>02/26/2015 11:50:28</publishTime>
+    </File>
+    <File Include="Views/Library/CheckoutEmailTemplate.cshtml">
+      <publishTime>02/21/2015 16:32:35</publishTime>
+    </File>
+    <File Include="Views/Library/Index.cshtml">
+      <publishTime>02/25/2015 16:23:21</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>02/27/2015 12:34:58</publishTime>
+    </File>
+    <File Include="Views/Shared/_BasePage.cshtml">
+      <publishTime>02/18/2015 11:40:27</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>02/26/2015 11:49:22</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/27/2015 13:35:34</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

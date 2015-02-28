@@ -1,0 +1,32 @@
+﻿@Model ErrorModel
+@using System.Diagnostics
+@using BookSelection.WebApp
+@using LibraryCheckout.WebAppMVC.ViewModels
+@using Blackriverinc.Framework.DataStore
+@model ErrorModel
+@{  
+    Layout = "~/Views/Shared/_BasePage.cshtml";
+    Page.Title = "Black River Systems, Inc. - Lending Library";
+}
+<div id="oe-error">
+    <form action="@(Model.OriginalRequestUrl??"~/")">
+    <fieldset>
+        <legend>O-o-o-p-s!</legend>
+        <p class="oe-para">
+            <em>Something</em> has gone horribly wrong at our end! We most humbly apologise.</p>
+        <p class="oe-para">@Model.ErrorMessage</p>
+        @if (!string.IsNullOrEmpty(@Model.OriginalRequestUrl))
+            {
+            <p class="oe-para">@Model.OriginalRequestUrl</p>
+            }
+        @if (@Model.ShowStack)
+            {
+            <p class="oe-para">@Html.Raw(@Model.ErrorStack.Replace("\r\n", "<br/>\r\n"))</p>
+            }
+        <p class="oe-para">
+            You can try pressing the 'Sorry' button and hope for the best.
+        </p>
+        <input type="submit" value="Sorry!" />
+    </fieldset>
+    </form>
+</div>

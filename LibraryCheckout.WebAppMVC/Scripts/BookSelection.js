@@ -119,6 +119,10 @@ $(document).ready(function () {
         if (response.status == 200) {
             $('#email-confirmation').text(data.message);
             $('#email-review').show();
+            var $selection = $('#book-selection li#item-' + data.ISBN + '');
+            $selection.attr('xcheckedout', true);
+            $('p input', $selection).prop('disabled', true);
+            $('p input', $selection).prop('checked', false);
         }
         else {
             checkoutFail(data, Response);
@@ -251,7 +255,7 @@ $(document).ready(function () {
         console.log(src.target);
 
         var email = $(src.target).val();
-        var url = '/Subscriber/Read?email=' + email;
+        var url = 'LibraryCheckout/Subscriber/Read?email=' + email;
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
@@ -277,7 +281,7 @@ $(document).ready(function () {
         
         $(src.target).prop('disabled', true);
         var formData = $('#order-entry').serialize();
-        var postUrl = 'Library/Checkout';
+        var postUrl = 'LibraryCheckout/Library/Checkout';
         //var postUrl = 'CheckoutBook.ashx';
         $.post(postUrl, formData)
             .done(function () {
