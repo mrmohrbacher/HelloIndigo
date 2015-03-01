@@ -72,7 +72,7 @@ $(document).ready(function () {
     // Bind the property values of 'obj' to the matching <input>
     // elements.
     //-----------------------------------------------------------------
-    var bindData = function (obj) {
+    var bindSubscriberData = function (obj) {
         for (var prop in obj) {
             if (prop === undefined)
                 continue;
@@ -85,6 +85,14 @@ $(document).ready(function () {
                 $fld.val(val.trim());
             }
         }
+    }
+
+    var bindBooks = function (books) {
+        if ($.isArray(books)) {
+            for (var i = 0; i < books.lenght; i++) {
+                console.log(books[i]);
+            }
+        }        
     }
 
     var clearFields = function (fieldList) {
@@ -128,6 +136,17 @@ $(document).ready(function () {
             checkoutFail(data, Response);
         }
         
+    }
+
+    var getBooks = function () {
+        var url = "Library/Books";
+        $.get(url)
+            .done(function (books) {
+                bindBooks(books);
+            })
+            .fail(function (data) {
+                console.log(data);
+            });
     }
 
     // Hide all panels
@@ -234,7 +253,7 @@ $(document).ready(function () {
 
         window.console && console.log('- confirmation -');
     });
-
+    
     // -------------------------------------------------------
     // Stash the Book ISBN choice into a hidden field.
     // -------------------------------------------------------
@@ -259,7 +278,7 @@ $(document).ready(function () {
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
-                bindData(data);
+                bindSubscriberData(data);
             })
             .fail(function (data) {
                 if (data.status == 404) {
@@ -311,6 +330,7 @@ $(document).ready(function () {
     else
         showPanel($('#current-tab').val());
 
+    window.setTimeout(function () { getBooks(); }, 0);
 
     window.console && console.log('- document.ready -');
 
