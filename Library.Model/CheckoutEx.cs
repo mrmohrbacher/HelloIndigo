@@ -6,6 +6,7 @@ namespace Library.Model
 	[MetadataTypeAttribute(typeof(CheckoutValidationModel))]
 	public partial class Checkout
 		{
+		public string Title { get; set; }
 		}
 
 	public class CheckoutValidationModel

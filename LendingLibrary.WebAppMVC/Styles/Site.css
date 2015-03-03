@@ -239,7 +239,7 @@ fieldset {
         color: Gray;
     }
 
-.oe-panel ul#book-list {
+.oe-panel #book-list ul {
     list-style: none
 }
     

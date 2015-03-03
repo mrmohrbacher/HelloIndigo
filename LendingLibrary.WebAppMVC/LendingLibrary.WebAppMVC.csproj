@@ -183,7 +183,6 @@
     </Content>
     <Content Include="Views\Library\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_BasePage.cshtml" />
     <Content Include="CheckoutBook.ashx" />
     <Content Include="Views\Library\CheckoutEmailTemplate.cshtml" />
   </ItemGroup>
@@ -228,6 +227,8 @@
     <Content Include="Hello.html" />
     <None Include="Properties\PublishProfiles\Gear Host.pubxml" />
     <Content Include="Views\Home\Hello.cshtml" />
+    <Content Include="Views\Library\BookList.cshtml" />
+    <Content Include="Views\Shared\_PageBase.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -243,13 +244,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>53268</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:53205/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
+          <UseCustomServer>True</UseCustomServer>
           <CustomServerUrl>http://localhost:8000/LendingLibrary</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>

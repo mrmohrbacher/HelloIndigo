@@ -57,8 +57,37 @@ namespace LendingLibrary.WebAppMVC.Controllers
 			return File(new System.Text.UTF8Encoding().GetBytes(content.ToString()), "text/csv", "Library.csv");
 			}
 
-		//
-		// GET: /Library/
+
+		[HttpGet]
+		public ActionResult BookList()
+			{
+			Book[] books = null;
+			try
+				{
+				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
+				if (endpointName == null)
+					{
+					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
+					}
+				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
+
+				// ---------------------------------------------------------
+				// 
+				// ---------------------------------------------------------
+				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
+					{
+					proxy.List(null, out books);
+					}
+
+				}
+			catch (Exception exp)
+				{
+				Request.PostError(exp, false);
+				}
+
+			return PartialView(new List<Book>(books));
+			}
+
 		[HttpGet]
 		public ActionResult Index()
 			{
@@ -87,36 +116,6 @@ namespace LendingLibrary.WebAppMVC.Controllers
 				}
 
 			return View(new List<Book>(books));
-			}
-
-		[HttpGet]
-		public ActionResult Books()
-			{
-			Book[] books = null;
-			try
-				{
-				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
-				if (endpointName == null)
-					{
-					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
-					}
-				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
-
-				// ---------------------------------------------------------
-				// 
-				// ---------------------------------------------------------
-				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
-					{
-					proxy.List(null, out books);
-					}
-
-				}
-			catch (Exception exp)
-				{
-				Request.PostError(exp, false);
-				}
-
-			return Json(new List<Book>(books), JsonRequestBehavior.AllowGet);
 			}
 
 		[HttpPost]

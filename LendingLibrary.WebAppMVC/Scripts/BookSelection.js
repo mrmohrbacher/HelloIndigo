@@ -68,6 +68,8 @@ $(document).ready(function () {
 
     window.console && console.log('+ document.ready +');
 
+    var baseUrl = window.location.pathname.split('/')[1];
+
     //-----------------------------------------------------------------
     // Bind the property values of 'obj' to the matching <input>
     // elements.
@@ -85,14 +87,6 @@ $(document).ready(function () {
                 $fld.val(val.trim());
             }
         }
-    }
-
-    var bindBooks = function (books) {
-        if ($.isArray(books)) {
-            for (var i = 0; i < books.lenght; i++) {
-                console.log(books[i]);
-            }
-        }        
     }
 
     var clearFields = function (fieldList) {
@@ -127,10 +121,7 @@ $(document).ready(function () {
         if (response.status == 200) {
             $('#email-confirmation').text(data.message);
             $('#email-review').show();
-            var $selection = $('#book-selection li#item-' + data.ISBN + '');
-            $selection.attr('xcheckedout', true);
-            $('p input', $selection).prop('disabled', true);
-            $('p input', $selection).prop('checked', false);
+            setTimeout(getBooks, 0);
         }
         else {
             checkoutFail(data, Response);
@@ -139,14 +130,21 @@ $(document).ready(function () {
     }
 
     var getBooks = function () {
-        var url = "Library/Books";
+        var url = baseUrl + "/Library/BookList";
         $.get(url)
             .done(function (books) {
-                bindBooks(books);
+                renderBooks(books);
             })
             .fail(function (data) {
-                console.log(data);
+                renderBooks('<b class="error message">Failed to retrieve Books from the Libary database.</b>');
             });
+    }
+
+    var renderBooks = function (bookList) {
+        var $bookList = $('#book-list');
+        if ($bookList.length > 0) {
+            $bookList.html(bookList);
+        }
     }
 
     // Hide all panels
@@ -257,7 +255,7 @@ $(document).ready(function () {
     // -------------------------------------------------------
     // Stash the Book ISBN choice into a hidden field.
     // -------------------------------------------------------
-    $('#book-selection :radio[name=ChoiceBook]').click(function () {
+    $('#book-selection').on('click', ':radio[name=ChoiceBook]', function () {
         var $this = $(this);
 
         var choice = $this.attr('id').slice('choice-book-'.length);
@@ -270,11 +268,14 @@ $(document).ready(function () {
         $('#confirmation .submit').prop('disabled', false);
     });
 
+    // -------------------------------------------------------
+    // Fetch the existing Subscriber data.
+    // -------------------------------------------------------
     $('#email.oe-text', '#information').change(function (src) {
         console.log(src.target);
 
         var email = $(src.target).val();
-        var url = 'LendingLibrary/Subscriber/Read?email=' + email;
+        var url = baseUrl + '/Subscriber/Read?email=' + email;
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
@@ -292,6 +293,9 @@ $(document).ready(function () {
             });
     });
 
+    // -------------------------------------------------------
+    // Submit Checkout transaction.
+    // -------------------------------------------------------
     $('.submit', '#confirmation').click(function (src) {
         src.preventDefault();
         if ($(src.target).prop('disabled')) {
@@ -300,8 +304,7 @@ $(document).ready(function () {
         
         $(src.target).prop('disabled', true);
         var formData = $('#order-entry').serialize();
-        var postUrl = 'LendingLibrary/Library/Checkout';
-        //var postUrl = 'CheckoutBook.ashx';
+        var postUrl = baseUrl + '/Library/Checkout';
         $.post(postUrl, formData)
             .done(function () {
                 checkoutOk(arguments[0], arguments[2]);
@@ -313,23 +316,31 @@ $(document).ready(function () {
     });
 
     $('.oe-panel .export').click(function () {
-        $.get('/Library/Export');
+        $.get(baseUrl + '/Library/Export');
     });
 
+    // -------------------------------------------------------
     // Program the State Entry AutoComplete
+    // -------------------------------------------------------
     $("#state").autocomplete({ source: states });
 
-    // Attach jquery.validator to order-entry form
+    // -------------------------------------------------------
+    // Attach jquery.validator to Checkout form.
+    // -------------------------------------------------------
     validator = $('#order-entry').validate();
 
     //--------------------------------------------------------
     // Activate the 1st navigation tab.
+    // -------------------------------------------------------
     if ($('#current-tab').val() == null
      || $('#current-tab').val().length == 0)
         showPanel('#welcome');
     else
         showPanel($('#current-tab').val());
 
+    // -------------------------------------------------------
+    // Queue the Book Selection fetch.
+    // -------------------------------------------------------
     window.setTimeout(function () { getBooks(); }, 0);
 
     window.console && console.log('- document.ready -');

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Library.Model.Book>
+<ul>
+@foreach (var book in @Model)
+    {
+    <li class='oe-modelitem' id='item-@book.ISBN' @(book.CheckedOut != null ? "xcheckedout=true" : "")>
+        <p>
+            <img src="~/images/@(book.ISBN).jpg" alt="@book.ISBN" />
+        </p>
+        <p id="title-@book.ISBN">
+            @book.Title
+        </p>
+        <p class="oe-choice">
+            <input type="radio" id="choice-book-@book.ISBN" name="ChoiceBook" @((@book.CheckedOut != null) ? "disabled" : "") />
+            ISBN: @book.ISBN
+        </p>
+    </li>
+    }
+</ul>
+

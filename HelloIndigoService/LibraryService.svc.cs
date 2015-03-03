@@ -144,9 +144,12 @@ namespace HelloIndigo
 
 						Checkout checkout = context.Checkouts
 															.Where(bc => bc.DateIn == null
-                                                       && bc.ISBN == book.ISBN)
+																		 && bc.ISBN == book.ISBN)															
 															.FirstOrDefault();
-						book.CheckedOut = (checkout != null ? checkout.DateOut : (DateTime?)null);
+						if (checkout != null)
+							{
+							book.CheckedOut = checkout.DateOut;
+							}
 						results.Add(book);
 						}
 					books = results.ToArray();
@@ -262,6 +265,7 @@ namespace HelloIndigo
 					//-------------------------------------------------------------
 					checkedout = DateTime.UtcNow;
 					checkout.DateOut = checkedout.Value;
+					checkout.Title = book.Title;
 					context.Checkouts.Add(checkout);
 
 					result = (context.SaveChanges() > 0);
