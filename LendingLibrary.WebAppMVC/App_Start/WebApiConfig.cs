@@ -11,8 +11,8 @@ namespace LendingLibrary.WebAppMVC
 			{
 			config.Routes.MapHttpRoute(
 				 name: "SubscriberApi",
-				 routeTemplate: "api/Subscriber/{email}",
-				 defaults: new { controller = "Subscriber" }
+				 routeTemplate: "api/Subscribers/{email}",
+				 defaults: new { controller = "Subscribers" }
 
 			);
 

@@ -9,7 +9,7 @@ using Library.Model;
 
 namespace LendingLibrary.WebAppMVC.Controllers
 	{
-	public class SubscriberController : ApiController
+	public class SubscribersController : ApiController
 		{
 		public Subscriber Get(string email)
 			{

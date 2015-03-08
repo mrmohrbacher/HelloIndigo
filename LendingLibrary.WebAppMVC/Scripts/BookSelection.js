@@ -130,7 +130,7 @@ $(document).ready(function () {
     }
 
     var getBooks = function () {
-        var url = baseUrl + "/Library/BookList";
+        var url = baseUrl + "/Library/Books";
         $.get(url)
             .done(function (books) {
                 renderBooks(books);
@@ -279,8 +279,7 @@ $(document).ready(function () {
         // in the last node, IIS will assume we are trying to serve up a static
         // resource of some kind. Putting the trailing slash forces the email
         // address to appear in the path part of the URL.
-        // AMENDMENT: Created URL Rewrite rul to automagically add the trailing "/".
-        var url = baseUrl + '/api/Subscriber/' + email;
+        var url = baseUrl + '/api/Subscribers/' + email + '/';
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);

@@ -122,7 +122,7 @@
     <Compile Include="App_Start\GlobalCacheConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibraryController.cs" />
-    <Compile Include="Controllers\SubscriberController.cs" />
+    <Compile Include="Controllers\SubscribersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,7 +229,7 @@
     <Content Include="Hello.html" />
     <None Include="Properties\PublishProfiles\Gear Host.pubxml" />
     <Content Include="Views\Home\Hello.cshtml" />
-    <Content Include="Views\Library\BookList.cshtml" />
+    <Content Include="Views\Library\Books.cshtml" />
     <Content Include="Views\Shared\_PageBase.cshtml" />
   </ItemGroup>
   <PropertyGroup>

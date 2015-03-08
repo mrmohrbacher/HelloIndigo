@@ -59,7 +59,7 @@ namespace LendingLibrary.WebAppMVC.Controllers
 
 
 		[HttpGet]
-		public ActionResult BookList()
+		public ActionResult Books()
 			{
 			Book[] books = null;
 			try
