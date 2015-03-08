@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Web.Http;
 
 using Blackriverinc.Framework.DataStore;
-using Blackriverinc.Framework.Utility;
-
 using LendingLibrary.Client.SubscriberService;
 using Library.Model;
 
 namespace LendingLibrary.WebAppMVC.Controllers
 	{
-	public class SubscriberController : Controller
+	public class SubscriberController : ApiController
 		{
-		[HttpGet]
-		public ActionResult Read(string email)
+		public Subscriber Get(string email)
 			{
 			string endpointName = GlobalCache.GetResolvedString("SubscriberServiceEndpoint");
 			if (endpointName == null)
@@ -31,14 +26,11 @@ namespace LendingLibrary.WebAppMVC.Controllers
 			// ---------------------------------------------------------
 			using (SubscriberClient proxy = new SubscriberClient(endpointName))
 				{
-				if (proxy.Read(email, out subscriber))
-					{
-					return Json(subscriber, JsonRequestBehavior.AllowGet);
-					}
+				if (!proxy.Read(email, out subscriber))
+					throw new HttpResponseException(HttpStatusCode.NotFound);
 				}
 
-			Response.StatusCode = 404;
-			return Content(string.Format("Email {0} Not Found", email));
+			return subscriber;
 			}
 		}
 	}

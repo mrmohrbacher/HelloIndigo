@@ -7,6 +7,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+using Newtonsoft.Json.Serialization;
+
 namespace LendingLibrary.WebAppMVC
 	{
 	// Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -21,6 +23,13 @@ namespace LendingLibrary.WebAppMVC
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+			// Include this to supress <name>k_BackingField JSON property names.
+			var serializerSettings =
+			  GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
+			var contractResolver =
+			  (DefaultContractResolver)serializerSettings.ContractResolver;
+			contractResolver.IgnoreSerializableAttribute = true; 
+
 			GlobalCacheConfig.Load();
 			}
 
@@ -31,13 +40,8 @@ namespace LendingLibrary.WebAppMVC
 				{
 				if (rte.GetRouteData(ctx) != null)
 					{
-					if (rte.RouteHandler.GetType().Name == "MvcRouteHandler")
-						Trace.WriteLine(string.Format("Following: {1} for request: {0}", 
+					Trace.WriteLine(string.Format("Route: {1} for request: {0}", 
 															Context.Request.Url, rte.Url));
-					else
-						//{System.Web.Routing.StopRoutingHandler}
-						Trace.WriteLine(string.Format("Ignore: {1} for request: {0}",
-														Context.Request.Url, rte.Url));
 					break;
 					}
 

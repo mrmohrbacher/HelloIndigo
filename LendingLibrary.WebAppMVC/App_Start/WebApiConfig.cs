@@ -10,9 +10,17 @@ namespace LendingLibrary.WebAppMVC
 		public static void Register(HttpConfiguration config)
 			{
 			config.Routes.MapHttpRoute(
+				 name: "SubscriberApi",
+				 routeTemplate: "api/Subscriber/{email}",
+				 defaults: new { controller = "Subscriber" }
+
+			);
+
+			config.Routes.MapHttpRoute(
 				 name: "DefaultApi",
-				 routeTemplate: "api/{controller}/{id}",
-				 defaults: new { id = RouteParameter.Optional }
+				 routeTemplate: "api/{controller}/{email}",
+				 defaults: new { email = RouteParameter.Optional }
+
 			);
 			}
 		}

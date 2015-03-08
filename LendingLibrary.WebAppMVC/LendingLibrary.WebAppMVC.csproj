@@ -170,7 +170,9 @@
     <Content Include="Styles\jquery-ui-1.8.18.custom.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\Tabs.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

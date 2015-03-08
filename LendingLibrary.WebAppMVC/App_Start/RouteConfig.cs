@@ -25,13 +25,6 @@ namespace LendingLibrary.WebAppMVC
 				defaults: new { controller = "Home", action = "Login", id = UrlParameter.Optional }
 			 );
 
-
-			routes.MapRoute(
-				name: "SubscriberRoutes",
-				url: "Subscriber/{action}/{id}",
-			   defaults: new { controller = "Subscriber", action = "Index", id = UrlParameter.Optional }
-			 );
-
 			routes.MapRoute(
 				 name: "Default",
 				 url: "{controller}/{action}/{id}",

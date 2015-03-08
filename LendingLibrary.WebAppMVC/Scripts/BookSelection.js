@@ -275,7 +275,11 @@ $(document).ready(function () {
         console.log(src.target);
 
         var email = $(src.target).val();
-        var url = baseUrl + '/Subscriber/Read?email=' + email;
+        // Because an email address probably contains a '.', if we leave it
+        // in the last node, IIS will assume we are trying to serve up a static
+        // resource of some kind. Putting the trailing slash forces the email
+        // address to appear in the path part of the URL.
+        var url = baseUrl + '/api/Subscriber/' + email + '/';
         $.get(url)
             .done(function (data) {
                 clearFields(['Name', 'Address', 'City', 'State', 'PostalCode']);
