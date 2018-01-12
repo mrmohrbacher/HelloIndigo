@@ -6,12 +6,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAE0y43sqk8EWjXDgH95V8mwAAAAACAAAAAAAQZgAAAAEAACAAAACzGiebU2E5JJOkaHmDOcU0UR15gB6tGHcL/MxVCjRSNQAAAAAOgAAAAAIAACAAAACbUJmchc02QcbwOcVAfcHKLWbDFdpqAgQy6RLqjgChhzAAAABk/LsqN6zm8wgJHNm/f4zXwdD524C5H1b+pp4kScCgDVxGZ1BWviisW0XHO0kfOCFAAAAAPuV9CfyT0zHrf7BpoMs/vwz41hPY4RMLKVflLRfu77ExDblx8ZIIYYcnDRrbuh8O9L05Fo+wSuMZuL1xNi8kDg==</EncryptedPassword>
-    <_PublishTargetUrl>ftp://ftp.v3.cloudsites.gearhost.com/blackriverinc.com/webroot/HelloIndigoService</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAo7qLgKfIcEuV7DrWuM5zMAAAAAACAAAAAAAQZgAAAAEAACAAAABkXc8UuxGI0wA9emQCm1FWCk1UeaBBzFioKFzfaOAVxwAAAAAOgAAAAAIAACAAAADBRmd0FqO7XNMmTNxsh4+AxWcUhl6eafSj8Ex9umItjYAAAABMWJjJiwDpgr2Ry2RWr5Mik6ZtNmTwvC8T4PaPe3/6JiAhLtEmnAn1buqMwBOez/QhS4COqejN80Yh0P5C3g8Zwvk21Hyq/lRYpC2TnixFVsdOm0W1zOX8ZX+UKyb3PkyN8tfh2VRXqvysmPZng/Mjaux/7+8N9UpuwYT8n/HpAEAAAABcXqzPZu6qS7HiYAiS29oehD/rmsP+XjeqvOkizLWYZRKmsHSENqf1GUdK4QxtsEhhMrrOjkF3La4WNhMUzaeh</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.gear.host/blackriverinc.com/services/HelloIndigo</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AppData/Books.xml">
       <publishTime>02/21/2015 14:14:42</publishTime>
+    </File>
+    <File Include="bin/Blackriverinc.Framework.DataStore.dll">
+      <publishTime>09/14/2017 17:08:04</publishTime>
+    </File>
+    <File Include="bin/Blackriverinc.Framework.Utility.dll">
+      <publishTime>09/08/2017 20:32:32</publishTime>
     </File>
     <File Include="bin/database.config">
       <publishTime>02/19/2015 07:41:15</publishTime>
@@ -29,16 +35,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2015 06:46:25</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.dll">
-      <publishTime>02/28/2015 12:08:42</publishTime>
+      <publishTime>01/12/2018 09:19:07</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.pdb">
-      <publishTime>02/28/2015 12:08:42</publishTime>
+      <publishTime>01/12/2018 09:19:07</publishTime>
     </File>
     <File Include="bin/Library.Model.dll">
-      <publishTime>02/28/2015 12:08:42</publishTime>
+      <publishTime>01/12/2018 09:05:12</publishTime>
+    </File>
+    <File Include="bin/Library.Model.dll.config">
+      <publishTime>02/19/2015 11:04:55</publishTime>
     </File>
     <File Include="bin/Library.Model.pdb">
-      <publishTime>02/28/2015 12:08:42</publishTime>
+      <publishTime>01/12/2018 09:05:12</publishTime>
     </File>
     <File Include="bin/Microsoft.WindowsAzure.Configuration.dll">
       <publishTime>10/29/2012 14:18:47</publishTime>
@@ -58,6 +67,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Utility.pdb">
       <publishTime>02/28/2015 12:08:41</publishTime>
     </File>
+    <File Include="bin/WindowsAzureEventSource.dll">
+      <publishTime>03/20/2014 21:42:34</publishTime>
+    </File>
+    <File Include="bin/WindowsAzureTelemetryEvents.dll">
+      <publishTime>03/20/2014 21:42:34</publishTime>
+    </File>
     <File Include="EchoService.svc">
       <publishTime>03/02/2012 13:42:21</publishTime>
     </File>
@@ -65,13 +80,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/01/2012 13:11:05</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/19/2015 06:46:25</publishTime>
+      <publishTime>09/15/2017 13:59:57</publishTime>
     </File>
     <File Include="Subscriber.svc">
       <publishTime>02/23/2015 12:59:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/28/2015 12:36:37</publishTime>
+      <publishTime>01/12/2018 09:19:09</publishTime>
     </File>
   </ItemGroup>
 </Project>

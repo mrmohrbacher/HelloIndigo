@@ -1,4 +1,4 @@
-﻿using Blackriverinc.EmailClient;
+﻿using Blackriverinc.Framework.EmailClient;
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 using BookSelection.WebApp;
@@ -57,7 +57,6 @@ namespace LendingLibrary.WebAppMVC.Controllers
 			return File(new System.Text.UTF8Encoding().GetBytes(content.ToString()), "text/csv", "Library.csv");
 			}
 
-
 		[HttpGet]
 		public ActionResult Books()
 			{
@@ -94,20 +93,6 @@ namespace LendingLibrary.WebAppMVC.Controllers
 			Book[] books = null;
 			try
 				{
-				string endpointName = GlobalCache.GetResolvedString("LibraryServiceEndpoint");
-				if (endpointName == null)
-					{
-					throw new ApplicationException("Could not find 'LibraryServiceEndpoint' in configuration settings.");
-					}
-				Debug.WriteLine(string.Format("LibraryServiceEndpoint='{0}'", endpointName));
-
-				// ---------------------------------------------------------
-				// 
-				// ---------------------------------------------------------
-				using (LibraryServiceClient proxy = new LibraryServiceClient(endpointName))
-					{
-					proxy.List(null, out books);
-					}
 
 				}
 			catch (Exception exp)
@@ -115,7 +100,7 @@ namespace LendingLibrary.WebAppMVC.Controllers
 				Request.PostError(exp, false);
 				}
 
-			return View(new List<Book>(books));
+			return View("");
 			}
 
 		[HttpPost]

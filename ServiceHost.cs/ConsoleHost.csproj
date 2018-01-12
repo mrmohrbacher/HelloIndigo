@@ -53,6 +53,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blackriverinc.Framework.DataStore, Version=1.0.6466.30533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataStore.1.0.6466.30533\lib\net40\Blackriverinc.Framework.DataStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.Utility, Version=1.0.6460.36909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.Utility.1.0.6460.36909\lib\net40\Blackriverinc.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.dll</HintPath>
@@ -96,14 +102,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
-      <Project>{ddd1d805-d47e-4c26-ac60-4efaf74aea4c}</Project>
-      <Name>DataStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
-      <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HelloIndigoService\HelloIndigoService.csproj">
       <Project>{1AA4180A-6250-480E-8148-705461F6F974}</Project>
       <Name>HelloIndigoService</Name>

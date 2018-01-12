@@ -12,32 +12,32 @@ using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 
 namespace HelloIndigo
-   {
-   [ServiceBehavior(IncludeExceptionDetailInFaults = true, 
-						  Name = "HelloIndigo.EchoService",
-						  InstanceContextMode = InstanceContextMode.PerSession)]
-   public class EchoService : IEchoService, IDisposable
-      {
-      static AppTraceListener tracer = null;
-      static int instanceCount = 0;
-		bool disposed = false;
+{
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true,
+                           Name = "HelloIndigo.EchoService",
+                           InstanceContextMode = InstanceContextMode.PerSession)]
+    public class EchoService : IEchoService, IDisposable
+    {
+        static AppTraceListener tracer = null;
+        static int instanceCount = 0;
+        bool disposed = false;
 
-      int instanceID = -1;
-		static IKeyedDataStore iconfig = null;
+        int instanceID = -1;
+        static IKeyedDataStore iconfig = null;
 
-		static string _logPath = null;
+        static string _logPath = null;
 
-      static EchoService()
-         {
-			initializeTracer();				
-			}
+        static EchoService()
+        {
+            initializeTracer();
+        }
 
-		private static void initializeTracer()
-			{
-			IDataStoreProvider provider = ConfigProviderBase.Open();
-			iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
+        private static void initializeTracer()
+        {
+            IDataStoreProvider provider = ConfigProviderBase.Open();
+            iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
 
-			_logPath = (iconfig["LogPath"] as string)?? @"C:\Logs\HelloIndigo";
+            _logPath = (iconfig["LogPath"] as string) ?? @"C:\Logs\HelloIndigo";
 #if _AZURE
 			// Running in the Cloud; look for the local drive
 			if (!Path.IsPathRooted(_logPath)
@@ -48,27 +48,27 @@ namespace HelloIndigo
 				_logPath = Path.Combine(localResource.RootPath, _logPath);
 				}
 #endif
-			tracer = new AppTraceListener(_logPath);
-			}
+            tracer = new AppTraceListener(_logPath);
+        }
 
-      public EchoService()
-         {
-         instanceID = Interlocked.Add(ref instanceCount, 1);
-         Trace.WriteLine(string.Format("+ EchoService [{0}] +", instanceID));       
-         }
+        public EchoService()
+        {
+            instanceID = Interlocked.Add(ref instanceCount, 1);
+            Trace.WriteLine(string.Format("+ EchoService [{0}] +", instanceID));
+        }
 
-      ~EchoService()
-         {
-			Dispose(false);
-         }
+        ~EchoService()
+        {
+            Dispose(false);
+        }
 
-      #region IEchoService Implementation
+        #region IEchoService Implementation
 
-      public void Ping(out string result)
-         {
-         string env = "App";
-         string location = "Local";
-         try
+        public void Ping(out string result)
+        {
+            string env = "App";
+            string location = "Local";
+            try
             {
 #if _AZURE
             if (RoleEnvironment.IsAvailable)
@@ -84,41 +84,41 @@ namespace HelloIndigo
             Trace.WriteLine(ree.ToString());
             }
 #endif
-         catch (Exception exp)
+            catch (Exception exp)
             {
-            Trace.WriteLine(exp.ToString());
-            throw;
+                Trace.WriteLine(exp.ToString());
+                throw;
             }
-         result = "{" + string.Format("Environment:'{0}',Location:'{1}',Version:'{2}', LogPath={3}",
-            location, env, this.GetType().Assembly.GetName().Version, _logPath) + "}";
-         Trace.WriteLine(result);
-         }
+            result = "{" + string.Format("Environment:'{0}',Location:'{1}',Version:'{2}', LogPath={3}",
+               location, env, this.GetType().Assembly.GetName().Version, _logPath) + "}";
+            Trace.WriteLine(result);
+        }
 
-      public bool Echo(out string result, string input)
-         {
-         result = input;
-         Trace.WriteLine(string.Format("{0} => {1}", input, result));
-         return true;
-         }
+        public bool Echo(out string result, string input)
+        {
+            result = input;
+            Trace.WriteLine(string.Format("{0} => {1}", input, result));
+            return true;
+        }
 
-      #endregion
+        #endregion
 
-		protected void Dispose(bool manualDispose)
-			{
-			if (!disposed)
-				{
-				int cnt = Interlocked.Add(ref instanceCount, -1);
-				Trace.WriteLine(string.Format("- EchoService [{0}] -", instanceID));
-				if (cnt == 0)
-					if (tracer != null) tracer.Close();
-				}
-			disposed = true;
-			}
+        protected void Dispose(bool manualDispose)
+        {
+            if (!disposed)
+            {
+                int cnt = Interlocked.Add(ref instanceCount, -1);
+                Trace.WriteLine(string.Format("- EchoService [{0}] -", instanceID));
+                if (cnt == 0)
+                    if (tracer != null) tracer.Close();
+            }
+            disposed = true;
+        }
 
-		public void Dispose()
-			{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-			}
-		}
-   }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+    }
+}

@@ -25,6 +25,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blackriverinc.Framework.DataStore, Version=1.0.6466.30533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataStore.1.0.6466.30533\lib\net40\Blackriverinc.Framework.DataStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.Utility, Version=1.0.6460.36909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.Utility.1.0.6460.36909\lib\net40\Blackriverinc.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.dll</HintPath>
@@ -122,14 +130,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
-      <Project>{DDD1D805-D47E-4C26-AC60-4EFAF74AEA4C}</Project>
-      <Name>DataStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
-      <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Library.Model\Library.Model.csproj">
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>
@@ -143,6 +143,7 @@
     <None Include="HelloIndigoService.cd" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\GearHost.pubxml" />
+    <None Include="Properties\PublishProfiles\localhost.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

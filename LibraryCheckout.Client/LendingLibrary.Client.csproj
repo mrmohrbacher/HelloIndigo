@@ -58,6 +58,21 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blackriverinc.Framework.DataStore, Version=1.0.6466.30533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataStore.1.0.6466.30533\lib\net40\Blackriverinc.Framework.DataStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.DataView, Version=1.0.6467.23328, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataView.1.0.6467.23328\lib\net40\Blackriverinc.Framework.DataView.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.EmailClient, Version=1.0.6467.23793, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.EmailClient.1.0.6467.23793\lib\net40\Blackriverinc.Framework.EmailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.ScheduledJob, Version=1.0.6467.24564, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.ScheduledJob.1.0.0\lib\net40\Blackriverinc.Framework.ScheduledJob.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.Utility, Version=1.0.6460.36909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.Utility.1.0.6460.36909\lib\net40\Blackriverinc.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -104,6 +119,7 @@
     <None Include="HelloIndigo.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\Library.Model.Book.datasource" />
     <None Include="Properties\DataSources\Library.Model.Subscriber.datasource" />
     <None Include="Properties\DataSources\LibraryModel.Book.datasource" />
@@ -148,15 +164,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SubscriberService\HelloIndigo.wsdl" />
-    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.ListResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.ReadResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SubscriberService\LibraryCheckout.Client.SubscriberService.UpdateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SubscriberService\Subscriber.wsdl" />
     <None Include="Service References\SubscriberService\Subscriber.xsd">
       <SubType>Designer</SubType>
@@ -172,18 +179,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
-      <Project>{DDD1D805-D47E-4C26-AC60-4EFAF74AEA4C}</Project>
-      <Name>DataStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\ScheduledJobsBase\ScheduledJobBase.csproj">
-      <Project>{06950D4D-4DD7-48F2-9439-76D7ABA032D8}</Project>
-      <Name>ScheduledJobBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
-      <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Library.Model\Library.Model.csproj">
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>
@@ -250,6 +245,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\FailureNotification.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

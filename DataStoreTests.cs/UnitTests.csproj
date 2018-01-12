@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blackriverinc.Framework.Utility, Version=1.0.6460.36909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.Utility.1.0.6460.36909\lib\net40\Blackriverinc.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -53,16 +56,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
-      <Project>{DDD1D805-D47E-4C26-AC60-4EFAF74AEA4C}</Project>
-      <Name>DataStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
-      <Project>{545070DE-50F6-4710-AA5F-8365A9B76FDC}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

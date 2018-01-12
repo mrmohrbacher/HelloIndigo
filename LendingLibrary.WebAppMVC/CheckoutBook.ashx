@@ -9,7 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 
-using Blackriverinc.EmailClient;
+using Blackriverinc.Framework.EmailClient;
 using Blackriverinc.Framework.DataStore;
 using Blackriverinc.Framework.Utility;
 using BookSelection.WebApp;

@@ -21,6 +21,14 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +50,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blackriverinc.Framework.DataStore, Version=1.0.6466.30533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataStore.1.0.6466.30533\lib\net40\Blackriverinc.Framework.DataStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.DataView, Version=1.0.6467.23328, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.DataView.1.0.6467.23328\lib\net40\Blackriverinc.Framework.DataView.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.EmailClient, Version=1.0.6467.23793, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.EmailClient.1.0.6467.23793\lib\net40\Blackriverinc.Framework.EmailClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Blackriverinc.Framework.Utility, Version=1.0.6460.36909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Blackriverinc.Framework.Utility.1.0.6460.36909\lib\net40\Blackriverinc.Framework.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -201,18 +221,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\DataStore\DataStore.csproj">
-      <Project>{ddd1d805-d47e-4c26-ac60-4efaf74aea4c}</Project>
-      <Name>DataStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\EmailClient\EmailClient.csproj">
-      <Project>{2a9d3d1d-466f-4003-9085-51b809238d65}</Project>
-      <Name>EmailClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Utility\Utility.csproj">
-      <Project>{545070de-50f6-4710-aa5f-8365a9b76fdc}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Library.Model\Library.Model.csproj">
       <Project>{6c568049-7bab-4e0c-b729-861acbd4296e}</Project>
       <Name>Library.Model</Name>

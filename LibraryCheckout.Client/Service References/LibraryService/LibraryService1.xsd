@@ -37,6 +37,7 @@
       <xs:element name="_x003C_PostalCode_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_State_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Subscriber_x003E_k__BackingField" nillable="true" type="tns:Subscriber" />
+      <xs:element name="_x003C_Title_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Checkout" nillable="true" type="tns:Checkout" />
