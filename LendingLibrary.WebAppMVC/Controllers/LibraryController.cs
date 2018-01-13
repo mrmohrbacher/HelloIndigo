@@ -217,7 +217,7 @@ namespace LendingLibrary.WebAppMVC.Controllers
 			emailBody = stream.ContentsToString();
 #endif
 			// Send confirmation Email
-			string emailConnection = GlobalCache.GetResolvedString("EMailConnectionMock");
+			string emailConnection = GlobalCache.GetResolvedString("EmailService");
 			Encryption encryptor = new Encryption();
 			IEmailClient client = EmailClientFactory.Create(encryptor.Decrypt(emailConnection));
 			client.Send("mike@blackriverinc.com",

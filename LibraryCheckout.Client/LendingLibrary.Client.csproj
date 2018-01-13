@@ -164,6 +164,15 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SubscriberService\HelloIndigo.wsdl" />
+    <None Include="Service References\SubscriberService\LendingLibrary.Client.SubscriberService.ListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SubscriberService\LendingLibrary.Client.SubscriberService.ReadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SubscriberService\LendingLibrary.Client.SubscriberService.UpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SubscriberService\Subscriber.wsdl" />
     <None Include="Service References\SubscriberService\Subscriber.xsd">
       <SubType>Designer</SubType>

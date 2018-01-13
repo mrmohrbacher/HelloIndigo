@@ -90,13 +90,16 @@ namespace HelloIndigo
 				}
 			catch (Exception exp)
 				{
+                Interlocked.Decrement(ref instanceCount);
 				Trace.WriteLine(exp.ToString());
 				}
 			}
 
 		~LibraryService()
 			{
-			Interlocked.Add(ref instanceCount, -1);
+            if (Interlocked.CompareExchange(ref instanceCount, 0, 0) > 0)
+                Interlocked.Decrement(ref instanceCount);
+
 			Trace.WriteLine(string.Format("- LibraryService[{0}]-", instanceCount));
 			if (Interlocked.CompareExchange(ref instanceCount, 0, 0) == 0)
 				if (tracer != null)  tracer.Close();
