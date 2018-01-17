@@ -78,7 +78,7 @@ namespace HelloIndigo
 					Trace.WriteLine(string.Format("+ LibraryService[{0}]+", instanceCount));
 
 					// Populate the Books Table
-					using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+					using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 						{
 						if (context.Books.Count() == 0)
 							{
@@ -110,7 +110,7 @@ namespace HelloIndigo
 		public bool Load(Stream xstream)
 			{
 			// Populate the Books Table
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				context.DeserializeBooks(xstream);
 				context.SaveChanges();
@@ -136,7 +136,7 @@ namespace HelloIndigo
 
 				var results = new List<Book>();
 
-				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 					{
 					var query = (from book in context.Books
 									 select book)
@@ -176,7 +176,7 @@ namespace HelloIndigo
 				return false;
 				}
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				book = new Book((from b in context.Books
 									  where b.ISBN == isbn
@@ -214,7 +214,7 @@ namespace HelloIndigo
 
 			try
 				{
-				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+				using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 					{
 					//-------------------------------------------------------------
 					// Verify Book exists.
@@ -291,7 +291,7 @@ namespace HelloIndigo
 			bool result = false;
 			checkedin = null;
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				var book = context.Books
 										.Where(b => (b.ISBN == isbn))

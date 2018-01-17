@@ -30,13 +30,18 @@ namespace HelloIndigo
         static EchoService()
         {
             initializeTracer();
+            IDataStoreProvider provider = ConfigProviderBase.Open();
+            GlobalCache.LoadConfigurationSettings(provider, true);
         }
 
         private static void initializeTracer()
         {
             IDataStoreProvider provider = ConfigProviderBase.Open();
+#if _AZURE
             iconfig = new KeyedDataStore(new CloudSettingsProvider(provider));
-
+#else
+            iconfig = new KeyedDataStore(provider);
+#endif
             _logPath = (iconfig["LogPath"] as string) ?? @"C:\Logs\HelloIndigo";
 #if _AZURE
 			// Running in the Cloud; look for the local drive
@@ -62,12 +67,12 @@ namespace HelloIndigo
             Dispose(false);
         }
 
-        #region IEchoService Implementation
+#region IEchoService Implementation
 
         public void Ping(out string result)
         {
-            string env = "App";
-            string location = "Local";
+            string databaseConfiguration = GlobalCache.GetResolvedString("DatabaseConfiguration");
+            string environment = GlobalCache.GetResolvedString("Environment");
             try
             {
 #if _AZURE
@@ -89,8 +94,7 @@ namespace HelloIndigo
                 Trace.WriteLine(exp.ToString());
                 throw;
             }
-            result = "{" + string.Format("Environment:'{0}',Location:'{1}',Version:'{2}', LogPath={3}",
-               location, env, this.GetType().Assembly.GetName().Version, _logPath) + "}";
+            result = $"{{Environment: {environment}, Database Configuration: {databaseConfiguration}, Version: {this.GetType().Assembly.GetName().Version}, LogPath={_logPath}}}";
             Trace.WriteLine(result);
         }
 
@@ -101,7 +105,7 @@ namespace HelloIndigo
             return true;
         }
 
-        #endregion
+#endregion
 
         protected void Dispose(bool manualDispose)
         {

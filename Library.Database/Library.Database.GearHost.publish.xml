@@ -2,9 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>library</TargetDatabaseName>
+    <TargetDatabaseName>librarydatabase</TargetDatabaseName>
     <DeployScriptFileName>Library.Database.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=tcp:mssql5.cloudsites.gearhost.com;Persist Security Info=True;User ID=library;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=den1.mssql4.gear.host;Persist Security Info=True;User ID=librarydatabase;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
 </Project>

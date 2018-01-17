@@ -78,7 +78,7 @@ namespace HelloIndigo
 					Trace.WriteLine(string.Format("+ SubscriberService[{0}]+", instanceCount));
 
 					// Populate the Books Table
-					using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+					using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 						{
 						//if (context.Books.Count() == 0)
 						//	{
@@ -117,7 +117,7 @@ namespace HelloIndigo
 				return false;
 				}
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				subscriber = new Subscriber((from s in context.Subscribers
 													  where s.Email == email
@@ -137,7 +137,7 @@ namespace HelloIndigo
 				return false;
 				}
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				string email = subscriber.Email.ToLower();
 				var currentSubscriber = context.Subscribers
@@ -165,7 +165,7 @@ namespace HelloIndigo
 				return false;
 				}
 
-			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("Environment")))
+			using (LibraryEntities context = new LibraryEntities("name=" + GlobalCache.GetResolvedString("DatabaseConfiguration")))
 				{
 				if (context.Subscribers
 						.Any(s => s.Email.ToLower() == subscriber.Email.ToLower()))

@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="HelloIndigo.EchoService" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="HelloIndigo.EchoService"  CodeBehind="EchoService.svc.cs" %>
