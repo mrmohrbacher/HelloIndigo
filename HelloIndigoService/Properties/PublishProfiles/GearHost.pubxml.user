@@ -35,19 +35,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2015 06:46:25</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.dll">
-      <publishTime>01/16/2018 20:28:27</publishTime>
+      <publishTime>01/21/2018 13:26:10</publishTime>
     </File>
     <File Include="bin/HelloIndigoService.pdb">
-      <publishTime>01/16/2018 20:28:27</publishTime>
+      <publishTime>01/21/2018 13:26:10</publishTime>
     </File>
     <File Include="bin/Library.Model.dll">
-      <publishTime>01/13/2018 16:43:55</publishTime>
+      <publishTime>01/21/2018 13:26:10</publishTime>
     </File>
     <File Include="bin/Library.Model.dll.config">
       <publishTime>02/19/2015 11:04:55</publishTime>
     </File>
     <File Include="bin/Library.Model.pdb">
-      <publishTime>01/13/2018 16:43:55</publishTime>
+      <publishTime>01/21/2018 13:26:10</publishTime>
     </File>
     <File Include="bin/Microsoft.WindowsAzure.Configuration.dll">
       <publishTime>10/29/2012 14:18:47</publishTime>
@@ -86,7 +86,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/23/2015 12:59:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/16/2018 20:35:10</publishTime>
+      <publishTime>01/21/2018 13:26:30</publishTime>
     </File>
   </ItemGroup>
 </Project>

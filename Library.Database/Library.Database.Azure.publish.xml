@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>Library</TargetDatabaseName>
     <DeployScriptFileName>Library.Database.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=ewt2vlky68.database.windows.net,1433;Persist Security Info=True;User ID=eljeffe;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=ewt2vlky68.database.windows.net,1433;Persist Security Info=True;User ID=eljeffe;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
 </Project>
