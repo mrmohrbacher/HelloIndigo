@@ -10,8 +10,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <_PublishTargetUrl>ftp://ftp.gear.host/site/wwwroot/applications/lendinglibrary</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="ApplicationInsights.config">
+      <publishTime>01/21/2018 13:50:40</publishTime>
+    </File>
     <File Include="bin/AppData/Books.xml">
       <publishTime>02/24/2015 15:01:04</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>01/21/2018 13:50:40</publishTime>
     </File>
     <File Include="bin/Blackriverinc.Framework.DataStore.dll">
       <publishTime>09/14/2017 17:08:04</publishTime>
@@ -65,13 +71,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2018 13:01:39</publishTime>
     </File>
     <File Include="bin/Library.Model.dll">
-      <publishTime>01/13/2018 16:43:55</publishTime>
+      <publishTime>01/21/2018 13:41:13</publishTime>
     </File>
     <File Include="bin/Library.Model.dll.config">
       <publishTime>02/19/2015 11:04:55</publishTime>
     </File>
     <File Include="bin/Library.Model.pdb">
-      <publishTime>01/13/2018 16:43:55</publishTime>
+      <publishTime>01/21/2018 13:41:13</publishTime>
     </File>
     <File Include="bin/LibraryCheckout.Client.exe">
       <publishTime>02/27/2015 10:45:01</publishTime>
@@ -80,10 +86,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/27/2015 10:45:01</publishTime>
     </File>
     <File Include="bin/LibraryCheckout.WebAppMVC.dll">
-      <publishTime>01/16/2018 19:12:47</publishTime>
+      <publishTime>01/21/2018 13:51:22</publishTime>
     </File>
     <File Include="bin/LibraryCheckout.WebAppMVC.pdb">
-      <publishTime>01/16/2018 19:12:47</publishTime>
+      <publishTime>01/21/2018 13:51:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>06/27/2017 12:59:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>07/07/2017 17:39:02</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>07/07/2017 17:44:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>06/27/2017 15:30:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>07/07/2017 17:44:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>07/07/2017 17:44:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>06/27/2017 15:33:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.TraceListener.dll">
+      <publishTime>09/06/2017 13:04:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
+      <publishTime>06/28/2017 15:05:26</publishTime>
     </File>
     <File Include="bin/Microsoft.ReportViewer.Common.dll">
       <publishTime>02/20/2011 04:40:08</publishTime>
@@ -108,6 +141,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/ScheduledJobBase.pdb">
       <publishTime>02/28/2015 12:08:42</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>06/27/2017 11:17:34</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>02/18/2015 09:16:19</publishTime>
@@ -224,7 +260,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/18/2015 09:18:40</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/15/2017 14:03:06</publishTime>
+      <publishTime>01/21/2018 13:50:35</publishTime>
     </File>
     <File Include="Properties/DataSources/Library.Model.Book.datasource">
       <publishTime>02/19/2015 17:49:06</publishTime>
@@ -249,6 +285,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery.validate.min.js">
       <publishTime>02/18/2015 09:18:33</publishTime>
+    </File>
+    <File Include="Service References/Application Insights/ConnectedService.json">
+      <publishTime>01/21/2018 13:50:42</publishTime>
     </File>
     <File Include="Styles/Buttons.css">
       <publishTime>02/24/2015 09:44:20</publishTime>
@@ -290,7 +329,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/26/2015 11:49:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/16/2018 20:33:12</publishTime>
+      <publishTime>01/21/2018 13:52:13</publishTime>
     </File>
   </ItemGroup>
 </Project>
